@@ -11,11 +11,12 @@ public class User implements Serializable{
 	
 	
 	
-	public User(String user_name, String password, String first, String last) {
+	public User(String user_name, String password, String first, String last,DataTransferObject dto) {
 		this.user_name = user_name;
 		this.password  = password;
 		this.last = last;
 		this.first = first;
+		
 		
 	}
 	public void save_User(){
@@ -73,6 +74,11 @@ public class User implements Serializable{
 			System.out.println(e);
 			return null;	
 		}
+	}
+	
+	public boolean isGiatros() {
+		
+		return true;
 	}
 	
 
