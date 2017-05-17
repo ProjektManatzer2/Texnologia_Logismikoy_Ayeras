@@ -8,32 +8,50 @@ public class User implements Serializable{
 	protected String password;
 	protected String first;
 	protected String last;
+	protected UserDataTransferObject dto;
 	
 	
-	
-	public User(String user_name, String password, String first, String last,DataTransferObject dto) {
+	public User(String user_name, String password, String first, String last) {
 		this.user_name = user_name;
 		this.password  = password;
 		this.last = last;
 		this.first = first;
 		
+		}
+	public void save_User(boolean exists){
+		Connection conn=null;
 		
-	}
-	public void save_User(){
-		Connection conn = null ;
-		try {
+		if(!exists){
 			
-			conn = User.getConnection();
+			try{
+				conn=User.getConnection();
+				String sql="INSERT INTO Users (username, password, onoma,eponymo) VALUES ("+user_name+","+password+","+first+" , "+last+");";
+				
+			
+			
+			}catch(Exception e){
+				System.out.println("Problem in database connection");
+			}
 			
 		}
-		catch (Exception e) {
-			
-			System.out.println("Could not connect to database");
+		
+		else{
+			String sql = "UPDATE Users SET onoma=?,eponymo=? where username="+this.user_name;
+			try {
+			conn=User.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, first);
+			statement.setString(2, last);
+			statement.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("Problem in databse connection");
+			}
 						
 		}
 		
 		try{
-			
+			 this.dto.transferToDatabase(this.user_name,conn,true);
+				
 			File file = new File("temp.bin");
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -42,13 +60,13 @@ public class User implements Serializable{
 			fout.close();
 			
 			InputStream inputStream = new FileInputStream(new File(file.getAbsolutePath()));
-			 
-			String sql = "UPDATE users set arxeiaki = ? where user_name=" + this.user_name;
+			String sql = "UPDATE Users set ARXEIO= ? where user_name=" + this.user_name;
 			 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setBlob(1, inputStream);
 			statement.executeUpdate();
 			inputStream.close();
+			
 		}catch (Exception e){
 			
 			System.out.println("Problem in file uploading");

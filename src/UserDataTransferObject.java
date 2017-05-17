@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class DataTransferObject {
+public class UserDataTransferObject implements Serializable{
 
 	String patronymo;
 	String birth_date;
@@ -25,7 +26,8 @@ public class DataTransferObject {
 	String kliniki;
 	String put_date;
 	String paratiriseis;
-	public DataTransferObject(){
+	
+	public UserDataTransferObject(){
 		patronymo="";
 		birth_date="";
 		gender='M';
@@ -50,12 +52,12 @@ public class DataTransferObject {
 		put_date="";	
 	}
 	
-	public void transferToDatabase(String username){
+	public void transferToDatabase(String username,Connection conn,boolean exists){
 		try {
 			
 			
-			Connection conn = User.getConnection();
-			String sql = "UPDATE table_name SET patronymo = ?, date_birth=?,"
+			if(exists){
+			String sql = "UPDATE Users SET patronymo = ?, date_birth=?,"
 					+ "varos=?,upsos=?,address=?,region=?,city=?,tk=?,"
 					+ "eidikotita=?,tameio=?,family_statement=?,"
 					+ "kliniki=?,amka=?,arithmos_taytotitas=?,"
@@ -84,12 +86,43 @@ public class DataTransferObject {
 			statement.setString(20, put_date);
 			statement.setString(21, paratiriseis);
 			statement.executeUpdate();
+			}
 			
-			
-			
-			
-			
-			
+			else{
+
+				String sql = "UPDATE Users SET patronymo = ?, date_birth=?,"
+						+ "varos=?,upsos=?,address=?,region=?,city=?,tk=?,"
+						+ "eidikotita=?,tameio=?,family_statement=?,"
+						+ "kliniki=?,amka=?,arithmos_taytotitas=?,"
+						+ " kinito=?,thlefwno_spitiou=?,thlefwno_ergasias=?,"
+						+ "fax=?,email=?,hmeromhnia_eisagwghws=?,paratiriseis=? WHERE username=" + username;
+				PreparedStatement statement=conn.prepareStatement(sql);
+				statement.setString(1, patronymo);
+				statement.setString(2,birth_date);
+				statement.setString(3, varos);
+				statement.setString(4, upsos);
+				statement.setString(5, address);
+				statement.setString(6, region);
+				statement.setString(7, city);
+				statement.setString(8, tk);
+				statement.setString(9, eidikothta);
+				statement.setString(10, tameio);
+				statement.setString(11, family_statement);
+				statement.setString(12, kliniki);
+				statement.setString(13, amka);
+				statement.setString(14, taytotita);
+				statement.setString(15, kinito);
+				statement.setString(16, house_phone);
+				statement.setString(17, job_phone);
+				statement.setString(18, fax);
+				statement.setString(19, email);
+				statement.setString(20, put_date);
+				statement.setString(21, paratiriseis);
+				statement.executeUpdate();
+				
+				
+				
+			}
 			
 		} catch (Exception e) {
 
@@ -102,6 +135,8 @@ public class DataTransferObject {
 		
 		
 	}
+	
+	
 	
 	
 	

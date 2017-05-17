@@ -9,9 +9,9 @@ public class Doctor extends User implements Serializable {
 	private HashSet<String> amka_bonusPatients;
 	
 	
-	public Doctor(String user_name, String password,String AMKA,String first,String last,DataTransferObject dto) {
+	public Doctor(String user_name, String password,String AMKA,String first,String last) {
 		
-		super( user_name,  password,  first, last,dto);
+		super( user_name,  password,  first, last);
 		try {
 			Connection conn = User.getConnection();
 			
