@@ -18,7 +18,7 @@ public class User implements Serializable{
 		this.first = first;
 		
 		}
-	public void save_User(boolean exists){
+	public void save_User_in_DB(boolean exists){
 		Connection conn=null;
 		
 		if(!exists){
@@ -50,15 +50,15 @@ public class User implements Serializable{
 		}
 		
 		try{
-			 this.dto.transferToDatabase(this.user_name,conn,true);
+			 this.dto.transferToDatabase(this.user_name,conn);
 				
 			File file = new File("temp.bin");
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
-			
+			oos.writeObject(this);
+
 			oos.close();
 			fout.close();
-			
 			InputStream inputStream = new FileInputStream(new File(file.getAbsolutePath()));
 			String sql = "UPDATE Users set ARXEIO= ? where user_name=" + this.user_name;
 			 
@@ -96,7 +96,7 @@ public class User implements Serializable{
 	
 	public boolean isGiatros() {
 		
-		return true;
+		return false;
 	}
 	
 

@@ -26,7 +26,7 @@ public class UserDataTransferObject implements Serializable{
 	String kliniki;
 	String put_date;
 	String paratiriseis;
-	
+	int type;
 	public UserDataTransferObject(){
 		patronymo="";
 		birth_date="";
@@ -49,23 +49,24 @@ public class UserDataTransferObject implements Serializable{
 		email="";
 		paratiriseis="";
 		kliniki="";
-		put_date="";	
+		put_date="";
+		type=0;
 	}
 	
-	public void transferToDatabase(String username,Connection conn,boolean exists){
+	public void transferToDatabase(String username,Connection conn){
 		try {
 			
 			
-			if(exists){
+			
 			String sql = "UPDATE Users SET patronymo = ?, date_birth=?,"
 					+ "varos=?,upsos=?,address=?,region=?,city=?,tk=?,"
 					+ "eidikotita=?,tameio=?,family_statement=?,"
 					+ "kliniki=?,amka=?,arithmos_taytotitas=?,"
 					+ " kinito=?,thlefwno_spitiou=?,thlefwno_ergasias=?,"
-					+ "fax=?,email=?,hmeromhnia_eisagwghws=?,paratiriseis=? WHERE username=" + username;
+					+ "fax=?,email=?,hmeromhnia_eisagwghws=?,paratiriseis=?,type=? WHERE username=" + username;
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, patronymo);
-			statement.setString(2,birth_date);
+			statement.setString(2, birth_date);
 			statement.setString(3, varos);
 			statement.setString(4, upsos);
 			statement.setString(5, address);
@@ -85,44 +86,11 @@ public class UserDataTransferObject implements Serializable{
 			statement.setString(19, email);
 			statement.setString(20, put_date);
 			statement.setString(21, paratiriseis);
+			statement.setInt(22, type);
 			statement.executeUpdate();
-			}
 			
-			else{
+			
 
-				String sql = "UPDATE Users SET patronymo = ?, date_birth=?,"
-						+ "varos=?,upsos=?,address=?,region=?,city=?,tk=?,"
-						+ "eidikotita=?,tameio=?,family_statement=?,"
-						+ "kliniki=?,amka=?,arithmos_taytotitas=?,"
-						+ " kinito=?,thlefwno_spitiou=?,thlefwno_ergasias=?,"
-						+ "fax=?,email=?,hmeromhnia_eisagwghws=?,paratiriseis=? WHERE username=" + username;
-				PreparedStatement statement=conn.prepareStatement(sql);
-				statement.setString(1, patronymo);
-				statement.setString(2,birth_date);
-				statement.setString(3, varos);
-				statement.setString(4, upsos);
-				statement.setString(5, address);
-				statement.setString(6, region);
-				statement.setString(7, city);
-				statement.setString(8, tk);
-				statement.setString(9, eidikothta);
-				statement.setString(10, tameio);
-				statement.setString(11, family_statement);
-				statement.setString(12, kliniki);
-				statement.setString(13, amka);
-				statement.setString(14, taytotita);
-				statement.setString(15, kinito);
-				statement.setString(16, house_phone);
-				statement.setString(17, job_phone);
-				statement.setString(18, fax);
-				statement.setString(19, email);
-				statement.setString(20, put_date);
-				statement.setString(21, paratiriseis);
-				statement.executeUpdate();
-				
-				
-				
-			}
 			
 		} catch (Exception e) {
 
@@ -137,9 +105,17 @@ public class UserDataTransferObject implements Serializable{
 	}
 	
 	
+
+	
+	public int getType() {
+		return type;
+	}
+	public void setType(int f) {
+		this.type=f;
+	}
 	
 	
-	
+
 	
 	public String getPatronymo() {
 		return patronymo;
