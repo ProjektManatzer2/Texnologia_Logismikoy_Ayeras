@@ -113,10 +113,7 @@ public class UserDataTransferObject implements Serializable{
 	public void setType(int f) {
 		this.type=f;
 	}
-	
-	
-
-	
+		
 	public String getPatronymo() {
 		return patronymo;
 	}
