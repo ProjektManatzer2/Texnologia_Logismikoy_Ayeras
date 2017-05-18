@@ -42,15 +42,15 @@ public class Γιατρός_Νοσηλευτής {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("\u03A0\u03C1\u03BF\u03B2\u03BF\u03BB\u03AE \u0391\u03C3\u03B8\u03B5\u03BD\u03CE\u03BD \u039A\u03BB\u03B9\u03BD\u03B9\u03BA\u03AE\u03C2");
-		btnNewButton.setBounds(200, 100, 200, 24);
+		btnNewButton.setBounds(180, 100, 240, 24);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("\u0391\u03AF\u03C4\u03B7\u03BC\u03B1 \u03A0\u03B1\u03C1\u03B1\u03C7\u03CE\u03C1\u03B7\u03C3\u03B7\u03C2 \u0394\u03B9\u03BA\u03B1\u03B9\u03C9\u03BC\u03AC\u03C4\u03C9\u03BD");
-		btnNewButton_1.setBounds(200, 150, 200, 24);
+		btnNewButton_1.setBounds(180, 150, 240, 24);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("\u0391\u03C0\u03BF\u03C3\u03CD\u03BD\u03B4\u03B5\u03C3\u03B7");
-		btnNewButton_2.setBounds(250, 230, 100, 24);
+		btnNewButton_2.setBounds(240, 230, 120, 24);
 		frame.getContentPane().add(btnNewButton_2);
 	}
 }
