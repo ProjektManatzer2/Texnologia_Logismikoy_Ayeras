@@ -67,7 +67,7 @@ public class InitialScreen {
 		frmLoginScreen.getContentPane().setLayout(null);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(340, 240, 60, 23);
+		btnLogin.setBounds(320, 240, 80, 23);
 		frmLoginScreen.getContentPane().add(btnLogin);
 		frmLoginScreen.getContentPane().add(pwdPassword);
 		frmLoginScreen.getContentPane().add(lblPassword);

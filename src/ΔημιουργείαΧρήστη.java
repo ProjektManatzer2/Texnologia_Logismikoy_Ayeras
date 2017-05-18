@@ -40,8 +40,6 @@ public class ΔημιουργείαΧρήστη {
 	private JTextField textField_16;
 	private JTextField textField_17;
 	private JTextField textField_18;
-	private JLabel textField_19;
-	private JTextField textField_20;
 
 	/**
 	 * Launch the application.
@@ -198,57 +196,57 @@ public class ΔημιουργείαΧρήστη {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1 \u03BA\u03B1\u03C4\u03BF\u03B9\u03BA\u03AF\u03B1\u03C2", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(17, 90, 162, 133);
+		panel_1.setBounds(17, 90, 172, 133);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_9 = new JLabel("\u0394\u03B9\u03B5\u03CD\u03B8\u03C5\u03BD\u03C3\u03B7  :\r\n");
-		lblNewLabel_9.setBounds(6, 16, 60, 20);
+		JLabel lblNewLabel_9 = new JLabel("\u0394\u03B9\u03B5\u03CD\u03B8\u03C5\u03BD\u03C3\u03B7 :\r\n");
+		lblNewLabel_9.setBounds(6, 16, 70, 20);
 		panel_1.add(lblNewLabel_9);
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(70, 16, 86, 20);
+		textField_5.setBounds(75, 16, 86, 20);
 		panel_1.add(textField_5);
 		textField_5.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_5.setColumns(10);
 		
 		JLabel lblNewLabel_10 = new JLabel("\u03A0\u03B5\u03C1\u03B9\u03BF\u03C7\u03AE :");
-		lblNewLabel_10.setBounds(6, 46, 60, 20);
+		lblNewLabel_10.setBounds(11, 46, 60, 20);
 		panel_1.add(lblNewLabel_10);
 		lblNewLabel_10.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		textField_6 = new JTextField();
-		textField_6.setBounds(70, 46, 86, 20);
+		textField_6.setBounds(75, 46, 86, 20);
 		panel_1.add(textField_6);
 		textField_6.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_6.setColumns(10);
 		
 		JLabel lblNewLabel_11 = new JLabel("\u03A0\u03CC\u03BB\u03B7 :");
-		lblNewLabel_11.setBounds(6, 76, 60, 20);
+		lblNewLabel_11.setBounds(11, 76, 60, 20);
 		panel_1.add(lblNewLabel_11);
 		lblNewLabel_11.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		textField_7 = new JTextField();
-		textField_7.setBounds(70, 76, 86, 20);
+		textField_7.setBounds(75, 76, 86, 20);
 		panel_1.add(textField_7);
 		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_7.setColumns(10);
 		
 		JLabel lblNewLabel_12 = new JLabel("\u03A4.\u039A :\r\n");
-		lblNewLabel_12.setBounds(20, 106, 46, 20);
+		lblNewLabel_12.setBounds(25, 106, 46, 20);
 		panel_1.add(lblNewLabel_12);
 		lblNewLabel_12.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setBounds(70, 106, 86, 20);
+		textField.setBounds(75, 106, 86, 20);
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1 \u03C7\u03C1\u03AE\u03C3\u03C4\u03B7", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(192, 89, 588, 133);
+		panel_2.setBounds(202, 89, 578, 133);
 		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -275,7 +273,7 @@ public class ΔημιουργείαΧρήστη {
 		textField_9.setColumns(10);
 		
 		JLabel lblNewLabel_15 = new JLabel("\u039F\u03B9\u03BA\u03BF\u03B3. \u03BA\u03B1\u03C4\u03AC\u03C3\u03C4\u03B1\u03C3\u03B7 :\r\n");
-		lblNewLabel_15.setBounds(6, 94, 105, 20);
+		lblNewLabel_15.setBounds(4, 94, 107, 20);
 		panel_2.add(lblNewLabel_15);
 		lblNewLabel_15.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -286,34 +284,33 @@ public class ΔημιουργείαΧρήστη {
 		textField_10.setColumns(10);
 		
 		JLabel lblNewLabel_16 = new JLabel("\u039A\u03BB\u03B9\u03BD\u03B9\u03BA\u03AE :");
-		lblNewLabel_16.setBounds(353, 18, 45, 20);
+		lblNewLabel_16.setBounds(343, 18, 50, 20);
 		panel_2.add(lblNewLabel_16);
-		lblNewLabel_16.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		textField_11 = new JTextField();
-		textField_11.setBounds(412, 18, 170, 20);
+		textField_11.setBounds(402, 18, 170, 20);
 		panel_2.add(textField_11);
 		textField_11.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_11.setColumns(10);
 		
 		JLabel lblNewLabel_17 = new JLabel("\u0391\u039C\u039A\u0391 :");
-		lblNewLabel_17.setBounds(353, 56, 45, 20);
+		lblNewLabel_17.setBounds(343, 56, 45, 20);
 		panel_2.add(lblNewLabel_17);
 		lblNewLabel_17.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		textField_12 = new JTextField();
-		textField_12.setBounds(412, 56, 170, 20);
+		textField_12.setBounds(402, 56, 170, 20);
 		panel_2.add(textField_12);
 		textField_12.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_12.setColumns(10);
 		
 		JLabel lblNewLabel_18 = new JLabel("\u0391.\u03A4 :\r\n");
-		lblNewLabel_18.setBounds(353, 94, 45, 20);
+		lblNewLabel_18.setBounds(343, 94, 45, 20);
 		panel_2.add(lblNewLabel_18);
 		lblNewLabel_18.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		textField_13 = new JTextField();
-		textField_13.setBounds(412, 94, 170, 20);
+		textField_13.setBounds(402, 94, 170, 20);
 		panel_2.add(textField_13);
 		textField_13.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_13.setColumns(10);
@@ -386,18 +383,6 @@ public class ΔημιουργείαΧρήστη {
 		JTextPane textPane = new JTextPane();
 		textPane.setText("\u03A0\u03B1\u03C1\u03B1\u03C4\u03B7\u03C1\u03AE\u03C3\u03B5\u03B9\u03C2 :");
 		scrollPane.setViewportView(textPane);
-		
-		textField_19 = new JLabel();
-		textField_19.setText("\u0397\u03BC\u03B5\u03C1/\u03BD\u03AF\u03B1 \u03B5\u03B9\u03C3\u03B1\u03B3\u03C9\u03B3\u03AE\u03C2 :\r\n");
-		textField_19.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_19.setBounds(434, 312, 110, 20);
-		frame.getContentPane().add(textField_19);
-		
-		textField_20 = new JTextField();
-		textField_20.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_20.setBounds(549, 312, 110, 20);
-		frame.getContentPane().add(textField_20);
-		textField_20.setColumns(10);
 		
 		JButton btnNewButton = new JButton("\u0395\u03C0\u03CC\u03BC\u03B5\u03BD\u03BF");
 		btnNewButton.setBounds(695, 437, 89, 23);

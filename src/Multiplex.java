@@ -11,6 +11,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DropMode;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.JLayeredPane;
 
 public class Multiplex {
 
@@ -70,13 +71,13 @@ public class Multiplex {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setSelectedIndex(0);
-		tabbedPane.setBounds(33, 30, 727, 359);
-		frame.getContentPane().add(tabbedPane);
+		JButton btnNewButton_2 = new JButton("\u03A0\u03AF\u03C3\u03C9");
+		btnNewButton_2.setBounds(350, 410, 100, 23);
+		frame.getContentPane().add(btnNewButton_2);
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("\u0393\u03B5\u03BD\u03B9\u03BA\u03AC \u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1", null, panel, null);
+		JLayeredPane panel = new JLayeredPane();
+		panel.setBounds(31, 44, 722, 331);
+		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("\u038C\u03BD\u03BF\u03BC\u03B1 :");
@@ -108,9 +109,9 @@ public class Multiplex {
 		panel.add(lblNewLabel_5);
 		
 		textField = new JTextField();
+		textField.setEditable(false);
 		textField.setBounds(92, 0, 200, 24);
 		panel.add(textField);
-		textField.setEnabled(false);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
@@ -149,13 +150,13 @@ public class Multiplex {
 		textField_6.setEditable(false);
 		textField_6.setColumns(10);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("\u0386\u03BD\u03B4\u03C1\u03B1\u03C2");
 		rdbtnNewRadioButton.setBounds(0, 215, 110, 24);
 		panel.add(rdbtnNewRadioButton);
 		rdbtnNewRadioButton.setEnabled(false);
 		buttonGroup.add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("\u0393\u03C5\u03BD\u03B1\u03AF\u03BA\u03B1");
 		rdbtnNewRadioButton_1.setBounds(182, 215, 110, 24);
 		panel.add(rdbtnNewRadioButton_1);
 		rdbtnNewRadioButton_1.setEnabled(false);
@@ -290,33 +291,5 @@ public class Multiplex {
 		panel.add(textField_19);
 		textField_19.setEditable(false);
 		textField_19.setColumns(10);
-		
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("\u0399\u03B1\u03C4\u03C1\u03B9\u03BA\u03CC \u0399\u03C3\u03C4\u03BF\u03C1\u03B9\u03BA\u03CC", null, panel_1, null);
-		panel_1.setLayout(null);
-		
-		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("\u0395\u03BE\u03B5\u03C4\u03AC\u03C3\u03B5\u03B9\u03C2", null, panel_2, null);
-		
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("\u03A0\u03B1\u03C1\u03B1\u03C4\u03B7\u03C1\u03AE\u03C3\u03B5\u03B9\u03C2", null, panel_3, null);
-		panel_3.setLayout(null);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(181, 83, 360, 161);
-		panel_3.add(textPane);
-		
-		JLabel lblNewLabel_19 = new JLabel("\u03A0\u03B1\u03C1\u03B1\u03C4\u03B7\u03C1\u03AE\u03C3\u03B5\u03B9\u03C2");
-		lblNewLabel_19.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_19.setBounds(320, 50, 80, 24);
-		panel_3.add(lblNewLabel_19);
-		
-		JButton btnNewButton = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7 \u03A0\u03B1\u03C1\u03B1\u03C4\u03AE\u03C1\u03B7\u03C3\u03B7\u03C2");
-		btnNewButton.setBounds(281, 266, 160, 23);
-		panel_3.add(btnNewButton);
-		
-		JButton btnNewButton_2 = new JButton("\u03A0\u03AF\u03C3\u03C9");
-		btnNewButton_2.setBounds(350, 410, 100, 23);
-		frame.getContentPane().add(btnNewButton_2);
 	}
 }
