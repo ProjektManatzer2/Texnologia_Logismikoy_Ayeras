@@ -16,8 +16,8 @@ public class User implements Serializable{
 		this.password  = password;
 		this.last = last;
 		this.first = first;
-		
-		}
+	}
+	
 	public void save_User_in_DB(boolean exists){
 		Connection conn=null;
 		
@@ -98,7 +98,36 @@ public class User implements Serializable{
 		
 		return false;
 	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getFirst() {
+		return first;
+	}
+	public void setFirst(String first) {
+		this.first = first;
+	}
+	public String getLast() {
+		return last;
+	}
+	public void setLast(String last) {
+		this.last = last;
+	}
+	public UserDataTransferObject getDto() {
+		return dto;
+	}
 	
+
 
 	
 }
