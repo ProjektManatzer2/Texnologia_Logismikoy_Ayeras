@@ -66,7 +66,7 @@ public class User implements Serializable{
 			statement.setBlob(1, inputStream);
 			statement.executeUpdate();
 			inputStream.close();
-			
+			conn.close();
 		}catch (Exception e){
 			
 			System.out.println("Problem in file uploading");

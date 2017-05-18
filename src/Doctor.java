@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.HashSet;
 
 public class Doctor extends User implements Serializable {
@@ -14,8 +15,12 @@ public class Doctor extends User implements Serializable {
 		super( user_name,  password,  first, last);
 		try {
 			Connection conn = User.getConnection();
+			String sql = "UPDATE Users SET type=1 where username="+this.user_name;
 			
 			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.executeUpdate();
+			conn.close();
 			
 		} catch (Exception e) {
 			System.out.println("Failed to connect to database");
