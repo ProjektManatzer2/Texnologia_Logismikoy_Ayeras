@@ -4,6 +4,10 @@ import java.sql.*;
 
 public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8889739166956625464L;
 	protected String user_name;
 	protected String password;
 	protected String first;
@@ -16,42 +20,46 @@ public class User implements Serializable{
 		this.password  = password;
 		this.last = last;
 		this.first = first;
+		this.dto=new UserDataTransferObject();
 	}
 	
 	public void save_User_in_DB(boolean exists){
 		Connection conn=null;
-		
+		String sql="";
+		PreparedStatement sQLstatement=null;
 		if(!exists){
 			
 			try{
 				conn=User.getConnection();
-				String sql="INSERT INTO Users (username, password, onoma,eponymo) VALUES ("+user_name+","+password+","+first+" , "+last+");";
+				sql="INSERT INTO Users (username, password, first_name,last_name) VALUES ('"+user_name+"','"+password+"','"+first+"' , '"+last+"');";
+				sQLstatement = conn.prepareStatement(sql);
+				sQLstatement.executeUpdate();
 				
 			
 			
 			}catch(Exception e){
 				System.out.println("Problem in database connection");
+				e.printStackTrace();
 			}
 			
 		}
 		
 		else{
-			String sql = "UPDATE Users SET onoma=?,eponymo=? where username="+this.user_name;
-			try {
-			conn=User.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, first);
-			statement.setString(2, last);
-			statement.executeUpdate();
-			} catch (Exception e) {
-				System.out.println("Problem in databse connection");
-			}
-						
-		}
-		
-		try{
-			 this.dto.transferToDatabase(this.user_name,conn);
+				sql = "UPDATE Users SET password=?,first_name=?,last_name=? where username='"+this.user_name+"'";
+				try {
+				conn=User.getConnection();
+				sQLstatement = conn.prepareStatement(sql);
+				sQLstatement.setString(1, password);
+				sQLstatement.setString(2, first);
+				sQLstatement.setString(3, last);
+				sQLstatement.executeUpdate();
 				
+				}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("FUUUCK");
+				}
+			}
+			try{
 			File file = new File("temp.bin");
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -60,20 +68,60 @@ public class User implements Serializable{
 			oos.close();
 			fout.close();
 			InputStream inputStream = new FileInputStream(new File(file.getAbsolutePath()));
-			String sql = "UPDATE Users set ARXEIO= ? where user_name=" + this.user_name;
+			sql = "UPDATE Users set arxeio= ? where username='" + this.user_name+"'";
 			 
-			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setBlob(1, inputStream);
-			statement.executeUpdate();
+			sQLstatement = conn.prepareStatement(sql);
+			sQLstatement.setBlob(1, inputStream);
+			sQLstatement.executeUpdate();
+			System.out.println("User was successfully written");
 			inputStream.close();
-			conn.close();
-		}catch (Exception e){
-			
+			}	
+		catch (Exception e){
+			e.printStackTrace();
 			System.out.println("Problem in file uploading");
 		}
-		
-		
+			
 	}
+		
+
+	public static User loadUser(String username){
+		Connection conn=null;
+		User john=null;
+		try{
+			conn=getConnection();
+		}catch(Exception e){
+			System.out.println("Couldnt connect to database");
+			return null;
+		}
+		
+		try{
+		PreparedStatement statement = conn.prepareStatement("SELECT arxeio FROM Users where username='"+username+"';");
+		ResultSet result = statement.executeQuery();
+		File file = new File("loader.bin");
+		FileOutputStream os = new FileOutputStream(file);
+		if(result.next()){
+
+		InputStream inputStream = result.getBinaryStream("arxeio");
+		byte[] buffer = new byte[1024];
+		while(inputStream.read(buffer)>0){
+			os.write(buffer);
+		}
+		inputStream.close();
+		FileInputStream fis=new FileInputStream(file.getAbsolutePath());
+		ObjectInputStream oss =new ObjectInputStream(fis);
+		john = (User )oss.readObject();
+		System.out.println("Ola kala");
+		}
+		return john;
+		
+		} catch (Exception e ){
+			e.printStackTrace();
+				 System.out.println("Arxeio Exception");
+				 	return null;
+		}
+	}
+
+	
 
 	public static Connection getConnection() throws Exception{
 		try{
@@ -122,9 +170,6 @@ public class User implements Serializable{
 	}
 	public void setLast(String last) {
 		this.last = last;
-	}
-	public UserDataTransferObject getDto() {
-		return dto;
 	}
 	
 

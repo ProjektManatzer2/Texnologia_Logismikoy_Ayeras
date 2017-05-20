@@ -1,9 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Secretary extends User {
+public class Secretary extends User implements Serializable{
 	
 	
-	public Secretary(String user_name, String password,String AMKA,String first,String last) {
+	
+	public Secretary(String user_name, String password,String first,String last) {
 		
 		super( user_name,  password,  first, last);
 	}
@@ -12,8 +14,6 @@ public class Secretary extends User {
 		new AitimaDikaiwmatwn(dc,astheneis);
 		
 	}
-	
-	
 	
 	
 
