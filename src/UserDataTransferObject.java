@@ -6,7 +6,7 @@ public class UserDataTransferObject implements Serializable{
 
 	String patronymo;
 	String birth_date;
-	char gender;
+	String gender;
 	String varos;
 	String upsos;
 	String address;
@@ -27,10 +27,11 @@ public class UserDataTransferObject implements Serializable{
 	String put_date;
 	String paratiriseis;
 	int type;
+	
 	public UserDataTransferObject(){
 		patronymo="";
 		birth_date="";
-		gender='M';
+		gender="M";
 		varos="";
 		upsos="";
 		address="";
@@ -63,7 +64,7 @@ public class UserDataTransferObject implements Serializable{
 					+ "eidikotita=?,tameio=?,family_statement=?,"
 					+ "kliniki=?,amka=?,arithmos_taytotitas=?,"
 					+ " kinito=?,thlefwno_spitiou=?,thlefwno_ergasias=?,"
-					+ "fax=?,email=?,hmeromhnia_eisagwghws=?,paratiriseis=?,type=? WHERE username=" + username;
+					+ "fax=?,email=?,hmeromhnia_eisagwghws=?,paratiriseis=?,type=?,gender=? WHERE username=" + username;
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, patronymo);
 			statement.setString(2, birth_date);
@@ -87,6 +88,7 @@ public class UserDataTransferObject implements Serializable{
 			statement.setString(20, put_date);
 			statement.setString(21, paratiriseis);
 			statement.setInt(22, type);
+			statement.setString(23, gender);
 			statement.executeUpdate();
 			
 			
@@ -126,10 +128,10 @@ public class UserDataTransferObject implements Serializable{
 	public void setBirth_date(String birth_date) {
 		this.birth_date = birth_date;
 	}
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getVaros() {
