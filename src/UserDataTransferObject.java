@@ -4,67 +4,70 @@ import java.sql.PreparedStatement;
 
 public class UserDataTransferObject implements Serializable{
 
-	String patronymo;
-	String birth_date;
-	String gender;
-	String varos;
-	String upsos;
-	String address;
-	String region;
-	String city;
-	String tk;
-	String eidikothta;
-	String tameio;
-	String family_statement;
-	String amka;
-	String taytotita;
-	String kinito;
-	String house_phone;
-	String job_phone;
-	String fax;
-	String email;
-	String kliniki;
-	String put_date;
-	String paratiriseis;
-	int type;
-	
-	public UserDataTransferObject(){
-		patronymo="";
-		birth_date="";
-		gender="M";
-		varos="";
-		upsos="";
-		address="";
-		region="";
-		city="";
-		tk="";
-		eidikothta="";
-		tameio="";
-		family_statement="";
-		amka="";
-		taytotita="";
-		kinito="";
-		house_phone="";
-		job_phone="";
-		fax="";
-		email="";
-		paratiriseis="";
-		kliniki="";
-		put_date="";
+	private static final long serialVersionUID = -8433207208407555152L;
+	private String username;
+	private String patronymo;
+	private String birth_date;
+	private String gender;
+	private String varos;
+	private String upsos;
+	private String address;
+	private String region;
+	private String city;
+	private String tk;
+	private String eidikothta;
+	private String tameio;
+	private String family_statement;
+	private String amka;
+	private String taytotita;
+	private String kinito;
+	private String house_phone;
+	private String job_phone;
+	private String fax;
+	private String email;
+	private String kliniki;
+	private String put_date;
+	private String paratiriseis;
+	private int type;
+		
+	public UserDataTransferObject(String username){
+		this.username=username;
+		patronymo="NULL";
+		birth_date="NULL";
+		gender="NULL";
+		varos="NULL";
+		upsos="NULL";
+		address="NULL";
+		region="NULL";
+		city="NULL";
+		tk="NULL";
+		eidikothta="NULL";
+		tameio="NULL";
+		family_statement="NULL";
+		amka="NULL";
+		taytotita="NULL";
+		kinito="NULL";
+		house_phone="NULL";
+		job_phone="NULL";
+		fax="NULL";
+		email="NULL";
+		paratiriseis="NULL";
+		kliniki="NULL";
+		put_date="NULL";
 		type=0;
 	}
 	
-	public void transferToDatabase(String username,Connection conn){
+	public void transferToDatabase(Connection conn){
 		try {
 			
 			
 			
-			String sql = "UPDATE Users SET patronymo = ?, date_birth=?,"
+			String sql = "UPDATE Users SET partonymo = ?, date_birth=?,"
 					+ "varos=?,upsos=?,address=?,region=?,city=?,tk=?,"
 					+ "eidikotita=?,tameio=?,family_statement=?,"
 					+ "kliniki=?,amka=?,arithmos_taytotitas=?,"
 					+ " kinito=?,thlefwno_spitiou=?,thlefwno_ergasias=?,"
-					+ "fax=?,email=?,hmeromhnia_eisagwghws=?,paratiriseis=?,type=?,gender=? WHERE username=" + username;
+					+ "fax=?,email=?,hmeromhnia_eisagwghs=?,paratiriseis=?,type=?,gender=? WHERE username='" + username+"'";
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, patronymo);
 			statement.setString(2, birth_date);
@@ -95,10 +98,11 @@ public class UserDataTransferObject implements Serializable{
 
 			
 		} catch (Exception e) {
-
+e.printStackTrace();
+			/*
 			System.out.println("UNABLE TO CONNECT TO DATABASE");
 			
-			
+*/			
 		}
 		
 		

@@ -27,46 +27,47 @@ public class PatientDataTransferObject implements Serializable {
 	String email;
 	String put_date;
 	String comments;
+	String amka; //PRIMARY KEY
 	
 	
-	
-	public PatientDataTransferObject()
+	public PatientDataTransferObject(String amka)
 	{
-		f_name="";
-		date_of_birth="";
-		gender="M";
-		weight="";
-		height="";
-		address="";
-		region="";
-		city="";
-		post_code="";
-		insurance_institution="";
-		status="";
-		taytotita="";
-		personal_tel="";
-		home_tel="";
-		job_tel="";
-		fax="";
-		email="";
-		comments="";
-		put_date="";
-		ama="";
+		this.amka=amka;
+		f_name="NULL";
+		date_of_birth="NULL";
+		gender="NULL";
+		weight="NULL";
+		height="NULL";
+		address="NULL";
+		region="NULL";
+		city="NULL";
+		post_code="NULL";
+		insurance_institution="NULL";
+		status="NULL";
+		taytotita="NULL";
+		personal_tel="NULL";
+		home_tel="NULL";
+		job_tel="NULL";
+		fax="NULL";
+		email="NULL";
+		comments="NULL";
+		put_date="NULL";
+		ama="NULL";
 	}
 	
-	public void transferToDatabase(String username,Connection conn)
+	public void transferToDatabase(Connection conn)
 	{
 		try 
 			{
 			
 			
-			
-			String sql = "UPDATE Users SET f_name = ?, date_of_birth=?,"
+						///APO EDW KATW "META TO UPDATE" PREPEI NA MPEI TO ONOMA TOY PINAKA ASTHENWN!!!!
+			String sql = "UPDATE ONOMAPINAKAASTHENWN SET f_name = ?, date_of_birth=?,"
 					+ "weight=?,height=?,address=?,region=?,city=?,post_code=?,"
 					+ "insurance_institution=?,status=?,"
 					+ "taytotita=?,"
 					+ " personal_tel=?,home_tel=?,job_tel=?,"
-					+ "fax=?,email=?,put_date=?,comments=?,gender=? WHERE username='" + username+"'";
+					+ "fax=?,email=?,put_date=?,comments=?,gender=? WHERE amka='" + amka+"'";
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, f_name);
 			statement.setString(2, date_of_birth);

@@ -20,7 +20,7 @@ public class User implements Serializable{
 		this.password  = password;
 		this.last = last;
 		this.first = first;
-		this.dto=new UserDataTransferObject();
+		this.dto=new UserDataTransferObject(user_name);
 	}
 	
 	public void save_User_in_DB(boolean exists){
@@ -75,6 +75,7 @@ public class User implements Serializable{
 			sQLstatement.executeUpdate();
 			System.out.println("User was successfully written");
 			inputStream.close();
+			this.dto.transferToDatabase(conn);
 			}	
 		catch (Exception e){
 			e.printStackTrace();
