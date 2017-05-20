@@ -1,73 +1,113 @@
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JRadioButton;
-import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
-import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
-public class ΔημιουργίαΧρήστη {
+public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 
-	private JFrame frame;
+	 
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ΔημιουργίαΧρήστη window = new ΔημιουργίαΧρήστη();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	private JTextField usernameField;
+	private JTextField passwordField;
+	JButton okButton;
+	JButton cancelButton;
 	public ΔημιουργίαΧρήστη() {
-		initialize();
-	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setTitle("\u0394\u03B7\u03BC\u03B9\u03BF\u03C5\u03C1\u03B3\u03AF\u03B1 \u03A7\u03C1\u03AE\u03C3\u03C4\u03B7 2");
-		frame.setBounds(100, 100, 600, 350);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		this.setResizable(false);
+		this.setTitle("Δημιουργία χρήστη");
+		this.setBounds(100, 100, 600, 350);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(150, 39, 300, 23);
-		frame.getContentPane().add(panel);
+		panel.setBounds(74, 37, 456, 23);
+		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("\u0393\u03B9\u03B1\u03C4\u03C1\u03CC\u03C2");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Γιατρός");
 		rdbtnNewRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
 		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(0, 0, 130, 23);
+		rdbtnNewRadioButton.setBounds(6, 0, 130, 23);
 		panel.add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("\u0399\u03B1\u03C4\u03C1\u03B9\u03BA\u03CC \u03C0\u03C1\u03BF\u03C3\u03C9\u03C0\u03B9\u03BA\u03CC");
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Υπάλληλος Γραμματείας");
 		rdbtnNewRadioButton_1.setHorizontalAlignment(SwingConstants.CENTER);
 		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(160, 0, 130, 23);
+		rdbtnNewRadioButton_1.setBounds(285, 0, 171, 23);
 		panel.add(rdbtnNewRadioButton_1);
+		
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Νοσηλευτής");
+		buttonGroup.add(rdbtnNewRadioButton_2);
+		rdbtnNewRadioButton_2.setBounds(174, 0, 109, 23);
+		panel.add(rdbtnNewRadioButton_2);
 		
 		JLabel lblNewLabel = new JLabel("Username :");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(147, 94, 60, 23);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(60, 95, 116, 23);
+		this.getContentPane().add(lblNewLabel);
+		
+		usernameField = new JTextField();
+		usernameField.setBounds(186, 96, 257, 20);
+		this.getContentPane().add(usernameField);
+		usernameField.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPassword.setBounds(74, 153, 93, 23);
+		this.getContentPane().add(lblPassword);
+		
+		passwordField = new JTextField();
+		passwordField.setBounds(186, 154, 252, 20);
+		this.getContentPane().add(passwordField);
+		passwordField.setColumns(10);
+		
+		cancelButton = new JButton("Cancel");
+		cancelButton.setBounds(483, 274, 101, 37);
+		cancelButton.addActionListener(this);
+		getContentPane().add(cancelButton);
+		
+		okButton = new JButton("OK");
+		okButton.setBounds(367, 274, 101, 37);
+		okButton.addActionListener(this);
+		getContentPane().add(okButton);
+		this.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		  if(event.getSource() == okButton){
+			  
+		  
+    
+			if(elegxos()){
+				
+			}else{
+				JOptionPane.showMessageDialog(null,
+					    "Συμπληρώστε όλα τα στοιχεία",
+					    "Ελλιπείς στοιχεία",
+					    JOptionPane.ERROR_MESSAGE);
+				
+			}
+			
+			}
+		  if(event.getSource() == cancelButton){
+			  this.dispose();
+			  new SecretaryOffice();
+		  }
+				
+	}
+	
+
+	private boolean elegxos() {
+		
+		return false;
 	}
 }
