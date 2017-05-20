@@ -112,7 +112,7 @@ public class ΚαρτέλαΑσθενούς {
 		
 		JLabel lblNewLabel_1 = new JLabel("\u03A0\u03B1\u03C4\u03C1\u03CE\u03BD\u03C5\u03BC\u03BF :");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(520, 10, 70, 20);
+		lblNewLabel_1.setBounds(520, 10, 72, 20);
 		
 		textField_2 = new JTextField();
 		textField_2.setHorizontalAlignment(SwingConstants.CENTER);

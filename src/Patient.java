@@ -1,10 +1,15 @@
+import java.io.*;
 
-public class Patient {
+public class Patient implements Serializable {
 	
 	
-	private String first;
-	private String last;
-	private String amka;
+	/**
+	 * 
+	 */
+	protected static final long serialVersionUID = 737501913632927252L;
+	protected String first;
+	protected String last;
+	protected String amka;
 	
 	
 	public Patient(String first,String last,String amka){
