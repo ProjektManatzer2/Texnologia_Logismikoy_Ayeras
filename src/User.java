@@ -4,17 +4,19 @@ import java.sql.*;
 
 public class User implements Serializable{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -8889739166956625464L;
 	protected String user_name;
 	protected String password;
 	protected String first;
 	protected String last;
-	protected UserDataTransferObject dto;
+	private UserDataTransferObject dto;
 	
 	
+	public UserDataTransferObject getDto() {
+		return dto;
+	}
+
 	public User(String user_name, String password, String first, String last) {
 		this.user_name = user_name;
 		this.password  = password;

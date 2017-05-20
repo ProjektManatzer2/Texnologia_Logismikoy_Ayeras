@@ -94,22 +94,36 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		  if(event.getSource() == okButton){
+      //EPILOGH TOY OK
+	  if(event.getSource() == okButton){
 			  
-		  
-    
+			  		 
 			if(elegxos()){
+				if(doctorButton.isSelected()){ //New frame proorismeno gia dhmiourgia giatroy.
+					this.dispose();
+					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),1);
+				}
+				else if(nurseButton.isSelected()){ //New frame proorismeno gia dhmiourgia Noshleuti.
+					this.dispose();
+					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),2);
+					 
+				}
+				else{  //New frame proorismeno gia dhmiourgia ypallilou grammateias.
+					this.dispose(); 
+					new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),3);
 				
-			}else{
+				}
+			}
+			else{
 				JOptionPane.showMessageDialog(null,
 					    "Συμπληρώστε όλα τα στοιχεία",
 					    "Ελλιπείς στοιχεία",
 					    JOptionPane.ERROR_MESSAGE);
 				
 			}
-			
-			}
-		  if(event.getSource() == cancelButton){
+	 }
+	//EPILOGH TOY CANCEL		
+	 if(event.getSource() == cancelButton){
 			  this.dispose();
 			  new SecretaryOffice();
 		  }

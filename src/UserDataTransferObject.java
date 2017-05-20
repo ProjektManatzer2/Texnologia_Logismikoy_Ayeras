@@ -98,7 +98,7 @@ public class UserDataTransferObject implements Serializable{
 
 			
 		} catch (Exception e) {
-e.printStackTrace();
+			e.printStackTrace();
 			/*
 			System.out.println("UNABLE TO CONNECT TO DATABASE");
 			
@@ -239,6 +239,9 @@ e.printStackTrace();
 	}
 	public void setParatiriseis(String paratiriseis) {
 		this.paratiriseis = paratiriseis;
+	}
+	public void setPutDate(String putDate) {
+		this.put_date= putDate;
 	}
 	
 

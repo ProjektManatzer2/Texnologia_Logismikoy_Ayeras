@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,8 +21,15 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
-
 	
+	private JSpinner monthSpinner;
+	private JSpinner yearSpinner;
+	private JSpinner daySpinner;
+	private JRadioButton maleField;
+	private JRadioButton femaleField;
+	private JTextPane commentsField; 
+	private JButton okButton ;
+	private JButton cancelButton;
 	private JTextField firstNameField;
 	private JTextField lastNameField;
 	private JTextField patronymoField;
@@ -40,9 +51,15 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	private JTextField thlErgasiaField;
 	private JTextField faxField;
 	private JTextField emailField;
-
+	private String username;
+	private String password;
+	private int type;
 	
-	public ΔημιουργείαΧρήστη() {
+	public ΔημιουργείαΧρήστη(String username, String password, int i) {
+		
+		this.username=username;
+		this.password=password;
+		this.type=i;
 		
 		this.getContentPane().setEnabled(false);
 		this.setResizable(false);
@@ -89,15 +106,16 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JRadioButton maleField = new JRadioButton("\u0386\u03BD\u03B4\u03C1\u03B1\u03C2");
+		maleField = new JRadioButton("\u0386\u03BD\u03B4\u03C1\u03B1\u03C2");
 		maleField.setBounds(6, 16, 109, 23);
 		panel.add(maleField);
 		buttonGroup.add(maleField);
 		maleField.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JRadioButton femaleField = new JRadioButton("\u0393\u03C5\u03BD\u03B1\u03AF\u03BA\u03B1\r\n");
+		maleField.addActionListener(this);
+		femaleField = new JRadioButton("\u0393\u03C5\u03BD\u03B1\u03AF\u03BA\u03B1\r\n");
 		femaleField.setBounds(124, 16, 105, 23);
 		panel.add(femaleField);
+		femaleField.addActionListener(this);
 		buttonGroup.add(femaleField);
 		
 		JLabel label_1 = new JLabel("\u0397\u03BC. \u0393\u03AD\u03BD\u03BD\u03B7\u03C3\u03B7\u03C2 :\r\n");
@@ -105,17 +123,17 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		label_1.setBounds(262, 50, 75, 20);
 		this.getContentPane().add(label_1);
 		
-		JSpinner daySpinner = new JSpinner();
+		daySpinner = new JSpinner();
 		daySpinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
 		daySpinner.setBounds(346, 60, 35, 20);
 		this.getContentPane().add(daySpinner);
 		
-		JSpinner monthSpinner = new JSpinner();
+		monthSpinner = new JSpinner();
 		monthSpinner.setModel(new SpinnerNumberModel(1, 1, 12, 1));
 		monthSpinner.setBounds(390, 60, 35, 20);
 		this.getContentPane().add(monthSpinner);
 		
-		JSpinner yearSpinner = new JSpinner();
+		yearSpinner = new JSpinner();
 		yearSpinner.setModel(new SpinnerNumberModel(new Integer(2017), new Integer(1900), null, new Integer(1)));
 		yearSpinner.setBounds(434, 60, 60, 20);
 		this.getContentPane().add(yearSpinner);
@@ -227,6 +245,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_13 = new JLabel("\u0395\u03B9\u03B4\u03B9\u03BA\u03CC\u03C4\u03B7\u03C4\u03B1 :\r\n");
 		lblNewLabel_13.setBounds(6, 18, 105, 20);
+		if(type!=3){
 		panel_2.add(lblNewLabel_13);
 		lblNewLabel_13.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -235,7 +254,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		panel_2.add(eidikotitaField);
 		eidikotitaField.setHorizontalAlignment(SwingConstants.CENTER);
 		eidikotitaField.setColumns(10);
-		
+		}
 		JLabel lblNewLabel_14 = new JLabel("\u03A4\u03B1\u03BC\u03B5\u03AF\u03BF :");
 		lblNewLabel_14.setBounds(6, 56, 105, 20);
 		panel_2.add(lblNewLabel_14);
@@ -260,14 +279,14 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_16 = new JLabel("\u039A\u03BB\u03B9\u03BD\u03B9\u03BA\u03AE :");
 		lblNewLabel_16.setBounds(343, 18, 50, 20);
-		panel_2.add(lblNewLabel_16);
-		
+		if(type!=3){
+		/*panel_2.add(lblNewLabel_16);
 		klinikiField = new JTextField();
 		klinikiField.setBounds(402, 18, 170, 20);
 		panel_2.add(klinikiField);
 		klinikiField.setHorizontalAlignment(SwingConstants.CENTER);
-		klinikiField.setColumns(10);
-		
+		klinikiField.setColumns(10);*/
+		}
 		JLabel lblNewLabel_17 = new JLabel("\u0391\u039C\u039A\u0391 :");
 		lblNewLabel_17.setBounds(343, 56, 45, 20);
 		panel_2.add(lblNewLabel_17);
@@ -355,25 +374,87 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		scrollPane.setBounds(18, 312, 385, 120);
 		this.getContentPane().add(scrollPane);
 		
-		JTextPane commentsField = new JTextPane();
+		commentsField = new JTextPane();
 		commentsField.setText("Παρατηρήσεις: ");
 		scrollPane.setViewportView(commentsField);
 		
-		JButton okButton = new JButton("OK");
+		okButton = new JButton("OK");
 		okButton.setBounds(695, 437, 89, 23);
+		okButton.addActionListener(this);
 		this.getContentPane().add(okButton);
 		
-		JButton cancelButton = new JButton("Cancel");
+		cancelButton = new JButton("Cancel");
 		cancelButton.setBounds(596, 437, 89, 23);
+		cancelButton.addActionListener(this);
 		this.getContentPane().add(cancelButton);
+		
 		this.setVisible(true);
+	
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		if(e.getSource()==cancelButton){
+			this.dispose();
+			new ΔημιουργίαΧρήστη();
+		}	
+		if(e.getSource()==okButton){
+			switch (type){
+				case 1:
+					Doctor D = new Doctor(username,password,firstNameField.getText().trim(),lastNameField.getText().trim());
+					D.getDto().setAddress(dieuthinsiField.getText());
+					D.getDto().setAmka(amkaField.getText().trim());
+					D.getDto().setCity(poliField.getText());
+					D.getDto().setEidikothta(eidikotitaField.getText().trim());
+					D.getDto().setEmail(emailField.getText().trim());
+					D.getDto().setFamily_statement(oikogeneiaField.getText());
+					D.getDto().setFax(faxField.getText().trim());
+					D.getDto().setHouse_phone(homeField.getText().trim());
+					D.getDto().setJob_phone(thlErgasiaField.getText().trim());
+					D.getDto().setKinito(kinitoField.getText().trim());
+					D.getDto().setParatiriseis(commentsField.getText());
+					D.getDto().setPatronymo(patronymoField.getText().trim());
+					D.getDto().setRegion(perioxiField.getText());
+					D.getDto().setTameio(tameioField.getText().trim());
+					D.getDto().setTaytotita(taytotitaField.getText());
+					D.getDto().setTk(tkField.getText().trim());
+					D.getDto().setType(type);
+					D.getDto().setUpsos(ypsosField.getText());
+					D.getDto().setVaros(varosField.getText());
+					D.getDto().setFamily_statement(oikogeneiaField.getText());
+						if(femaleField.isSelected())
+							D.getDto().setGender("F");
+						else if(maleField.isSelected())
+							D.getDto().setGender("M");						
+				   
+					String date = daySpinner.getToolTipText() +"/"+ monthSpinner.getToolTipText()+"/"+yearSpinner.getToolTipText();
+					D.getDto().setBirth_date(date);
+					//EISAGWGH SE KLINIKI!!!
+					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+					Date dateOfPut = new Date();
+					System.out.println(dateFormat.format(dateOfPut));
+					D.save_User_in_DB(false);
+					System.out.println("TOKANA");
+					break;
+							
+				case 2: 
+					
+					break;
+					
+				default:  
+					
+					
+					break;
+			}
+		}
+			
+			
+			
+			
+		}
+		
 
 		
 	}
-}
+
