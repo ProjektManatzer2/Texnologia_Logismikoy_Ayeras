@@ -17,8 +17,12 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField usernameField;
 	private JTextField passwordField;
-	JButton okButton;
-	JButton cancelButton;
+	private JButton okButton;
+	private JButton cancelButton;
+	private JRadioButton doctorButton;
+	private JRadioButton secretaryButton;
+	private JRadioButton nurseButton;
+	
 	public ΔημιουργίαΧρήστη() {
 
 		this.setResizable(false);
@@ -32,22 +36,22 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Γιατρός");
-		rdbtnNewRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(6, 0, 130, 23);
-		panel.add(rdbtnNewRadioButton);
+		doctorButton = new JRadioButton("Γιατρός");
+		doctorButton.setHorizontalAlignment(SwingConstants.CENTER);
+		buttonGroup.add(doctorButton);
+		doctorButton.setBounds(6, 0, 130, 23);
+		panel.add(doctorButton);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Υπάλληλος Γραμματείας");
-		rdbtnNewRadioButton_1.setHorizontalAlignment(SwingConstants.CENTER);
-		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(285, 0, 171, 23);
-		panel.add(rdbtnNewRadioButton_1);
+		secretaryButton = new JRadioButton("Υπάλληλος Γραμματείας");
+		secretaryButton.setHorizontalAlignment(SwingConstants.CENTER);
+		buttonGroup.add(secretaryButton);
+		secretaryButton.setBounds(285, 0, 171, 23);
+		panel.add(secretaryButton);
 		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Νοσηλευτής");
-		buttonGroup.add(rdbtnNewRadioButton_2);
-		rdbtnNewRadioButton_2.setBounds(174, 0, 109, 23);
-		panel.add(rdbtnNewRadioButton_2);
+		nurseButton = new JRadioButton("Νοσηλευτής");
+		buttonGroup.add(nurseButton);
+		nurseButton.setBounds(174, 0, 109, 23);
+		panel.add(nurseButton);
 		
 		JLabel lblNewLabel = new JLabel("Username :");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -78,6 +82,13 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 		okButton.setBounds(367, 274, 101, 37);
 		okButton.addActionListener(this);
 		getContentPane().add(okButton);
+		
+		 secretaryButton.addActionListener(this);
+		 doctorButton.addActionListener(this);
+		 nurseButton.addActionListener(this);
+		
+		
+		
 		this.setVisible(true);
 	}
 
@@ -105,9 +116,14 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 				
 	}
 	
-
+	
 	private boolean elegxos() {
+		if(usernameField.getText().trim().equals("") || passwordField.getText().trim().equals(""))
+			return false;
 		
-		return false;
+		if (doctorButton.isSelected() || nurseButton.isSelected() || secretaryButton.isSelected())
+			return true;
+		else
+			return false;
 	}
 }
