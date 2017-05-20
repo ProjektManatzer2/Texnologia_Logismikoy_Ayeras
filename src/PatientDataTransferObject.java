@@ -4,10 +4,12 @@ import java.sql.PreparedStatement;
 
 public class PatientDataTransferObject implements Serializable {
 
+	 
+	private static final long serialVersionUID = -8472687185815951244L;
 	String f_name;
 	String ama;
 	String date_of_birth;
-	char gender;
+	String gender;
 	String weight;
 	String height;
 	String address;
@@ -32,7 +34,7 @@ public class PatientDataTransferObject implements Serializable {
 	{
 		f_name="";
 		date_of_birth="";
-		gender='M';
+		gender="M";
 		weight="";
 		height="";
 		address="";
@@ -64,7 +66,7 @@ public class PatientDataTransferObject implements Serializable {
 					+ "insurance_institution=?,status=?,"
 					+ "taytotita=?,"
 					+ " personal_tel=?,home_tel=?,job_tel=?,"
-					+ "fax=?,email=?,put_date=?,comments=?, WHERE username=" + username;
+					+ "fax=?,email=?,put_date=?,comments=?,gender=? WHERE username='" + username+"'";
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, f_name);
 			statement.setString(2, date_of_birth);
@@ -84,6 +86,7 @@ public class PatientDataTransferObject implements Serializable {
 			statement.setString(16, email);
 			statement.setString(17, put_date);
 			statement.setString(18, comments);
+			statement.setString(19, gender);
 		
 			statement.executeUpdate();
 			
