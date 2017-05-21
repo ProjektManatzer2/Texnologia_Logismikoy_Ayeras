@@ -1,5 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -114,13 +117,9 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 				
 				}
 			}
-			else{
-				JOptionPane.showMessageDialog(null,
-					    "Συμπληρώστε όλα τα στοιχεία",
-					    "Ελλιπείς στοιχεία",
-					    JOptionPane.ERROR_MESSAGE);
+			
 				
-			}
+			
 	 }
 	//EPILOGH TOY CANCEL		
 	 if(event.getSource() == cancelButton){
@@ -133,11 +132,55 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	
 	private boolean elegxos() {
 		if(usernameField.getText().trim().equals("") || passwordField.getText().trim().equals(""))
+			{JOptionPane.showMessageDialog(null,
+			    "Συμπληρώστε όλα τα στοιχεία",
+			    "Ελλιπείς στοιχεία",
+			    JOptionPane.ERROR_MESSAGE);
 			return false;
+			}
+		
+		if(usernameExists(usernameField.getText().trim())){
+			JOptionPane.showMessageDialog(null,
+				    "Username Exists",
+				    "Invalid Username",
+				    JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		
 		if (doctorButton.isSelected() || nurseButton.isSelected() || secretaryButton.isSelected())
-			return true;
+		return true;
+		
 		else
+			{		JOptionPane.showMessageDialog(null,
+				    "Συμπληρώστε όλα τα στοιχεία",
+				    "Ελλιπείς στοιχεία",
+				    JOptionPane.ERROR_MESSAGE);
 			return false;
+			}
+	}
+
+	private boolean usernameExists(String trim) {
+
+		try {
+			Connection conn = User.getConnection();
+		
+			String sql = "Select username from Users where username = '"+trim+"'";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet result =statement.executeQuery();
+			int i=0;
+			while(result.next())
+				i++;
+			if (i>0)
+				return true;
+			
+			
+			
+			return false;
+		} catch (Exception e) {
+			System.out.println("Failed to connect");
+			e.printStackTrace();
+			return true;
+		}
+		
 	}
 }

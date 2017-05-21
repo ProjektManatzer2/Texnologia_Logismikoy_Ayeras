@@ -9,6 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -134,7 +135,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		this.getContentPane().add(monthSpinner);
 		
 		yearSpinner = new JSpinner();
-		yearSpinner.setModel(new SpinnerNumberModel(new Integer(2017), new Integer(1900), null, new Integer(1)));
+		yearSpinner.setModel(new SpinnerNumberModel(new Integer(1900), new Integer(1900), null, new Integer(1)));
 		yearSpinner.setBounds(434, 60, 60, 20);
 		this.getContentPane().add(yearSpinner);
 		
@@ -279,14 +280,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_16 = new JLabel("\u039A\u03BB\u03B9\u03BD\u03B9\u03BA\u03AE :");
 		lblNewLabel_16.setBounds(343, 18, 50, 20);
-		if(type!=3){
-		/*panel_2.add(lblNewLabel_16);
-		klinikiField = new JTextField();
-		klinikiField.setBounds(402, 18, 170, 20);
-		panel_2.add(klinikiField);
-		klinikiField.setHorizontalAlignment(SwingConstants.CENTER);
-		klinikiField.setColumns(10);*/
-		}
+		
 		JLabel lblNewLabel_17 = new JLabel("\u0391\u039C\u039A\u0391 :");
 		lblNewLabel_17.setBounds(343, 56, 45, 20);
 		panel_2.add(lblNewLabel_17);
@@ -400,8 +394,11 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 			new ΔημιουργίαΧρήστη();
 		}	
 		if(e.getSource()==okButton){
-			switch (type){
+			if(elegxosStoixeiwn()){
+				
+				switch (type){
 				case 1:
+					
 					Doctor D = new Doctor(username,password,firstNameField.getText().trim(),lastNameField.getText().trim());
 					D.getDto().setAddress(dieuthinsiField.getText());
 					D.getDto().setAmka(amkaField.getText().trim());
@@ -427,34 +424,205 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 							D.getDto().setGender("F");
 						else if(maleField.isSelected())
 							D.getDto().setGender("M");						
-				   
-					String date = daySpinner.getToolTipText() +"/"+ monthSpinner.getToolTipText()+"/"+yearSpinner.getToolTipText();
+						
+						int day=(int) daySpinner.getValue();
+						int month = (int)monthSpinner.getValue();
+						int year = (int)yearSpinner.getValue();
+						
+					String date = Integer.toString(day) + "/"+ Integer.toString(month)+ "/"+Integer.toString(year);
 					D.getDto().setBirth_date(date);
-					//EISAGWGH SE KLINIKI!!!
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 					Date dateOfPut = new Date();
 					System.out.println(dateFormat.format(dateOfPut));
 					D.save_User_in_DB(false);
 					System.out.println("TOKANA");
+					//EISAGWGH SE KLINIKH FRAME
+					this.dispose();
+					
+					
 					break;
-							
+					
+					
 				case 2: 
+					
+					Nurse N = new Nurse(username,password,firstNameField.getText().trim(),lastNameField.getText().trim());
+					N.getDto().setAddress(dieuthinsiField.getText());
+					N.getDto().setAmka(amkaField.getText().trim());
+					N.getDto().setCity(poliField.getText());
+					N.getDto().setEidikothta(eidikotitaField.getText().trim());
+					N.getDto().setEmail(emailField.getText().trim());
+					N.getDto().setFamily_statement(oikogeneiaField.getText());
+					N.getDto().setFax(faxField.getText().trim());
+					N.getDto().setHouse_phone(homeField.getText().trim());
+					N.getDto().setJob_phone(thlErgasiaField.getText().trim());
+					N.getDto().setKinito(kinitoField.getText().trim());
+					N.getDto().setParatiriseis(commentsField.getText());
+					N.getDto().setPatronymo(patronymoField.getText().trim());
+					N.getDto().setRegion(perioxiField.getText());
+					N.getDto().setTameio(tameioField.getText().trim());
+					N.getDto().setTaytotita(taytotitaField.getText());
+					N.getDto().setTk(tkField.getText().trim());
+					N.getDto().setType(type);
+					N.getDto().setUpsos(ypsosField.getText());
+					N.getDto().setVaros(varosField.getText());
+					N.getDto().setFamily_statement(oikogeneiaField.getText());
+					if(femaleField.isSelected())
+						N.getDto().setGender("F");
+					else if(maleField.isSelected())
+						N.getDto().setGender("M");						
+					
+					int day1=(int) daySpinner.getValue();
+					int month1 = (int)monthSpinner.getValue();
+					int year1 = (int)yearSpinner.getValue();
+					
+					String date1 = Integer.toString(day1) + "/"+ Integer.toString(month1)+ "/"+Integer.toString(year1);
+					N.getDto().setBirth_date(date1);
+					DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+					Date dateOfPut1 = new Date();
+					System.out.println(dateFormat1.format(dateOfPut1));
+					N.save_User_in_DB(false);
+					System.out.println("TOKANA");
+					//EISAGWGH SE KLINIKH FRAME
+					this.dispose();
 					
 					break;
 					
 				default:  
+
+					Secretary S = new Secretary(username,password,firstNameField.getText().trim(),lastNameField.getText().trim());
+					S.getDto().setAddress(dieuthinsiField.getText());
+					S.getDto().setAmka(amkaField.getText().trim());
+					S.getDto().setCity(poliField.getText());
+					S.getDto().setEmail(emailField.getText().trim());
+					S.getDto().setFamily_statement(oikogeneiaField.getText());
+					S.getDto().setFax(faxField.getText().trim());
+					S.getDto().setHouse_phone(homeField.getText().trim());
+					S.getDto().setJob_phone(thlErgasiaField.getText().trim());
+					S.getDto().setKinito(kinitoField.getText().trim());
+					S.getDto().setParatiriseis(commentsField.getText());
+					S.getDto().setPatronymo(patronymoField.getText().trim());
+					S.getDto().setRegion(perioxiField.getText());
+					S.getDto().setTameio(tameioField.getText().trim());
+					S.getDto().setTaytotita(taytotitaField.getText());
+					S.getDto().setTk(tkField.getText().trim());
+					S.getDto().setType(type);
+					S.getDto().setUpsos(ypsosField.getText());
+					S.getDto().setVaros(varosField.getText());
+					S.getDto().setFamily_statement(oikogeneiaField.getText());
+					if(femaleField.isSelected())
+						S.getDto().setGender("F");
+					else if(maleField.isSelected())
+						S.getDto().setGender("M");						
 					
+					int day2=(int) daySpinner.getValue();
+					int month2 = (int)monthSpinner.getValue();
+					int year2 = (int)yearSpinner.getValue();
+					
+					String date2 = Integer.toString(day2) + "/"+ Integer.toString(month2)+ "/"+Integer.toString(year2);
+					S.getDto().setBirth_date(date2);
+					DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
+					Date dateOfPut2 = new Date();
+					System.out.println(dateFormat2.format(dateOfPut2));
+					S.save_User_in_DB(false);
+					System.out.println("TOKANA");
+					//EISAGWGH SE KLINIKH FRAME
+					this.dispose();
 					
 					break;
+				}
 			}
-		}
+			
+		}	
 			
 			
-			
-			
+	}
+
+
+	private boolean elegxosStoixeiwn() {
+		if(firstNameField.getText().trim().equals("") || lastNameField.getText().trim().equals("") )
+		{	warning("Συμπληρώστε ονοματεπώνυμο");
+			return false;
 		}
 		
+		if(dieuthinsiField.getText().trim().equals("") && poliField.getText().trim().equals(""))
+		{
+			warning("Συμπληρώστε στοιχεία κατοικίας");
+			return false;
+		}
+		
+		if( characterFound(thlErgasiaField.getText().trim().replaceAll(" ","")) || characterFound(homeField.getText().trim().replaceAll(" ","")) || characterFound(kinitoField.getText().trim().replaceAll(" ","")))
+		{
+			warning("Aφαιρέστε τις παύλες και τους χαρακτήρες από τους αριθμούς επικοινωνίας");
+			return false;
+		}
+		
+		if( fakeNumber(thlErgasiaField.getText().trim().replaceAll(" ","")) || fakeNumber(homeField.getText().trim().replaceAll(" ","")) || fakeNumber(kinitoField.getText().trim().replaceAll(" ","")))
+		{
+			warning("Ο αριθμός που συμπληρώσατε δεν αντιστοιχεί σε τηλέφωνο");
+			return false;
+		}
+	
+		if(thlErgasiaField.getText().trim().equals("") && homeField.getText().trim().equals("") && kinitoField.getText().trim().equals(""))
+		{	warning("Πρέπει να συμπληρωθεί έστω ένα στοιχείο επικοινωνίας");
+			return false;
+		}
+		
+		if(thlErgasiaField.getText().trim().replaceAll(" ","").length()!=10 && thlErgasiaField.getText().trim().length()!=0)
+		{  warning("Τα ψηφία στον αριθμό εργασίας πρέπει να είναι δέκα");
+			return false;
+		}
+		
+		if(kinitoField.getText().trim().replaceAll(" ","").length()!=10 && kinitoField.getText().trim().length()!=0)
+		{ warning("Τα ψηφία στον αριθμό κινητού πρέπει να είναι δέκα");
+			return false;
+		}
+		
+		if(homeField.getText().trim().replaceAll(" ","").length()!=10 && homeField.getText().trim().replaceAll(" ","").length()!=0)
+		{ warning("Τα ψηφία στο τηλέφωνο σπιτιού πρέπει να είναι δέκα");
+			return false;
+		}
+				
+		return true;}
+		
+	private boolean fakeNumber(String ss) {
+		try{
+			if(ss.charAt(0) == '2' || (ss.charAt(0)=='6' && ss.charAt(1)=='9'))
+				return false;
+			
+			return true;
+			
+		}catch(StringIndexOutOfBoundsException e){
+			return false;
+		}
+		
+		
+	
+	}
 
+
+	private boolean characterFound(String trim) {
+		try{
+		for(int i=0; i<trim.length();i++){
+			if(trim.charAt(i) > '9' || trim.charAt(i)<'0')
+				return true;
+			}
+		
+			return false;
+			
+		}catch(StringIndexOutOfBoundsException e){
+			return false;
+		}
+		
 		
 	}
+
+
+	private void warning(String s){
+		JOptionPane.showMessageDialog(null,
+				s,
+		    "Λανθασμένα στοιχεία",
+		    JOptionPane.ERROR_MESSAGE);
+	}
+		
+}
 
