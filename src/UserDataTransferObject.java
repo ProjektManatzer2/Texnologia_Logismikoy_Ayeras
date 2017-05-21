@@ -32,28 +32,28 @@ public class UserDataTransferObject implements Serializable{
 		
 	public UserDataTransferObject(String username){
 		this.username=username;
-		patronymo="NULL";
-		birth_date="NULL";
-		gender="NULL";
-		varos="NULL";
-		upsos="NULL";
-		address="NULL";
-		region="NULL";
-		city="NULL";
-		tk="NULL";
-		eidikothta="NULL";
-		tameio="NULL";
-		family_statement="NULL";
-		amka="NULL";
-		taytotita="NULL";
-		kinito="NULL";
-		house_phone="NULL";
-		job_phone="NULL";
-		fax="NULL";
-		email="NULL";
-		paratiriseis="NULL";
-		kliniki="NULL";
-		put_date="NULL";
+		patronymo="";
+		birth_date="";
+		gender="";
+		varos="";
+		upsos="";
+		address="";
+		region="";
+		city="";
+		tk="";
+		eidikothta="";
+		tameio="";
+		family_statement="";
+		amka="";
+		taytotita="";
+		kinito="";
+		house_phone="";
+		job_phone="";
+		fax="";
+		email="";
+		paratiriseis="";
+		kliniki="";
+		put_date="";
 		type=0;
 	}
 	
@@ -99,10 +99,10 @@ public class UserDataTransferObject implements Serializable{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			/*
+			
 			System.out.println("UNABLE TO CONNECT TO DATABASE");
 			
-*/			
+			
 		}
 		
 		
