@@ -1,14 +1,15 @@
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
-import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class InitialScreen {
 
@@ -43,6 +44,8 @@ public class InitialScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		boolean flag = false;
+		int id;
 		frmLoginScreen = new JFrame();
 		frmLoginScreen.setResizable(false);
 		frmLoginScreen.setTitle("Login Screen");
@@ -68,10 +71,64 @@ public class InitialScreen {
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(320, 240, 80, 23);
+
+		
 		frmLoginScreen.getContentPane().add(btnLogin);
 		frmLoginScreen.getContentPane().add(pwdPassword);
 		frmLoginScreen.getContentPane().add(lblPassword);
 		frmLoginScreen.getContentPane().add(lblUsername);
 		frmLoginScreen.getContentPane().add(txtUsername);
+		while(flag==false){
+			
+			ButtonListener e = new ButtonListener(txtUsername,pwdPassword,flag,id);
+			btnLogin.addActionListener(e);
+			}
+			if (flag==true)
+				{
+				frmLoginScreen.setVisible(false);
+				if(id==0)
+					SecretaryOfficeFream();
+				else if (id==1)
+					DoctorFrame();
+				else if (id==2)
+					Γιατρός_Νοσηλευτής();
+					
 	}
 }
+
+
+class ButtonListener implements ActionListener {
+	boolean flag;
+	JTextField username; 
+	JPasswordField password;
+	int id;
+	
+	public ButtonListener(JTextField name, JPasswordField pwdPassword,boolean flag , int id) {
+
+		this.username = name;
+		password = pwdPassword;
+		this.flag=flag;
+		this.id=id;
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	
+		boolean flag0 = false;
+	
+		
+		String textField = username.getText();
+			userSearch(name,flag0);
+		
+		
+			
+		
+	
+	
+			if(flag0==false)
+			JOptionPane.showMessageDialog(null, "User " + textField.toString() + " Not Found");
+
+
+}
+	}
