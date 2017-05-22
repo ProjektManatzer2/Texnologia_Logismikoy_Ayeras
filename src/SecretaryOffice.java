@@ -51,7 +51,7 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnDhmiourgiasXrhsth){
-			System.out.println("NAI RE HRAKLARA");
+			System.out.println("NAI RE PAOKARA");
 			this.dispose();
 			new ΔημιουργίαΧρήστη();
 		}

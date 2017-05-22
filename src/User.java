@@ -174,13 +174,7 @@ public class User implements Serializable{
 	public void setLast(String last) {
 		this.last = last;
 	}
-	public void userSearch(String uname,boolean flag)
-	{
-		if (uname.IsEqual(select name 
-								from users ))
-			flag=true;
-			
-	}
+	
 
 
 	
