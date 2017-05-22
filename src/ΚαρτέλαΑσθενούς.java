@@ -32,9 +32,9 @@ import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
-public class ΚαρτέλαΑσθενούς {
+public class ΚαρτέλαΑσθενούς extends JFrame{
 
-	private JFrame frame;
+
 	private JTextField txtOKargasEinai;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -59,25 +59,8 @@ public class ΚαρτέλαΑσθενούς {
 	private JLabel textField_19;
 	private JTextField textField_20;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ΚαρτέλαΑσθενούς window = new ΚαρτέλαΑσθενούς();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the application.
-	 */
+
 	public ΚαρτέλαΑσθενούς() {
 		initialize();
 	}
@@ -86,12 +69,11 @@ public class ΚαρτέλαΑσθενούς {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setEnabled(false);
-		frame.setResizable(false);
-		frame.setTitle("\u0394\u03B7\u03BC\u03B9\u03BF\u03C5\u03C1\u03B3\u03AF\u03B1 \u03BA\u03B1\u03C1\u03C4\u03AD\u03BB\u03B1\u03C2 \u03B1\u03C3\u03B8\u03B5\u03BD\u03BF\u03CD\u03C2");
-		frame.setBounds(100, 100, 800, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setEnabled(false);
+		this.setResizable(false);
+		this.setTitle("\u0394\u03B7\u03BC\u03B9\u03BF\u03C5\u03C1\u03B3\u03AF\u03B1 \u03BA\u03B1\u03C1\u03C4\u03AD\u03BB\u03B1\u03C2 \u03B1\u03C3\u03B8\u03B5\u03BD\u03BF\u03CD\u03C2");
+		this.setBounds(100, 100, 800, 500);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("\u038C\u03BD\u03BF\u03BC\u03B1 :");
 		lblNewLabel.setBounds(14, 10, 50, 20);
@@ -118,18 +100,18 @@ public class ΚαρτέλαΑσθενούς {
 		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_2.setBounds(604, 10, 170, 20);
 		textField_2.setColumns(10);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(lblNewLabel);
-		frame.getContentPane().add(txtOKargasEinai);
-		frame.getContentPane().add(label);
-		frame.getContentPane().add(textField_1);
-		frame.getContentPane().add(lblNewLabel_1);
-		frame.getContentPane().add(textField_2);
+		this.getContentPane().setLayout(null);
+		this.getContentPane().add(lblNewLabel);
+		this.getContentPane().add(txtOKargasEinai);
+		this.getContentPane().add(label);
+		this.getContentPane().add(textField_1);
+		this.getContentPane().add(lblNewLabel_1);
+		this.getContentPane().add(textField_2);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A6\u03CD\u03BB\u03BB\u03BF", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(17, 34, 233, 46);
-		frame.getContentPane().add(panel);
+		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\u0386\u03BD\u03B4\u03C1\u03B1\u03C2");
@@ -146,76 +128,76 @@ public class ΚαρτέλαΑσθενούς {
 		JLabel label_1 = new JLabel("\u0397\u03BC. \u0393\u03AD\u03BD\u03BD\u03B7\u03C3\u03B7\u03C2 :\r\n");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setBounds(262, 50, 75, 20);
-		frame.getContentPane().add(label_1);
+		this.getContentPane().add(label_1);
 		
 		JSpinner spinner_1 = new JSpinner();
 		spinner_1.setModel(new SpinnerNumberModel(1, 1, 31, 1));
 		spinner_1.setBounds(346, 60, 35, 20);
-		frame.getContentPane().add(spinner_1);
+		this.getContentPane().add(spinner_1);
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 12, 1));
 		spinner.setBounds(390, 60, 35, 20);
-		frame.getContentPane().add(spinner);
+		this.getContentPane().add(spinner);
 		
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(new Integer(2017), new Integer(1900), null, new Integer(1)));
 		spinner_2.setBounds(434, 60, 60, 20);
-		frame.getContentPane().add(spinner_2);
+		this.getContentPane().add(spinner_2);
 		
 		JLabel lblNewLabel_2 = new JLabel("\u0397\u0397\r\n");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(346, 41, 35, 20);
-		frame.getContentPane().add(lblNewLabel_2);
+		this.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("\u039C\u039C\r\n");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBounds(390, 41, 35, 20);
-		frame.getContentPane().add(lblNewLabel_3);
+		this.getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("\u03A7\u03A7\u03A7\u03A7");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setBounds(434, 41, 60, 14);
-		frame.getContentPane().add(lblNewLabel_4);
+		this.getContentPane().add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("\u0392\u03AC\u03C1\u03BF\u03C2 :");
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setBounds(560, 41, 46, 14);
-		frame.getContentPane().add(lblNewLabel_5);
+		this.getContentPane().add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("\u038E\u03C8\u03BF\u03C2 :");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setBounds(560, 66, 46, 14);
-		frame.getContentPane().add(lblNewLabel_6);
+		this.getContentPane().add(lblNewLabel_6);
 		
 		textField_3 = new JTextField();
 		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_3.setBounds(616, 41, 100, 20);
-		frame.getContentPane().add(textField_3);
+		this.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
 		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_4.setBounds(616, 60, 100, 20);
-		frame.getContentPane().add(textField_4);
+		this.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 		
 		JLabel lblNewLabel_7 = new JLabel("(K.g)");
 		lblNewLabel_7.setEnabled(false);
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_7.setBounds(716, 41, 46, 20);
-		frame.getContentPane().add(lblNewLabel_7);
+		this.getContentPane().add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("(c.m)\r\n");
 		lblNewLabel_8.setEnabled(false);
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_8.setBounds(716, 60, 46, 20);
-		frame.getContentPane().add(lblNewLabel_8);
+		this.getContentPane().add(lblNewLabel_8);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1 \u03BA\u03B1\u03C4\u03BF\u03B9\u03BA\u03AF\u03B1\u03C2", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_1.setBounds(17, 90, 172, 133);
-		frame.getContentPane().add(panel_1);
+		this.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel_9 = new JLabel("\u0394\u03B9\u03B5\u03CD\u03B8\u03C5\u03BD\u03C3\u03B7 :\r\n");
@@ -264,7 +246,7 @@ public class ΚαρτέλαΑσθενούς {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1 \u03B1\u03C3\u03C6\u03B1\u03BB\u03B9\u03C3\u03BC\u03AD\u03BD\u03BF\u03C5 & \u03BB\u03BF\u03B9\u03C0\u03AC \u03C3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_2.setBounds(202, 89, 578, 133);
-		frame.getContentPane().add(panel_2);
+		this.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_13 = new JLabel("\u0395\u03C0\u03AC\u03B3\u03B3\u03B5\u03BB\u03BC\u03B1 :\r\n");
@@ -335,7 +317,7 @@ public class ΚαρτέλαΑσθενούς {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1 \u03B5\u03C0\u03B9\u03BA\u03BF\u03B9\u03BD\u03C9\u03BD\u03AF\u03B1\u03C2", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_3.setBounds(17, 227, 764, 74);
-		frame.getContentPane().add(panel_3);
+		this.getContentPane().add(panel_3);
 		panel_3.setLayout(null);
 		
 		JLabel lblNewLabel_19 = new JLabel("\u039A\u03B9\u03BD\u03B7\u03C4\u03CC :");
@@ -395,7 +377,7 @@ public class ΚαρτέλαΑσθενούς {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(18, 312, 385, 120);
-		frame.getContentPane().add(scrollPane);
+		this.getContentPane().add(scrollPane);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setText("\u03A0\u03B1\u03C1\u03B1\u03C4\u03B7\u03C1\u03AE\u03C3\u03B5\u03B9\u03C2 :");
@@ -405,20 +387,22 @@ public class ΚαρτέλαΑσθενούς {
 		textField_19.setText("\u0397\u03BC\u03B5\u03C1/\u03BD\u03AF\u03B1 \u03B5\u03B9\u03C3\u03B1\u03B3\u03C9\u03B3\u03AE\u03C2 :\r\n");
 		textField_19.setHorizontalAlignment(SwingConstants.RIGHT);
 		textField_19.setBounds(544, 312, 120, 20);
-		frame.getContentPane().add(textField_19);
+		this.getContentPane().add(textField_19);
 		
 		textField_20 = new JTextField();
 		textField_20.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_20.setBounds(670, 312, 110, 20);
-		frame.getContentPane().add(textField_20);
+		this.getContentPane().add(textField_20);
 		textField_20.setColumns(10);
 		
 		JButton btnNewButton = new JButton("\u0395\u03C0\u03CC\u03BC\u03B5\u03BD\u03BF");
 		btnNewButton.setBounds(695, 437, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		this.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("\u0386\u03BA\u03C5\u03C1\u03BF");
 		btnNewButton_1.setBounds(596, 437, 89, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		this.getContentPane().add(btnNewButton_1);
+		
+		this.setVisible(true);
 	}
 }
