@@ -25,9 +25,9 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	private JRadioButton doctorButton;
 	private JRadioButton secretaryButton;
 	private JRadioButton nurseButton;
-	
-	public ΔημιουργίαΧρήστη() {
-
+	private User user;
+	public ΔημιουργίαΧρήστη(User user) {
+		this.user=user;
 		this.setResizable(false);
 		this.setTitle("Δημιουργία χρήστη");
 		this.setBounds(100, 100, 600, 350);
@@ -104,16 +104,16 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 			if(elegxos()){
 				if(doctorButton.isSelected()){ //New frame proorismeno gia dhmiourgia giatroy.
 					this.dispose();
-					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),1);
+					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),1,user);
 				}
 				else if(nurseButton.isSelected()){ //New frame proorismeno gia dhmiourgia Noshleuti.
 					this.dispose();
-					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),2);
+					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),2,user);
 					 
 				}
 				else{  //New frame proorismeno gia dhmiourgia ypallilou grammateias.
 					this.dispose(); 
-					new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),3);
+					new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),3,user);
 				
 				}
 			}
@@ -124,7 +124,7 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	//EPILOGH TOY CANCEL		
 	 if(event.getSource() == cancelButton){
 			  this.dispose();
-			  new SecretaryOffice();
+			  new SecretaryOffice(user);
 		  }
 				
 	}

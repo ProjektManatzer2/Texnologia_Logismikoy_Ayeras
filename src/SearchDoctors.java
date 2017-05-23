@@ -32,11 +32,13 @@ public class SearchDoctors {
 	private JTable table;
 	private JComboBox comboBox;
 	private JScrollPane scrollPane;
+	private User user;
 	/**
 	 * Launch the application.
 	 */
 
-	public SearchDoctors() {
+	public SearchDoctors(User u) {
+		this.user=u;
 		initialize();
 	}
 
@@ -72,7 +74,7 @@ public class SearchDoctors {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				new SecretaryOffice();
+				new SecretaryOffice(user);
 			}
 		});
 		button.setBounds(165, 211, 102, 24);

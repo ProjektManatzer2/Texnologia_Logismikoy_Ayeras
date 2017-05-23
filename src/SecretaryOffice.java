@@ -10,11 +10,11 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 	JButton btnDoctorSearch ;
 	JButton btnPatientSearch;
 	JButton btnDisconnect ;
+	User user;
 	
 	
-	
-	public SecretaryOffice(){
-	
+	public SecretaryOffice(User u){
+		this.user=u;
 		this.setResizable(false);
 		this.setTitle("Secretary's office");
 		this.setBounds(100, 100, 600, 400);
@@ -53,11 +53,11 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 		if (e.getSource()==btnDhmiourgiasXrhsth){
 			System.out.println("NAI RE PAOKARA");
 			this.dispose();
-			new ΔημιουργίαΧρήστη();
+			new ΔημιουργίαΧρήστη(user);
 		}
 		if (e.getSource()==btnDoctorSearch){
 			this.dispose();
-			new SearchDoctors();
+			new SearchDoctors(user);
 		}
 		
 	}

@@ -16,10 +16,11 @@ public class ClinicCreateFrame {
 	private JFrame frame;
 	private JTextField nameField;
 	private JTextField textField;
-
+	private User user;
 	
-	public ClinicCreateFrame() {
+	public ClinicCreateFrame(User u) {
 		initialize();
+		this.user=u;
 	}
 
 
@@ -61,7 +62,7 @@ public class ClinicCreateFrame {
 								Clinic c =new Clinic(aa,nameField.getText(),conn);
 								c.saveClinic();
 								frame.dispose();
-								new SecretaryOffice();
+								new SecretaryOffice(user);
 							}
 				
 							
@@ -143,7 +144,7 @@ public class ClinicCreateFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				new SecretaryOffice();
+				new SecretaryOffice(user);
 			}
 		});
 		btnNewButton_1.setBounds(234, 298, 133, 31);

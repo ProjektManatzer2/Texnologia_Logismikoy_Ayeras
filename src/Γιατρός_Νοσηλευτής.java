@@ -6,27 +6,14 @@ import javax.swing.JButton;
 public class Γιατρός_Νοσηλευτής {
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Γιατρός_Νοσηλευτής window = new Γιατρός_Νοσηλευτής();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private User user;
 
 	/**
 	 * Create the application.
+	 * @param u 
 	 */
-	public Γιατρός_Νοσηλευτής() {
+	public Γιατρός_Νοσηλευτής(User u) {
+		this.user=u;
 		initialize();
 	}
 

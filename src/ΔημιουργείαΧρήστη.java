@@ -55,9 +55,9 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	private String username;
 	private String password;
 	private int type;
-	
-	public ΔημιουργείαΧρήστη(String username, String password, int i) {
-		
+	User user;
+	public ΔημιουργείαΧρήστη(String username, String password, int i, User user) {
+		this.user=user;
 		this.username=username;
 		this.password=password;
 		this.type=i;
@@ -391,7 +391,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==cancelButton){
 			this.dispose();
-			new ΔημιουργίαΧρήστη();
+			new ΔημιουργίαΧρήστη(user);
 		}	
 		if(e.getSource()==okButton){
 			if(elegxosStoixeiwn()){
@@ -437,7 +437,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					D.save_User_in_DB(false);
 					System.out.println("TOKANA");
 
-					new addToClinicFrame(null,D,null);
+					new addToClinicFrame(null,D,null,user);
 					this.dispose();
 					
 					
@@ -483,7 +483,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					System.out.println(dateFormat1.format(dateOfPut1));
 					N.save_User_in_DB(false);
 					System.out.println("TOKANA");
-					new addToClinicFrame(null,null,N);
+					new addToClinicFrame(null,null,N,user);
 					this.dispose();
 					
 					break;
@@ -528,7 +528,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					System.out.println("TOKANA");
 					
 					this.dispose();
-					new SecretaryOffice();
+					new SecretaryOffice(user);
 										
 					break;
 				}

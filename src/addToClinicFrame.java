@@ -12,10 +12,10 @@ public class addToClinicFrame {
 
 	private JFrame frame;
 	private JComboBox comboBox;
-
-	public addToClinicFrame(Patient aPatient,Doctor aDoctor,Nurse aNurse) {
+	private User user;
+	public addToClinicFrame(Patient aPatient,Doctor aDoctor,Nurse aNurse, User user) {
 	
-		
+		this.user=user;
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 537, 226);
@@ -47,7 +47,7 @@ public class addToClinicFrame {
 						
 						c.addNurseToClinic(aNurse);
 						frame.dispose();
-						new SecretaryOffice();
+						new SecretaryOffice(user);
 					}
 					if(aDoctor!=null){
 						sql="Update Users set kliniki = ? where username= '"+aDoctor.getUser_name()+"'";
@@ -70,7 +70,7 @@ public class addToClinicFrame {
 						
 						c.addPatientToClinic(aPatient);
 						frame.dispose();
-						new SecretaryOffice();
+						new SecretaryOffice(user);
 					}
 					
 					
@@ -89,7 +89,7 @@ public class addToClinicFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				new SecretaryOffice();
+				new SecretaryOffice(user);
 			}
 		});
 		btnNewButton_1.setBounds(112, 141, 315, 32);

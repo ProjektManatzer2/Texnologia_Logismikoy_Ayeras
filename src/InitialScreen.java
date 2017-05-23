@@ -54,15 +54,22 @@ public class InitialScreen {
 				String			username=txtUsername.getText();
 			
 				String 			password=pwdPassword.getText();
-				db_search(username,password);
+				User u = db_search(username,password);
 				if(flag){
-					if(type==3)
-						new SecretaryOffice();
-					else if (type==2)
-						new Γιατρός_Νοσηλευτής();
-					else if (type==1)
-						new Γιατρός_Νοσηλευτής();
-					frmLoginScreen.dispose();	
+					if(type==3){
+						new SecretaryOffice(u);
+						frmLoginScreen.dispose();
+					}
+					
+					else if (type==2){
+						new Γιατρός_Νοσηλευτής(u);
+						frmLoginScreen.dispose();
+					}
+					
+					else if (type==1){
+						new Γιατρός_Νοσηλευτής(u);
+						frmLoginScreen.dispose();
+					}	
 				}
 				
 				}});
@@ -79,7 +86,7 @@ public class InitialScreen {
 	
 
 
-	private void db_search(String username, String password) {
+	private User db_search(String username, String password) {
 		Connection conn=null;
 		try{
 			conn = User.getConnection();
@@ -98,15 +105,37 @@ public class InitialScreen {
 					        normalPass = result.getString ("password");
 					        type = result.getInt ("type");
 					    }
-					if (normalPass.equals(password))
-					 							 flag=true;
+					if (normalPass.equals(password)){
+						
+					
+					 flag=true;
+					 switch(type){
+					 case 1:
+						 Doctor d =(Doctor) User.loadUser(username);
+						 
+						 return d;
+					 case 2: 
+						 Nurse n=(Nurse)User.loadUser(username);
+					 
+						 return n;
+					 case 3:
+						 Secretary s=(Secretary)User.loadUser(username);
+						 return s;
+						 
+						 default: 
+							 return null;
+						 
+					 }
+					}
 					
 				
 			}	
+				
+				return null;
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			flag=false;
+			return null;
 
 		}
 	}	
