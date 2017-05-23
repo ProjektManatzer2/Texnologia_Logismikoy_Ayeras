@@ -104,4 +104,126 @@ public class PatientDataTransferObject implements Serializable {
 		
 	}
 	
+	
+	
+		
+	public String getF_name() {
+		return f_name;
+	}
+	public void setF_name(String f_name) {
+		this.f_name = f_name;
+	}
+	public String getDate_of_birth() {
+		return date_of_birth;
+	}
+	public void setDate_of_birth(String date_of_birth) {
+		this.date_of_birth = date_of_birth;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getPost_code() {
+		return post_code;
+	}
+	public void setPost_code(String post_code) {
+		this.post_code = post_code;
+	}
+	
+	public String getInsurance_institution() {
+		return insurance_institution;
+	}
+	public void setInsurance_institution(String insurance_institution) {
+		this.insurance_institution = insurance_institution;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getAmka() {
+		return amka;
+	}
+	public void setAmka(String amka) {
+		this.amka = amka;
+	}
+	public String getTaytotita() {
+		return taytotita;
+	}
+	public void setTaytotita(String taytotita) {
+		this.taytotita = taytotita;
+	}
+	public String getPersonal_tel() {
+		return personal_tel;
+	}
+	public void setPersonal_tel(String personal_tel) {
+		this.personal_tel = personal_tel;
+	}
+	public String getHome_tel() {
+		return home_tel;
+	}
+	public void setHome_tel(String home_tel) {
+		this.home_tel = home_tel;
+	}
+	public String getJob_tel() {
+		return job_tel;
+	}
+	public void setJob_tel(String job_tel) {
+		this.job_tel = job_tel;
+	}
+	public String getFax() {
+		return fax;
+	}
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	public void setPutDate(String putDate) {
+		this.put_date= putDate;
+	}
+	
 }
