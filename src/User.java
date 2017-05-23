@@ -16,6 +16,13 @@ public class User implements Serializable{
 	public UserDataTransferObject getDto() {
 		return dto;
 	}
+	
+	public boolean equals(User another){
+		if(this.user_name.equals(another.getUser_name()))
+				return true;
+		return false;
+		
+	}
 
 	public User(String user_name, String password, String first, String last) {
 		this.user_name = user_name;

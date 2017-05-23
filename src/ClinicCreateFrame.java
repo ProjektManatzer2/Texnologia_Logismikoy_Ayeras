@@ -148,5 +148,6 @@ public class ClinicCreateFrame {
 		});
 		btnNewButton_1.setBounds(234, 298, 133, 31);
 		frame.getContentPane().add(btnNewButton_1);
+		frame.setVisible(true);
 	}
 }

@@ -70,7 +70,7 @@ public class Clinic implements Serializable{
 			
 	}
 
-	public static Clinic loadClinic(String clinicName) {
+	public static Clinic loadClinic(int ide) {
 
 		
 		Connection conn=null;
@@ -83,7 +83,7 @@ public class Clinic implements Serializable{
 		}
 		
 		try{
-		PreparedStatement statement = conn.prepareStatement("SELECT clinic_file FROM clinics where name='"+clinicName+"';");
+		PreparedStatement statement = conn.prepareStatement("SELECT clinic_file FROM clinics where id='"+ide+"';");
 		ResultSet result = statement.executeQuery();
 		File file = new File("loader.bin");
 		FileOutputStream os = new FileOutputStream(file);
@@ -97,7 +97,7 @@ public class Clinic implements Serializable{
 		inputStream.close();
 		FileInputStream fis=new FileInputStream(file.getAbsolutePath());
 		ObjectInputStream oss =new ObjectInputStream(fis);
-		kiliniki = (Clinic )oss.readObject();
+		kiliniki = (Clinic)oss.readObject();
 		System.out.println("Ola kala");
 		}
 		return kiliniki;
@@ -123,6 +123,27 @@ public class Clinic implements Serializable{
 	public void addPatientToClinic(Patient aPatient) {	
 		astheneis.add(aPatient);
 		this.saveClinic();
+	}
+
+
+	public ArrayList<Patient> getAstheneis() {
+		return astheneis;
+	}
+
+	public ArrayList<Doctor> getGiatroi() {
+		return giatroi;
+	}
+
+	public ArrayList<Nurse> getNosokomoi() {
+		return nosokomoi;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 

@@ -15,7 +15,7 @@ public class Doctor extends User implements Serializable {
 	public Doctor(String user_name, String password,String first,String last) {
 		
 		super( user_name,  password,  first, last);
-		
+		amka_bonusPatients= new HashSet<String>();	
 	}
 			
 	@Override
