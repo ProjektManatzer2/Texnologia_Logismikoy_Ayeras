@@ -139,12 +139,19 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 			return false;
 			}
 		
-		if(usernameExists(usernameField.getText().trim())){
+		try {
+			if(usernameExists(usernameField.getText().trim())){
+				JOptionPane.showMessageDialog(null,
+					    "Username Exists",
+					    "Invalid Username",
+					    JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
-				    "Username Exists",
-				    "Invalid Username",
+				    "Couldnt Connect to database",
+				    "Failed to connect",
 				    JOptionPane.ERROR_MESSAGE);
-			return false;
 		}
 		
 		if (doctorButton.isSelected() || nurseButton.isSelected() || secretaryButton.isSelected())
@@ -159,9 +166,9 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 			}
 	}
 
-	private boolean usernameExists(String trim) {
+	private boolean usernameExists(String trim) throws Exception {
 
-		try {
+		
 			Connection conn = User.getConnection();
 		
 			String sql = "Select username from Users where username = '"+trim+"'";
@@ -172,15 +179,10 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 				i++;
 			if (i>0)
 				return true;
-			
-			
-			
 			return false;
-		} catch (Exception e) {
-			System.out.println("Failed to connect");
-			e.printStackTrace();
-			return true;
-		}
-		
 	}
+	
 }
+		
+	
+

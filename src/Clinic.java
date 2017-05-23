@@ -2,10 +2,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class Clinic implements Serializable{
@@ -24,6 +26,10 @@ public class Clinic implements Serializable{
 		try{
 			this.id=id;
 			this.name=name;
+			this.astheneis= new ArrayList<Patient>();
+			this.giatroi=new ArrayList<Doctor>();
+			this.nosokomoi=new ArrayList<Nurse>();;
+			
 			String statement = "INSERT INTO clinics ( id , name ) VALUES (?,?)";
 			PreparedStatement posted = conn.prepareStatement(statement);
 			
@@ -53,7 +59,7 @@ public class Clinic implements Serializable{
 			sQLstatement.setBlob(1, inputStream);
 			sQLstatement.setInt(2, id);
 			sQLstatement.executeUpdate();
-			System.out.println("User was successfully written");
+			System.out.println("Clinic was successfully written");
 			inputStream.close();
 			
 			}	
@@ -63,4 +69,63 @@ public class Clinic implements Serializable{
 		}
 			
 	}
+
+	public static Clinic loadClinic(String clinicName) {
+
+		
+		Connection conn=null;
+		Clinic kiliniki=null;
+		try{
+			conn=User.getConnection();
+		}catch(Exception e){
+			System.out.println("Couldnt connect to database");
+			return null;
+		}
+		
+		try{
+		PreparedStatement statement = conn.prepareStatement("SELECT clinic_file FROM clinics where name='"+clinicName+"';");
+		ResultSet result = statement.executeQuery();
+		File file = new File("loader.bin");
+		FileOutputStream os = new FileOutputStream(file);
+		if(result.next()){
+
+		InputStream inputStream = result.getBinaryStream("clinic_file");
+		byte[] buffer = new byte[1024];
+		while(inputStream.read(buffer)>0){
+			os.write(buffer);
+		}
+		inputStream.close();
+		FileInputStream fis=new FileInputStream(file.getAbsolutePath());
+		ObjectInputStream oss =new ObjectInputStream(fis);
+		kiliniki = (Clinic )oss.readObject();
+		System.out.println("Ola kala");
+		}
+		return kiliniki;
+		
+		} catch (Exception e ){
+			e.printStackTrace();
+				 System.out.println("Arxeio Exception");
+				 	return null;
+		}
+
+	}
+
+	public void addNurseToClinic(Nurse aNurse) {
+		nosokomoi.add(aNurse);
+		this.saveClinic();
+	}
+	
+	public void addDoctorToClinic(Doctor aDoctor) {
+		giatroi.add(aDoctor);
+		this.saveClinic();
+	}
+	
+	public void addPatientToClinic(Patient aPatient) {	
+		astheneis.add(aPatient);
+		this.saveClinic();
+	}
+
+
+	
+	
 }

@@ -436,7 +436,8 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					System.out.println(dateFormat.format(dateOfPut));
 					D.save_User_in_DB(false);
 					System.out.println("TOKANA");
-					//EISAGWGH SE KLINIKH FRAME
+
+					new addToClinicFrame(null,D,null);
 					this.dispose();
 					
 					
@@ -482,7 +483,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					System.out.println(dateFormat1.format(dateOfPut1));
 					N.save_User_in_DB(false);
 					System.out.println("TOKANA");
-					//EISAGWGH SE KLINIKH FRAME
+					new addToClinicFrame(null,null,N);
 					this.dispose();
 					
 					break;
@@ -525,9 +526,10 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					System.out.println(dateFormat2.format(dateOfPut2));
 					S.save_User_in_DB(false);
 					System.out.println("TOKANA");
-					//EISAGWGH SE KLINIKH FRAME
-					this.dispose();
 					
+					this.dispose();
+					new SecretaryOffice();
+										
 					break;
 				}
 			}

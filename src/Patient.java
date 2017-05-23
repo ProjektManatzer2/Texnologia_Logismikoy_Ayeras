@@ -80,7 +80,7 @@ public class Patient implements Serializable {
 			sQLstatement.executeUpdate();
 			System.out.println("User was successfully written");
 			inputStream.close();
-			this.dto.transferToDatabase(conn);
+			this.pdto.transferToDatabase(conn);
 			}	
 		catch (Exception e){
 			e.printStackTrace();
