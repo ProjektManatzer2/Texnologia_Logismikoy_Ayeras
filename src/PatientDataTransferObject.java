@@ -6,53 +6,54 @@ public class PatientDataTransferObject implements Serializable {
 
 	 
 	private static final long serialVersionUID = -8472687185815951244L;
-	String f_name;
-	String ama;
-	String date_of_birth;
-	String gender;
-	String weight;
-	String height;
-	String address;
-	String region;
-	String city;
-	String post_code;
-	String job;
-	String insurance_institution;
-	String status;
-	String taytotita;
-	String personal_tel;
-	String home_tel;
-	String job_tel;
-	String fax;
-	String email;
-	String put_date;
-	String comments;
-	String amka; //PRIMARY KEY
+	private String f_name;
+	private String ama;
+	private String date_of_birth;
+	private String gender;
+	private String weight;
+	private String height;
+	private String address;
+	private String region;
+	private String city;
+	private String post_code;
+	private String job;
+	private String insurance_institution;
+	private String status;
+	private String taytotita;
+	private String personal_tel;
+	private String home_tel;
+	private String job_tel;
+	private String fax;
+	private String email;
+	private String put_date;
+	private String comments;
+	private String amka; 
 	
 	
 	public PatientDataTransferObject(String amka)
 	{
 		this.amka=amka;
-		f_name="NULL";
-		date_of_birth="NULL";
-		gender="NULL";
-		weight="NULL";
-		height="NULL";
-		address="NULL";
-		region="NULL";
-		city="NULL";
-		post_code="NULL";
-		insurance_institution="NULL";
-		status="NULL";
-		taytotita="NULL";
-		personal_tel="NULL";
-		home_tel="NULL";
-		job_tel="NULL";
-		fax="NULL";
-		email="NULL";
-		comments="NULL";
-		put_date="NULL";
-		ama="NULL";
+		f_name="";
+		date_of_birth="";
+		gender="";
+		weight="";
+		height="";
+		address="";
+		region="";
+		city="";
+		post_code="";
+		insurance_institution="";
+		status="";
+		taytotita="";
+		personal_tel="";
+		home_tel="";
+		job_tel="";
+		fax="";
+		email="";
+		comments="";
+		put_date="";
+		ama="";
+		job="";
 	}
 	
 	public void transferToDatabase(Connection conn)
@@ -61,13 +62,13 @@ public class PatientDataTransferObject implements Serializable {
 			{
 			
 			
-						///APO EDW KATW "META TO UPDATE" PREPEI NA MPEI TO ONOMA TOY PINAKA ASTHENWN!!!!
-			String sql = "UPDATE ONOMAPINAKAASTHENWN SET f_name = ?, date_of_birth=?,"
+						
+			String sql = "UPDATE Astheneis SET f_name = ?, date_of_birth=?,"
 					+ "weight=?,height=?,address=?,region=?,city=?,post_code=?,"
 					+ "insurance_institution=?,status=?,"
 					+ "taytotita=?,"
 					+ " personal_tel=?,home_tel=?,job_tel=?,"
-					+ "fax=?,email=?,put_date=?,comments=?,gender=? WHERE amka='" + amka+"'";
+					+ "fax=?,email=?,put_date=?,comments=?,gender=?,job=? WHERE amka='" + amka+"'";
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, f_name);
 			statement.setString(2, date_of_birth);
@@ -88,7 +89,8 @@ public class PatientDataTransferObject implements Serializable {
 			statement.setString(17, put_date);
 			statement.setString(18, comments);
 			statement.setString(19, gender);
-		
+			statement.setString(20, job);
+			
 			statement.executeUpdate();
 			
 			
@@ -97,7 +99,7 @@ public class PatientDataTransferObject implements Serializable {
 			} 
 		catch (Exception e)
 		{
-
+			e.printStackTrace();
 			System.out.println("UNABLE TO CONNECT TO DATABASE");
 			
 		}
@@ -225,5 +227,29 @@ public class PatientDataTransferObject implements Serializable {
 	public void setPutDate(String putDate) {
 		this.put_date= putDate;
 	}
-	
+
+	public String getAma() {
+		return ama;
+	}
+
+	public void setAma(String ama) {
+		this.ama = ama;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public String getPut_date() {
+		return put_date;
+	}
+
+	public void setPut_date(String put_date) {
+		this.put_date = put_date;
+	}	
+
 }

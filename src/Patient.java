@@ -5,20 +5,18 @@ import java.sql.PreparedStatement;
 public class Patient implements Serializable {
 	
 	
-	/**
-	 * 
-	 */
-	protected static final long serialVersionUID = 737501913632927252L;
-	protected String first;
-	protected String last;
-	protected String amka;
+	 
+	private static final long serialVersionUID = 737501913632927252L;
+	private String first;
+	private String last;
+	private String amka;
 	private PatientDataTransferObject pdto;
 	
 	public PatientDataTransferObject getPdto() {
 		return pdto;
 	}
 	
-	public Patient(String first,String last,String amka){
+	public Patient(String amka,String first,String last){
 		this.first=first;
 		this.last=last;
 		this.amka=amka;
@@ -36,7 +34,7 @@ public class Patient implements Serializable {
 			
 			try{
 				conn=User.getConnection();
-				sql="INSERT INTO Users (username, password, first_name,last_name) VALUES ('"+user_name+"','"+password+"','"+first+"' , '"+last+"');";
+				sql="INSERT INTO Astheneis (AMKA, first, last) VALUES ('" +amka+ "','" +first+ "','" +last+ "');";
 				sQLstatement = conn.prepareStatement(sql);
 				sQLstatement.executeUpdate();
 				
@@ -50,13 +48,13 @@ public class Patient implements Serializable {
 		}
 		
 		else{
-				sql = "UPDATE Users SET password=?,first_name=?,last_name=? where username='"+this.user_name+"'";
+				sql = "UPDATE Astheneis SET first=?,last=? where amka='"+this.amka+"'";
 				try {
 				conn=User.getConnection();
 				sQLstatement = conn.prepareStatement(sql);
-				sQLstatement.setString(1, password);
-				sQLstatement.setString(2, first);
-				sQLstatement.setString(3, last);
+				
+				sQLstatement.setString(1, first);
+				sQLstatement.setString(2, last);
 				sQLstatement.executeUpdate();
 				
 				}catch(Exception e){
@@ -73,12 +71,12 @@ public class Patient implements Serializable {
 			oos.close();
 			fout.close();
 			InputStream inputStream = new FileInputStream(new File(file.getAbsolutePath()));
-			sql = "UPDATE Users set arxeio= ? where username='" + this.user_name+"'";
+			sql = "UPDATE Astheneis set arxeio= ? where amka='" + this.amka +"'";
 			 
 			sQLstatement = conn.prepareStatement(sql);
 			sQLstatement.setBlob(1, inputStream);
 			sQLstatement.executeUpdate();
-			System.out.println("User was successfully written");
+			System.out.println("Patient was successfully written");
 			inputStream.close();
 			this.pdto.transferToDatabase(conn);
 			}	

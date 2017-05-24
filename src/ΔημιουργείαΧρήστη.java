@@ -56,6 +56,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	private String password;
 	private int type;
 	User user;
+
 	public ΔημιουργείαΧρήστη(String username, String password, int i, User user) {
 		this.user=user;
 		this.username=username;
@@ -401,15 +402,15 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					
 					Doctor D = new Doctor(username,password,firstNameField.getText().trim(),lastNameField.getText().trim());
 					D.getDto().setAddress(dieuthinsiField.getText());
-					D.getDto().setAmka(amkaField.getText().trim());
+					D.getDto().setAmka(amkaField.getText().trim().replaceAll(" ",""));
 					D.getDto().setCity(poliField.getText());
-					D.getDto().setEidikothta(eidikotitaField.getText().trim());
+					D.getDto().setEidikothta(eidikotitaField.getText());
 					D.getDto().setEmail(emailField.getText().trim());
 					D.getDto().setFamily_statement(oikogeneiaField.getText());
-					D.getDto().setFax(faxField.getText().trim());
-					D.getDto().setHouse_phone(homeField.getText().trim());
-					D.getDto().setJob_phone(thlErgasiaField.getText().trim());
-					D.getDto().setKinito(kinitoField.getText().trim());
+					D.getDto().setFax(faxField.getText());
+					D.getDto().setHouse_phone(homeField.getText().trim().replaceAll("-","").replaceAll(" ",""));
+					D.getDto().setJob_phone(thlErgasiaField.getText().trim().replaceAll("-", "").replaceAll(" ",""));
+					D.getDto().setKinito(kinitoField.getText().trim().replaceAll("-","").replaceAll(" ",""));
 					D.getDto().setParatiriseis(commentsField.getText());
 					D.getDto().setPatronymo(patronymoField.getText().trim());
 					D.getDto().setRegion(perioxiField.getText());

@@ -39,5 +39,6 @@ public class Γιατρός_Νοσηλευτής {
 		JButton btnNewButton_2 = new JButton("\u0391\u03C0\u03BF\u03C3\u03CD\u03BD\u03B4\u03B5\u03C3\u03B7");
 		btnNewButton_2.setBounds(240, 230, 120, 24);
 		frame.getContentPane().add(btnNewButton_2);
+		frame.setVisible(true);
 	}
 }
