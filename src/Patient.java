@@ -36,7 +36,7 @@ public class Patient implements Serializable {
 			
 			try{
 				conn=User.getConnection();
-				sql="INSERT INTO Users (username, password, first_name,last_name) VALUES ('"+user_name+"','"+password+"','"+first+"' , '"+last+"');";
+				sql="INSERT INTO Astheneis (first, last, amka) VALUES ('"+first+"','"+last+"','"+amka+"');";
 				sQLstatement = conn.prepareStatement(sql);
 				sQLstatement.executeUpdate();
 				
@@ -49,7 +49,7 @@ public class Patient implements Serializable {
 			
 		}
 		
-		else{
+		/*else{
 				sql = "UPDATE Users SET password=?,first_name=?,last_name=? where username='"+this.user_name+"'";
 				try {
 				conn=User.getConnection();
@@ -63,9 +63,9 @@ public class Patient implements Serializable {
 				e.printStackTrace();
 				System.out.println("FUUUCK");
 				}
-			}
+			} */
 			try{
-			File file = new File("temp.bin");
+			File file = new File("atemp.bin");
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
@@ -73,12 +73,12 @@ public class Patient implements Serializable {
 			oos.close();
 			fout.close();
 			InputStream inputStream = new FileInputStream(new File(file.getAbsolutePath()));
-			sql = "UPDATE Users set arxeio= ? where username='" + this.user_name+"'";
+			sql = "UPDATE Astheneis set arxeio= ? where amka='" + this.amka+"'";
 			 
 			sQLstatement = conn.prepareStatement(sql);
 			sQLstatement.setBlob(1, inputStream);
 			sQLstatement.executeUpdate();
-			System.out.println("User was successfully written");
+			System.out.println("Patient was successfully written");
 			inputStream.close();
 			this.pdto.transferToDatabase(conn);
 			}	
