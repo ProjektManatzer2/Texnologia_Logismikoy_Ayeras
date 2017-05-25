@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -12,9 +13,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
 
+import net.proteanit.sql.DbUtils;
+
 public class SearchDoctors implements ActionListener{
 
-	
+	private JButton showButton;
 	private JTextPane textFieldSearch;
 	private JButton searchButton ;
 	private JButton button;
@@ -38,26 +41,26 @@ public class SearchDoctors implements ActionListener{
 	 */
 	private  void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 831, 411);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 60, 337, 140);
+		scrollPane.setBounds(29, 60, 748, 234);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first_name", "last_name"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first_name", "last_name","eidikotita","username"}));
 		comboBox.setSelectedIndex(1);
-		comboBox.setBounds(71, 11, 183, 38);
+		comboBox.setBounds(46, 11, 183, 38);
 		frame.getContentPane().add(comboBox);
 		
 		
 		textFieldSearch = new JTextPane();
-		textFieldSearch.setBounds(274, 25, 89, 24);
+		textFieldSearch.setBounds(283, 11, 293, 38);
 		frame.getContentPane().add(textFieldSearch);
 		
 		button = new JButton("Πίσω");
@@ -67,13 +70,18 @@ public class SearchDoctors implements ActionListener{
 				new SecretaryOffice(user);
 			}
 		});
-		button.setBounds(10, 227, 102, 24);
+		button.setBounds(29, 322, 163, 32);
 		frame.getContentPane().add(button);
 		
 		searchButton = new JButton("Search");
-		searchButton.setBounds(218, 211, 144, 40);
+		searchButton.setBounds(622, 18, 171, 31);
 		searchButton.addActionListener(this);
 		frame.getContentPane().add(searchButton);
+		
+		showButton = new JButton("Εμφάνιση στοιχείων");
+		showButton.setBounds(594, 314, 183, 49);
+		showButton.addActionListener(this);
+		frame.getContentPane().add(showButton);
 		
 		
 		frame.setVisible(true);
@@ -83,8 +91,8 @@ public class SearchDoctors implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-		
-				
+		if (e.getSource()==searchButton){
+				//ANAZHTHSH
 				Connection conn=null;
 				try{
 					conn=User.getConnection();
@@ -94,56 +102,29 @@ public class SearchDoctors implements ActionListener{
 				}
 				
 				String selection = (String)comboBox.getSelectedItem();
-				String query = "select first_name, last_name, eidikothta,kinito from Users where '"+selection+"'=? and type < 3";
+				String query = "select first_name as onoma, last_name as eponymo, eidikotita,username,kinito from Users where "+selection+" like '%"+textFieldSearch.getText()+"%' and type < 3";
 				
 				
 				try {
-					PreparedStatement statement = conn.prepareStatement(query);
-					statement.setString(1, textFieldSearch.getText());	
+					System.out.println(textFieldSearch.getText()); 
 					
+					PreparedStatement statement = conn.prepareStatement(query);
+					//statement.setString(1, textFieldSearch.getText());	
+					ResultSet res = statement.executeQuery();
+					
+					table.setModel(DbUtils.resultSetToTableModel(res));
 				} catch (SQLException e2) {
 					
 					e2.printStackTrace();
 				}
-								
+		}
+		
+		
+		if(e.getSource()==searchButton){
+			
+			
+		}
 				
 		
 		}
-
-
-
-
 }
-
-
-
-/*
-
-	@Override
-			public void keyReleased(KeyEvent arg0) {
-				try {
-					
-					Connection conn=null;
-					try{
-						conn=User.getConnection();
-					}catch(Exception e){
-						System.out.println("Couldnt connect to database");
-						
-					}
-					String selection = (String)comboBox.getSelectedItem();
-					
-				String query = "select first_name, last_name, kinito from Users where '"+selection+"'=? ";
-				PreparedStatement pst = conn.prepareStatement(query);
-				pst.setString(1, textFieldSearch.getText());
-				ResultSet rs = pst.executeQuery();
-				
-				table.setModel(DbUtils.resultSetToTableModel(rs));
-				pst.close();
-				
-				} catch(Exception ex) {
-				ex.printStackTrace();
-				}
-				
-				} 
-		});
-*/

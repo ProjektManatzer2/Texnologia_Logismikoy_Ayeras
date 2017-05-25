@@ -97,7 +97,7 @@ public class Patient implements Serializable {
 			System.out.println("Couldnt connect to database");
 			return null;
 		}
-		
+		 
 		try{
 		PreparedStatement statement = conn.prepareStatement("SELECT patientFile FROM Astheneis where AMKA='"+amka+"';");
 		ResultSet result = statement.executeQuery();
@@ -115,6 +115,9 @@ public class Patient implements Serializable {
 		ObjectInputStream oss =new ObjectInputStream(fis);
 		mary = (Patient)oss.readObject();
 		System.out.println("Ola kala");
+		//Care
+		os.close();
+		oss.close();
 		}
 		return mary;
 		
