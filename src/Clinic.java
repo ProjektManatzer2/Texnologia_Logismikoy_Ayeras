@@ -85,7 +85,7 @@ public class Clinic implements Serializable{
 		try{
 		PreparedStatement statement = conn.prepareStatement("SELECT clinic_file FROM clinics where id='"+ide+"';");
 		ResultSet result = statement.executeQuery();
-		File file = new File("loader.bin");
+		File file = new File("loaderClinic.bin");
 		FileOutputStream os = new FileOutputStream(file);
 		if(result.next()){
 

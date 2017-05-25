@@ -59,6 +59,10 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 			this.dispose();
 			new SearchDoctors(user);
 		}
+		if(e.getSource()==btnAnoigmaKartelas){
+			this.dispose();
+			new ΚαρτέλαΑσθενούς(user);
+		}
 		
 	}
 

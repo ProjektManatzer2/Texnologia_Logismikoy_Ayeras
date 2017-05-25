@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -55,7 +56,7 @@ public class InitialScreen {
 			
 				String 			password=pwdPassword.getText();
 				User u = db_search(username,password);
-				if(flag){
+				
 					if(type==3){
 						new SecretaryOffice(u);
 						frmLoginScreen.dispose();
@@ -70,7 +71,13 @@ public class InitialScreen {
 						new Γιατρός_Νοσηλευτής(u);
 						frmLoginScreen.dispose();
 					}	
-				}
+					else{
+						JOptionPane.showMessageDialog(null,
+							    "Λάθος όνομα χρήστη ή κωδικός",
+							    "Invalid name or password",
+							    JOptionPane.WARNING_MESSAGE);
+					}
+				
 				
 				}});
 		btnLogin.setBounds(320, 240, 80, 23);
@@ -108,7 +115,7 @@ public class InitialScreen {
 					if (normalPass.equals(password)){
 						
 					
-					 flag=true;
+					 
 					 switch(type){
 					 case 1:
 						 Doctor d =(Doctor) User.loadUser(username);

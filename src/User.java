@@ -69,7 +69,7 @@ public class User implements Serializable{
 				}
 			}
 			try{
-			File file = new File("temp.bin");
+			File file = new File("temporaryUser.bin");
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
@@ -107,7 +107,7 @@ public class User implements Serializable{
 		try{
 		PreparedStatement statement = conn.prepareStatement("SELECT arxeio FROM Users where username='"+username+"';");
 		ResultSet result = statement.executeQuery();
-		File file = new File("loader.bin");
+		File file = new File("loaderUser.bin");
 		FileOutputStream os = new FileOutputStream(file);
 		if(result.next()){
 
@@ -119,7 +119,7 @@ public class User implements Serializable{
 		inputStream.close();
 		FileInputStream fis=new FileInputStream(file.getAbsolutePath());
 		ObjectInputStream oss =new ObjectInputStream(fis);
-		john = (User )oss.readObject();
+		john = (User)oss.readObject();
 		System.out.println("Ola kala");
 		}
 		return john;

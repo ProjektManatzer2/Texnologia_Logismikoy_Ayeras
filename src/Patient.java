@@ -16,7 +16,7 @@ public class Patient implements Serializable {
 		return pdto;
 	}
 	
-	public Patient(String amka,String first,String last){
+	public Patient(String amka, String first,String last){
 		this.first=first;
 		this.last=last;
 		this.amka=amka;
@@ -63,7 +63,7 @@ public class Patient implements Serializable {
 				}
 			}
 			try{
-			File file = new File("temp.bin");
+			File file = new File("temporaryPatient.bin");
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
@@ -71,7 +71,7 @@ public class Patient implements Serializable {
 			oos.close();
 			fout.close();
 			InputStream inputStream = new FileInputStream(new File(file.getAbsolutePath()));
-			sql = "UPDATE Astheneis set arxeio= ? where amka='" + this.amka +"'";
+			sql = "UPDATE Astheneis set patientFile= ? where amka='" + this.amka +"'";
 			 
 			sQLstatement = conn.prepareStatement(sql);
 			sQLstatement.setBlob(1, inputStream);

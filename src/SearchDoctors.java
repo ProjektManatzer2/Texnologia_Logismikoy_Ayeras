@@ -1,33 +1,23 @@
-import java.awt.EventQueue;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
 
-import net.proteanit.sql.DbUtils;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JScrollPane;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+public class SearchDoctors implements ActionListener{
 
-public class SearchDoctors {
-
+	
+	private JTextPane textFieldSearch;
+	private JButton searchButton ;
+	private JButton button;
 	private JFrame frame;
 	private JTable table;
 	private JComboBox comboBox;
@@ -59,29 +49,77 @@ public class SearchDoctors {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		 comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first_name", "last_name"}));
 		comboBox.setSelectedIndex(1);
 		comboBox.setBounds(71, 11, 183, 38);
 		frame.getContentPane().add(comboBox);
 		
 		
-		JTextPane textFieldSearch = new JTextPane();
+		textFieldSearch = new JTextPane();
 		textFieldSearch.setBounds(274, 25, 89, 24);
 		frame.getContentPane().add(textFieldSearch);
 		
-		JButton button = new JButton("\u03A0\u03AF\u03C3\u03C9");
+		button = new JButton("Πίσω");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				new SecretaryOffice(user);
 			}
 		});
-		button.setBounds(165, 211, 102, 24);
+		button.setBounds(10, 227, 102, 24);
 		frame.getContentPane().add(button);
 		
-		textFieldSearch.addKeyListener(new KeyAdapter() {
-			@Override
+		searchButton = new JButton("Search");
+		searchButton.setBounds(218, 211, 144, 40);
+		searchButton.addActionListener(this);
+		frame.getContentPane().add(searchButton);
+		
+		
+		frame.setVisible(true);
+		
+		
+	}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		
+				
+				Connection conn=null;
+				try{
+					conn=User.getConnection();
+				}catch(Exception exception){
+					System.out.println("Couldnt connect to database");
+					exception.printStackTrace();
+				}
+				
+				String selection = (String)comboBox.getSelectedItem();
+				String query = "select first_name, last_name, eidikothta,kinito from Users where '"+selection+"'=? and type < 3";
+				
+				
+				try {
+					PreparedStatement statement = conn.prepareStatement(query);
+					statement.setString(1, textFieldSearch.getText());	
+					
+				} catch (SQLException e2) {
+					
+					e2.printStackTrace();
+				}
+								
+				
+		
+		}
+
+
+
+
+}
+
+
+
+/*
+
+	@Override
 			public void keyReleased(KeyEvent arg0) {
 				try {
 					
@@ -108,6 +146,4 @@ public class SearchDoctors {
 				
 				} 
 		});
-		frame.setVisible(true);
-	}
-}
+*/
