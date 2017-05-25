@@ -1,6 +1,7 @@
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Patient implements Serializable {
 	
@@ -48,7 +49,7 @@ public class Patient implements Serializable {
 		}
 		
 		else{
-				sql = "UPDATE Astheneis SET first=?,last=? where amka='"+this.amka+"'";
+				sql = "UPDATE Astheneis SET first=?,last=? where AMKA='"+this.amka+"'";
 				try {
 				conn=User.getConnection();
 				sQLstatement = conn.prepareStatement(sql);
@@ -86,6 +87,45 @@ public class Patient implements Serializable {
 		}
 			
 	}
+	
+	public static Patient loadPatient(String amka){ 
+		Connection conn=null;
+		Patient mary=null;
+		try{
+			conn=User.getConnection();
+		}catch(Exception e){
+			System.out.println("Couldnt connect to database");
+			return null;
+		}
+		
+		try{
+		PreparedStatement statement = conn.prepareStatement("SELECT patientFile FROM Astheneis where AMKA='"+amka+"';");
+		ResultSet result = statement.executeQuery();
+		File file = new File("loaderPatient.bin");
+		FileOutputStream os = new FileOutputStream(file);
+		if(result.next()){
+
+		InputStream inputStream = result.getBinaryStream("patientFile");
+		byte[] buffer = new byte[1024];
+		while(inputStream.read(buffer)>0){
+			os.write(buffer);
+		}
+		inputStream.close();
+		FileInputStream fis=new FileInputStream(file.getAbsolutePath());
+		ObjectInputStream oss =new ObjectInputStream(fis);
+		mary = (Patient)oss.readObject();
+		System.out.println("Ola kala");
+		}
+		return mary;
+		
+		} catch (Exception e ){
+			e.printStackTrace();
+				 System.out.println("Arxeio Exception");
+				 	return null;
+		}
+	}	
+	
+	
 
 	public String getFirst() {
 
