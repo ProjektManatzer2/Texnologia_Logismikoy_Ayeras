@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -78,6 +79,32 @@ public class SearchDoctors implements ActionListener{
 		searchButton.addActionListener(this);
 		frame.getContentPane().add(searchButton);
 		
+		Connection conn=null;
+		try{
+			conn=User.getConnection();
+		
+			String query = "select first_name as onoma, last_name as eponymo, eidikotita,username,kinito from Users where type<3";
+			
+			
+			System.out.println(textFieldSearch.getText()); 
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			
+			table.setModel(PatientSearch.resultSetToTableModel(res));
+			table.setSelectionBackground(Color.RED);
+			table.setSelectionForeground(Color.WHITE);
+			
+		} catch (Exception e2) {
+			
+			e2.printStackTrace();
+		}
+
+		
+		
+		
+		
+		
+		
 		showButton = new JButton("Εμφάνιση στοιχείων");
 		showButton.setBounds(594, 314, 183, 49);
 		showButton.addActionListener(this);
@@ -91,40 +118,43 @@ public class SearchDoctors implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==searchButton){
-				//ANAZHTHSH
-				Connection conn=null;
-				try{
-					conn=User.getConnection();
-				}catch(Exception exception){
-					System.out.println("Couldnt connect to database");
-					exception.printStackTrace();
-				}
-				
-				String selection = (String)comboBox.getSelectedItem();
-				String query = "select first_name as onoma, last_name as eponymo, eidikotita,username,kinito from Users where "+selection+" like '%"+textFieldSearch.getText()+"%' and type < 3";
-				
-				
-				try {
-					System.out.println(textFieldSearch.getText()); 
+			if (e.getSource()==searchButton){
+					//ANAZHTHSH
+					Connection conn=null;
+					try{
+						conn=User.getConnection();
+					}catch(Exception exception){
+						System.out.println("Couldnt connect to database");
+						exception.printStackTrace();
+					}
 					
-					PreparedStatement statement = conn.prepareStatement(query);
-					//statement.setString(1, textFieldSearch.getText());	
-					ResultSet res = statement.executeQuery();
+					String selection = (String)comboBox.getSelectedItem();
+					String query = "select first_name as onoma, last_name as eponymo, eidikotita,username,kinito from Users where "+selection+" like '%"+textFieldSearch.getText()+"%' and type < 3";
 					
-					table.setModel(DbUtils.resultSetToTableModel(res));
-				} catch (SQLException e2) {
 					
-					e2.printStackTrace();
-				}
-		}
+					try {
+						System.out.println(textFieldSearch.getText()); 
+						
+						PreparedStatement statement = conn.prepareStatement(query);
+						ResultSet res = statement.executeQuery();
+						
+						table.setModel(PatientSearch.resultSetToTableModel(res));
+						table.setSelectionBackground(Color.RED);
+						table.setSelectionForeground(Color.WHITE);
+						
+					} catch (SQLException e2) {
+						
+						e2.printStackTrace();
+					}
+			}
 		
 		
-		if(e.getSource()==searchButton){
-			
-			
-		}
-				
+			if(e.getSource()==showButton){
+				int row = table.getSelectedRow();
+				String username =  table.getModel().getValueAt(row,3).toString();
+					new ΣτοιχείαΧρήστηFrame(username);
+			}
+					
 		
 		}
 }
