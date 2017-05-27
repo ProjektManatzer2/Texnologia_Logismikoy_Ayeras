@@ -99,7 +99,10 @@ public class Clinic implements Serializable{
 		ObjectInputStream oss =new ObjectInputStream(fis);
 		kiliniki = (Clinic)oss.readObject();
 		System.out.println("Ola kala");
+		oss.close();
 		}
+		os.close();
+		
 		return kiliniki;
 		
 		} catch (Exception e ){

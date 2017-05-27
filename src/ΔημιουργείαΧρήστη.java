@@ -35,8 +35,6 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	private JTextField lastNameField;
 	private JTextField patronymoField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField varosField;
-	private JTextField ypsosField;
 	private JTextField dieuthinsiField;
 	private JTextField perioxiField;
 	private JTextField poliField;
@@ -64,13 +62,12 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		this.type=i;
 		
 		this.getContentPane().setEnabled(false);
-		this.setResizable(false);
 		this.setTitle("\u0394\u03B7\u03BC\u03B9\u03BF\u03C5\u03C1\u03B3\u03AF\u03B1 \u03C7\u03C1\u03AE\u03C3\u03C4\u03B7");
 		this.setBounds(100, 100, 800, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("\u038C\u03BD\u03BF\u03BC\u03B1 :");
-		lblNewLabel.setBounds(14, 10, 50, 20);
+		lblNewLabel.setBounds(17, 10, 50, 20);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		firstNameField = new JTextField();
@@ -88,11 +85,11 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_1 = new JLabel("\u03A0\u03B1\u03C4\u03C1\u03CE\u03BD\u03C5\u03BC\u03BF :");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(520, 10, 70, 20);
+		lblNewLabel_1.setBounds(520, 10, 104, 20);
 		
 		patronymoField = new JTextField();
 		patronymoField.setHorizontalAlignment(SwingConstants.CENTER);
-		patronymoField.setBounds(604, 10, 170, 20);
+		patronymoField.setBounds(634, 10, 140, 20);
 		patronymoField.setColumns(10);
 		this.getContentPane().setLayout(null);
 		this.getContentPane().add(lblNewLabel);
@@ -103,7 +100,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		this.getContentPane().add(patronymoField);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A6\u03CD\u03BB\u03BB\u03BF", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Φύλο", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(17, 34, 233, 46);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -154,40 +151,6 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setBounds(434, 41, 60, 14);
 		this.getContentPane().add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("\u0392\u03AC\u03C1\u03BF\u03C2 :");
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setBounds(560, 41, 46, 14);
-		this.getContentPane().add(lblNewLabel_5);
-		
-		JLabel lblNewLabel_6 = new JLabel("\u038E\u03C8\u03BF\u03C2 :");
-		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setBounds(560, 66, 46, 14);
-		this.getContentPane().add(lblNewLabel_6);
-		
-		varosField = new JTextField();
-		varosField.setHorizontalAlignment(SwingConstants.CENTER);
-		varosField.setBounds(616, 41, 100, 20);
-		this.getContentPane().add(varosField);
-		varosField.setColumns(10);
-		
-		ypsosField = new JTextField();
-		ypsosField.setHorizontalAlignment(SwingConstants.CENTER);
-		ypsosField.setBounds(616, 60, 100, 20);
-		this.getContentPane().add(ypsosField);
-		ypsosField.setColumns(10);
-		
-		JLabel lblNewLabel_7 = new JLabel("(K.g)");
-		lblNewLabel_7.setEnabled(false);
-		lblNewLabel_7.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_7.setBounds(716, 41, 46, 20);
-		this.getContentPane().add(lblNewLabel_7);
-		
-		JLabel lblNewLabel_8 = new JLabel("(c.m)\r\n");
-		lblNewLabel_8.setEnabled(false);
-		lblNewLabel_8.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_8.setBounds(716, 60, 46, 20);
-		this.getContentPane().add(lblNewLabel_8);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1 \u03BA\u03B1\u03C4\u03BF\u03B9\u03BA\u03AF\u03B1\u03C2", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -311,29 +274,29 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		panel_3.setLayout(null);
 		
 		JLabel lblNewLabel_19 = new JLabel("\u039A\u03B9\u03BD\u03B7\u03C4\u03CC :");
-		lblNewLabel_19.setBounds(6, 16, 65, 20);
+		lblNewLabel_19.setBounds(6, 16, 96, 20);
 		panel_3.add(lblNewLabel_19);
 		lblNewLabel_19.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		kinitoField = new JTextField();
-		kinitoField.setBounds(76, 16, 86, 20);
+		kinitoField.setBounds(112, 16, 86, 20);
 		panel_3.add(kinitoField);
 		kinitoField.setHorizontalAlignment(SwingConstants.CENTER);
 		kinitoField.setColumns(10);
 		
 		JLabel lblNewLabel_20 = new JLabel("\u03A4\u03B7\u03BB. \u039F\u03B9\u03BA\u03AF\u03B1\u03C2 :");
-		lblNewLabel_20.setBounds(7, 47, 65, 20);
+		lblNewLabel_20.setBounds(7, 47, 95, 20);
 		panel_3.add(lblNewLabel_20);
 		lblNewLabel_20.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		homeField = new JTextField();
-		homeField.setBounds(76, 47, 86, 20);
+		homeField.setBounds(112, 47, 86, 20);
 		panel_3.add(homeField);
 		homeField.setHorizontalAlignment(SwingConstants.CENTER);
 		homeField.setColumns(10);
 		
 		JLabel lblNewLabel_21 = new JLabel("\u03A4\u03B7\u03BB. \u0395\u03C1\u03B3\u03B1\u03C3\u03AF\u03B1\u03C2 :");
-		lblNewLabel_21.setBounds(251, 16, 75, 20);
+		lblNewLabel_21.setBounds(188, 16, 138, 20);
 		panel_3.add(lblNewLabel_21);
 		lblNewLabel_21.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -418,8 +381,6 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					D.getDto().setTaytotita(taytotitaField.getText());
 					D.getDto().setTk(tkField.getText().trim());
 					D.getDto().setType(type);
-					D.getDto().setUpsos(ypsosField.getText());
-					D.getDto().setVaros(varosField.getText());
 					D.getDto().setFamily_statement(oikogeneiaField.getText());
 						if(femaleField.isSelected())
 							D.getDto().setGender("F");
@@ -434,7 +395,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					D.getDto().setBirth_date(date);
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 					Date dateOfPut = new Date();
-					System.out.println(dateFormat.format(dateOfPut));
+					D.getDto().setPutDate((dateFormat.format(dateOfPut)));
 					D.save_User_in_DB(false);
 					System.out.println("TOKANA");
 
@@ -465,8 +426,6 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					N.getDto().setTaytotita(taytotitaField.getText());
 					N.getDto().setTk(tkField.getText().trim());
 					N.getDto().setType(type);
-					N.getDto().setUpsos(ypsosField.getText());
-					N.getDto().setVaros(varosField.getText());
 					N.getDto().setFamily_statement(oikogeneiaField.getText());
 					if(femaleField.isSelected())
 						N.getDto().setGender("F");
@@ -481,7 +440,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					N.getDto().setBirth_date(date1);
 					DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
 					Date dateOfPut1 = new Date();
-					System.out.println(dateFormat1.format(dateOfPut1));
+					N.getDto().setPutDate((dateFormat1.format(dateOfPut1)));
 					N.save_User_in_DB(false);
 					System.out.println("TOKANA");
 					new addToClinicFrame(null,null,N,user);
@@ -508,8 +467,6 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					S.getDto().setTaytotita(taytotitaField.getText());
 					S.getDto().setTk(tkField.getText().trim());
 					S.getDto().setType(type);
-					S.getDto().setUpsos(ypsosField.getText());
-					S.getDto().setVaros(varosField.getText());
 					S.getDto().setFamily_statement(oikogeneiaField.getText());
 					if(femaleField.isSelected())
 						S.getDto().setGender("F");
@@ -524,9 +481,12 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 					S.getDto().setBirth_date(date2);
 					DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
 					Date dateOfPut2 = new Date();
-					System.out.println(dateFormat2.format(dateOfPut2));
+					S.getDto().setPutDate((dateFormat2.format(dateOfPut2)));
+										
 					S.save_User_in_DB(false);
 					System.out.println("TOKANA");
+					
+					
 					
 					this.dispose();
 					new SecretaryOffice(user);
@@ -584,6 +544,11 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		{ warning("Τα ψηφία στο τηλέφωνο σπιτιού πρέπει να είναι δέκα");
 			return false;
 		}
+		if((int)monthSpinner.getValue()>12 || (int)daySpinner.getValue()>31)
+			{
+			warning("Λάθος ημερομηνία");
+			return false;
+			}
 				
 		return true;}
 		
@@ -626,6 +591,5 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		    "Λανθασμένα στοιχεία",
 		    JOptionPane.ERROR_MESSAGE);
 	}
-		
 }
 

@@ -17,6 +17,10 @@ public class User implements Serializable{
 		return dto;
 	}
 	
+	public boolean hasClinic() {
+		return true;
+	}
+	
 	public boolean equals(User another){
 		if(this.user_name.equals(another.getUser_name()))
 				return true;

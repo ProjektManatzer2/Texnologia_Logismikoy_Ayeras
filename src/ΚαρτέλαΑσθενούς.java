@@ -54,7 +54,6 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 	private JTextField douleiaField;
 	private JTextField faxField;
 	private JTextField e_mailField;
-	private JLabel textField_19;
 	private User user;
 
 
@@ -93,11 +92,11 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		
 		JLabel lblNewLabel_1 = new JLabel("\u03A0\u03B1\u03C4\u03C1\u03CE\u03BD\u03C5\u03BC\u03BF :");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(520, 10, 72, 20);
+		lblNewLabel_1.setBounds(520, 10, 100, 20);
 		
 		f_nameField = new JTextField();
 		f_nameField.setHorizontalAlignment(SwingConstants.CENTER);
-		f_nameField.setBounds(604, 10, 170, 20);
+		f_nameField.setBounds(630, 10, 144, 20);
 		f_nameField.setColumns(10);
 		this.getContentPane().setLayout(null);
 		this.getContentPane().add(lblNewLabel);
@@ -108,7 +107,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		this.getContentPane().add(f_nameField);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u03A6\u03CD\u03BB\u03BB\u03BF", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Φύλο", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(17, 34, 233, 46);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -210,7 +209,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		addressField.setColumns(10);
 		
 		JLabel lblNewLabel_10 = new JLabel("\u03A0\u03B5\u03C1\u03B9\u03BF\u03C7\u03AE :");
-		lblNewLabel_10.setBounds(11, 46, 60, 20);
+		lblNewLabel_10.setBounds(0, 47, 60, 20);
 		panel_1.add(lblNewLabel_10);
 		lblNewLabel_10.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -221,7 +220,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		regionField.setColumns(10);
 		
 		JLabel lblNewLabel_11 = new JLabel("\u03A0\u03CC\u03BB\u03B7 :");
-		lblNewLabel_11.setBounds(11, 76, 60, 20);
+		lblNewLabel_11.setBounds(6, 76, 60, 20);
 		panel_1.add(lblNewLabel_11);
 		lblNewLabel_11.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -232,7 +231,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		cityField.setColumns(10);
 		
 		JLabel lblNewLabel_12 = new JLabel("\u03A4.\u039A :\r\n");
-		lblNewLabel_12.setBounds(25, 106, 46, 20);
+		lblNewLabel_12.setBounds(6, 106, 46, 20);
 		panel_1.add(lblNewLabel_12);
 		lblNewLabel_12.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -320,45 +319,45 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		panel_3.setLayout(null);
 		
 		JLabel lblNewLabel_19 = new JLabel("\u039A\u03B9\u03BD\u03B7\u03C4\u03CC :");
-		lblNewLabel_19.setBounds(6, 16, 65, 20);
+		lblNewLabel_19.setBounds(6, 16, 103, 20);
 		panel_3.add(lblNewLabel_19);
 		lblNewLabel_19.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		kinitoField = new JTextField();
-		kinitoField.setBounds(76, 16, 86, 20);
+		kinitoField.setBounds(122, 16, 103, 20);
 		panel_3.add(kinitoField);
 		kinitoField.setHorizontalAlignment(SwingConstants.CENTER);
 		kinitoField.setColumns(10);
 		
 		JLabel lblNewLabel_20 = new JLabel("\u03A4\u03B7\u03BB. \u039F\u03B9\u03BA\u03AF\u03B1\u03C2 :");
-		lblNewLabel_20.setBounds(7, 47, 65, 20);
+		lblNewLabel_20.setBounds(7, 47, 102, 20);
 		panel_3.add(lblNewLabel_20);
 		lblNewLabel_20.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		houseField = new JTextField();
-		houseField.setBounds(76, 47, 86, 20);
+		houseField.setBounds(122, 47, 103, 20);
 		panel_3.add(houseField);
 		houseField.setHorizontalAlignment(SwingConstants.CENTER);
 		houseField.setColumns(10);
 		
 		JLabel lblNewLabel_21 = new JLabel("\u03A4\u03B7\u03BB. \u0395\u03C1\u03B3\u03B1\u03C3\u03AF\u03B1\u03C2 :");
-		lblNewLabel_21.setBounds(251, 16, 75, 20);
+		lblNewLabel_21.setBounds(251, 16, 92, 20);
 		panel_3.add(lblNewLabel_21);
 		lblNewLabel_21.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		douleiaField = new JTextField();
-		douleiaField.setBounds(331, 16, 86, 20);
+		douleiaField.setBounds(353, 16, 86, 20);
 		panel_3.add(douleiaField);
 		douleiaField.setHorizontalAlignment(SwingConstants.CENTER);
 		douleiaField.setColumns(10);
 		
 		JLabel lblFax = new JLabel("Fax :");
-		lblFax.setBounds(251, 47, 75, 20);
+		lblFax.setBounds(261, 47, 75, 20);
 		panel_3.add(lblFax);
 		lblFax.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		faxField = new JTextField();
-		faxField.setBounds(331, 47, 86, 20);
+		faxField.setBounds(353, 47, 86, 20);
 		panel_3.add(faxField);
 		faxField.setHorizontalAlignment(SwingConstants.CENTER);
 		faxField.setColumns(10);
@@ -382,12 +381,6 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		commentsField.setText("\u03A0\u03B1\u03C1\u03B1\u03C4\u03B7\u03C1\u03AE\u03C3\u03B5\u03B9\u03C2 :");
 		scrollPane.setViewportView(commentsField);
 		
-		textField_19 = new JLabel();
-		textField_19.setText("\u0397\u03BC\u03B5\u03C1/\u03BD\u03AF\u03B1 \u03B5\u03B9\u03C3\u03B1\u03B3\u03C9\u03B3\u03AE\u03C2 :\r\n");
-		textField_19.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_19.setBounds(544, 312, 120, 20);
-		this.getContentPane().add(textField_19);
-		
 		nextButton = new JButton("\u0395\u03C0\u03CC\u03BC\u03B5\u03BD\u03BF");
 		nextButton.addActionListener(this);
 		nextButton.setBounds(695, 437, 89, 23);
@@ -407,7 +400,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		
 		if(e.getSource()==cancelButton){
 			this.dispose();
-			new ΔημιουργίαΧρήστη(user);
+			new SecretaryOffice(user);
 		}	
 		
 		
@@ -447,6 +440,8 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		if(elegxos()){
 		P.save_Patient_in_DB(false);
 		this.dispose();
+		new addToClinicFrame(P,null,null,user); 
+			
 		}
 			
 			

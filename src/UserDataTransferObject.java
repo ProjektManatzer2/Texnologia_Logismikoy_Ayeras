@@ -9,8 +9,6 @@ public class UserDataTransferObject implements Serializable{
 	private String patronymo;
 	private String birth_date;
 	private String gender;
-	private String varos;
-	private String upsos;
 	private String address;
 	private String region;
 	private String city;
@@ -35,8 +33,6 @@ public class UserDataTransferObject implements Serializable{
 		patronymo="";
 		birth_date="";
 		gender="";
-		varos="";
-		upsos="";
 		address="";
 		region="";
 		city="";
@@ -63,7 +59,7 @@ public class UserDataTransferObject implements Serializable{
 			
 			
 			String sql = "UPDATE Users SET partonymo = ?, date_birth=?,"
-					+ "varos=?,upsos=?,address=?,region=?,city=?,tk=?,"
+					+ "address=?,region=?,city=?,tk=?,"
 					+ "eidikotita=?,tameio=?,family_statement=?,"
 					+ "kliniki=?,amka=?,arithmos_taytotitas=?,"
 					+ " kinito=?,thlefwno_spitiou=?,thlefwno_ergasias=?,"
@@ -71,27 +67,25 @@ public class UserDataTransferObject implements Serializable{
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, patronymo);
 			statement.setString(2, birth_date);
-			statement.setString(3, varos);
-			statement.setString(4, upsos);
-			statement.setString(5, address);
-			statement.setString(6, region);
-			statement.setString(7, city);
-			statement.setString(8, tk);
-			statement.setString(9, eidikothta);
-			statement.setString(10, tameio);
-			statement.setString(11, family_statement);
-			statement.setString(12, kliniki);
-			statement.setString(13, amka);
-			statement.setString(14, taytotita);
-			statement.setString(15, kinito);
-			statement.setString(16, house_phone);
-			statement.setString(17, job_phone);
-			statement.setString(18, fax);
-			statement.setString(19, email);
-			statement.setString(20, put_date);
-			statement.setString(21, paratiriseis);
-			statement.setInt(22, type);
-			statement.setString(23, gender);
+			statement.setString(3, address);
+			statement.setString(4, region);
+			statement.setString(5, city);
+			statement.setString(6, tk);
+			statement.setString(7, eidikothta);
+			statement.setString(8, tameio);
+			statement.setString(9, family_statement);
+			statement.setString(10, kliniki);
+			statement.setString(11, amka);
+			statement.setString(12, taytotita);
+			statement.setString(13, kinito);
+			statement.setString(14, house_phone);
+			statement.setString(15, job_phone);
+			statement.setString(16, fax);
+			statement.setString(17, email);
+			statement.setString(18, put_date);
+			statement.setString(19, paratiriseis);
+			statement.setInt(20, type);
+			statement.setString(21, gender);
 			statement.executeUpdate();
 			
 			
@@ -138,18 +132,7 @@ public class UserDataTransferObject implements Serializable{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getVaros() {
-		return varos;
-	}
-	public void setVaros(String varos) {
-		this.varos = varos;
-	}
-	public String getUpsos() {
-		return upsos;
-	}
-	public void setUpsos(String upsos) {
-		this.upsos = upsos;
-	}
+	
 	public String getAddress() {
 		return address;
 	}

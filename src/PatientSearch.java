@@ -35,14 +35,18 @@ public class PatientSearch implements ActionListener{
 
 	public PatientSearch(User u) {
 		this.user=u;
-		initialize();
+		
+		initialize1();
+		//else
+		//initialize();	
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @return 
 	 */
-	private  void initialize() {
+	private  void initialize1() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 831, 411);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,14 +60,14 @@ public class PatientSearch implements ActionListener{
 		scrollPane.setViewportView(table);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first", "last","city","personal_tel","AMKA"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first", "last","personal_tel","AMKA"}));
 		comboBox.setSelectedIndex(1);
-		comboBox.setBounds(46, 11, 183, 38);
+		comboBox.setBounds(46, 29, 183, 20);
 		frame.getContentPane().add(comboBox);
 		
 		
 		textFieldSearch = new JTextPane();
-		textFieldSearch.setBounds(283, 11, 293, 38);
+		textFieldSearch.setBounds(281, 29, 295, 20);
 		frame.getContentPane().add(textFieldSearch);
 		
 		button = new JButton("Πίσω");
@@ -77,14 +81,52 @@ public class PatientSearch implements ActionListener{
 		frame.getContentPane().add(button);
 		
 		searchButton = new JButton("Search");
-		searchButton.setBounds(622, 18, 171, 31);
+		searchButton.setBounds(610, 29, 183, 20);
 		searchButton.addActionListener(this);
 		frame.getContentPane().add(searchButton);
 		
 		showButton = new JButton("Εμφάνιση στοιχείων");
-		showButton.setBounds(594, 314, 183, 49);
+		showButton.setBounds(579, 331, 198, 32);
 		showButton.addActionListener(this);
 		frame.getContentPane().add(showButton);
+		if(user.hasClinic()){
+			Connection conn=null;
+			try{
+				conn=User.getConnection();
+				
+				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where clinic=(select clinic from Users where username='"+user.getUser_name()+"')";
+				System.out.println(textFieldSearch.getText()); 
+				PreparedStatement statement = conn.prepareStatement(query);
+				ResultSet res = statement.executeQuery();
+				
+				table.setModel(PatientSearch.resultSetToTableModel(res));
+				table.setSelectionBackground(Color.BLUE);
+				table.setSelectionForeground(Color.CYAN);
+				
+			} catch (Exception e2) {
+				
+				e2.printStackTrace();
+			}
+		}
+		else{
+			Connection conn=null;
+			try{
+				conn=User.getConnection();
+				
+				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis "; 
+				System.out.println(textFieldSearch.getText()); 
+				PreparedStatement statement = conn.prepareStatement(query);
+				ResultSet res = statement.executeQuery();
+				
+				table.setModel(PatientSearch.resultSetToTableModel(res));
+				table.setSelectionBackground(Color.BLUE);
+				table.setSelectionForeground(Color.CYAN);
+				
+			} catch (Exception e2) {
+				
+				e2.printStackTrace();
+			}
+		}
 		
 		
 		frame.setVisible(true);
@@ -105,14 +147,13 @@ public class PatientSearch implements ActionListener{
 				}
 				
 				String selection = (String)comboBox.getSelectedItem();
-				String query = "select first as onoma, last as eponymo, personal_tel,city,AMKA from Astheneis where "+selection+" like '%"+textFieldSearch.getText()+"%' ";
+				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where "+selection+" like '%"+textFieldSearch.getText()+"%' ";
 				
 				
 				try {
 					System.out.println(textFieldSearch.getText()); 
 					
 					PreparedStatement statement = conn.prepareStatement(query);
-					//statement.setString(1, textFieldSearch.getText());	
 					ResultSet res = statement.executeQuery();
 					
 					table.setModel(resultSetToTableModel(res));
@@ -127,7 +168,16 @@ public class PatientSearch implements ActionListener{
 		
 		
 		if(e.getSource()==showButton){
-			
+			try{
+				int row = table.getSelectedRow();
+				String amka =  table.getModel().getValueAt(row,2).toString();
+				frame.dispose();
+				new	VasikaStoixeiaAstheni(amka);
+			}
+			catch(Exception ex){
+				ex.printStackTrace();
+				System.out.println("nothing selected");
+			}
 			
 		}
 				

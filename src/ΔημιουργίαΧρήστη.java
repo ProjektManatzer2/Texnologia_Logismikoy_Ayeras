@@ -26,6 +26,9 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	private JRadioButton secretaryButton;
 	private JRadioButton nurseButton;
 	private User user;
+	
+	
+	
 	public ΔημιουργίαΧρήστη(User user) {
 		this.user=user;
 		this.setResizable(false);

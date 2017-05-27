@@ -43,7 +43,6 @@ public class SearchDoctors implements ActionListener{
 	private  void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 831, 411);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		scrollPane = new JScrollPane();
@@ -56,12 +55,14 @@ public class SearchDoctors implements ActionListener{
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first_name", "last_name","eidikotita","username"}));
 		comboBox.setSelectedIndex(1);
-		comboBox.setBounds(46, 11, 183, 38);
+		comboBox.setBounds(194, 29, 193, 20);
 		frame.getContentPane().add(comboBox);
 		
 		
 		textFieldSearch = new JTextPane();
-		textFieldSearch.setBounds(283, 11, 293, 38);
+		textFieldSearch.setCaretColor(Color.black);
+		
+		textFieldSearch.setBounds(410, 29, 183, 20);
 		frame.getContentPane().add(textFieldSearch);
 		
 		button = new JButton("Πίσω");
@@ -75,7 +76,7 @@ public class SearchDoctors implements ActionListener{
 		frame.getContentPane().add(button);
 		
 		searchButton = new JButton("Search");
-		searchButton.setBounds(622, 18, 171, 31);
+		searchButton.setBounds(603, 29, 174, 20);
 		searchButton.addActionListener(this);
 		frame.getContentPane().add(searchButton);
 		
@@ -152,7 +153,8 @@ public class SearchDoctors implements ActionListener{
 			if(e.getSource()==showButton){
 				int row = table.getSelectedRow();
 				String username =  table.getModel().getValueAt(row,3).toString();
-					new ΣτοιχείαΧρήστηFrame(username);
+				frame.dispose();	
+				new ΣτοιχείαΧρήστηFrame(username);
 			}
 					
 		

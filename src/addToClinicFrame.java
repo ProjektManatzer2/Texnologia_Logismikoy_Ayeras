@@ -58,10 +58,12 @@ public class addToClinicFrame {
 						Clinic c = Clinic.loadClinic(numberClinic);
 						
 						c.addDoctorToClinic(aDoctor);
+
+						new SecretaryOffice(user);
 						frame.dispose();
 					}
 					if(aPatient!=null){
-						sql="Update Patients set kliniki = ? where AMKA= '"+aPatient.getAMKA()+"'";
+						sql="Update Astheneis set clinic= ? where AMKA= '"+aPatient.getAMKA()+"'";
 						System.out.println(sql);
 						statement = conn.prepareStatement(sql);
 						statement.setInt(1, numberClinic);
