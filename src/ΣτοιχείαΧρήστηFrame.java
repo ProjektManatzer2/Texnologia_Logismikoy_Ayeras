@@ -35,10 +35,11 @@ public class ΣτοιχείαΧρήστηFrame {
 	private JTextField taytotitaField;
 	private JTextField genderField;
 	private JTextField textField;
-	
+	private Secretary user;
 
-	public ΣτοιχείαΧρήστηFrame(String username) {
+	public ΣτοιχείαΧρήστηFrame(String username,Secretary user) {
 		this.username=username;
+		this.user=user;
 		initialize();
 		
 		
@@ -255,7 +256,7 @@ public class ΣτοιχείαΧρήστηFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new SearchDoctors(User.loadUser(username));
+				new SearchDoctors(user);
 			}
 		});
 		btnNewButton.setBounds(517, 476, 143, 45);
@@ -268,11 +269,11 @@ public class ΣτοιχείαΧρήστηFrame {
 				
 				if(	User.loadUser(username).isGiatros()){
 					Doctor d = (Doctor)User.loadUser(username);
-					new addToClinicFrame(null,d,null,null);
+					new addToClinicFrame(null,d,null,user);
 				}
 				else{
 					Nurse d = (Nurse)User.loadUser(username);
-					new addToClinicFrame(null,null,d,null);
+					new addToClinicFrame(null,null,d,user);
 				
 				}
 				
@@ -292,7 +293,6 @@ public class ΣτοιχείαΧρήστηFrame {
 		textField.setBounds(546, 335, 114, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		JButton exit = new JButton("Πίσω");
 		
 		try{
 			PreparedStatement statement = User.getConnection().prepareStatement("SELECT username, first_name, last_name, date_birth, partonymo, address, region, city, tk, eidikotita, tameio, family_statement, kliniki, amka, arithmos_taytotitas, kinito, thlefwno_spitiou,thlefwno_ergasias, fax, email, hmeromhnia_eisagwghs, paratiriseis,  gender  FROM Users where username ='"+username+"'");
@@ -323,7 +323,7 @@ public class ΣτοιχείαΧρήστηFrame {
 					clinicField.setText("");
 				}
 				
-				cityField.setText(result.getString("username"));
+				cityField.setText(result.getString("city"));
 				tameioField.setText(result.getString("tameio"));
 				taytotitaField.setText(result.getString("arithmos_taytotitas"));
 				String fyllo=result.getString("gender");

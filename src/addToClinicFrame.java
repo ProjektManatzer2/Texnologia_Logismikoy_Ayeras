@@ -12,10 +12,11 @@ public class addToClinicFrame {
 
 	private JFrame frame;
 	private JComboBox comboBox;
-	private User user;
-	public addToClinicFrame(Patient aPatient,Doctor aDoctor,Nurse aNurse, User user) {
+	private Secretary xrhsths;
 	
-		this.user=user;
+	public addToClinicFrame(Patient aPatient,Doctor aDoctor,Nurse aNurse, Secretary user) {
+	
+		this.xrhsths=user;
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 537, 226);
@@ -72,7 +73,7 @@ public class addToClinicFrame {
 						
 						c.addPatientToClinic(aPatient);
 						frame.dispose();
-						new SecretaryOffice(user);
+						new SecretaryOffice(xrhsths);
 					}
 					
 					

@@ -25,11 +25,11 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	private JRadioButton doctorButton;
 	private JRadioButton secretaryButton;
 	private JRadioButton nurseButton;
-	private User user;
+	private Secretary user;
 	
 	
 	
-	public ΔημιουργίαΧρήστη(User user) {
+	public ΔημιουργίαΧρήστη(Secretary user) {
 		this.user=user;
 		this.setResizable(false);
 		this.setTitle("Δημιουργία χρήστη");

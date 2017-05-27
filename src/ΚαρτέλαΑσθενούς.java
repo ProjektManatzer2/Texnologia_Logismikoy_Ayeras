@@ -54,10 +54,10 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 	private JTextField douleiaField;
 	private JTextField faxField;
 	private JTextField e_mailField;
-	private User user;
+	private Secretary user;
 
 
-	public ΚαρτέλαΑσθενούς(User aUser) {
+	public ΚαρτέλαΑσθενούς(Secretary aUser) {
 		this.user=aUser;
 		initialize();
 	}

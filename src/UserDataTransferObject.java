@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class UserDataTransferObject implements Serializable{
 
@@ -225,6 +226,31 @@ public class UserDataTransferObject implements Serializable{
 	}
 	public void setPutDate(String putDate) {
 		this.put_date= putDate;
+	}
+
+	public int getClinic() {
+		Connection conn;
+		try {
+			conn=User.getConnection();
+		
+		String query = "select kliniki from Users where username='"+this.username+"'";
+		
+		PreparedStatement statement = conn.prepareStatement(query);
+		ResultSet res = statement.executeQuery();
+		while(res.next()){
+			return res.getInt("kliniki");
+		}
+		return 0;
+		} catch (Exception e) {
+			System.out.println("ADYNAMIA SYNDESHS ");
+			e.printStackTrace();
+
+			return 0;
+		}
+		
+		
+		
+		
 	}
 	
 

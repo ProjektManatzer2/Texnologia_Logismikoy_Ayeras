@@ -2,16 +2,17 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Γιατρός_Νοσηλευτής {
-
+	
+	private JButton aitimaButton;
+	private JButton provoliAsthenwnButton;
 	private JFrame frame;
 	private User user;
-
-	/**
-	 * Create the application.
-	 * @param u 
-	 */
+	private JButton disconnectButton;
+	
 	public Γιατρός_Νοσηλευτής(User u) {
 		this.user=u;
 		initialize();
@@ -28,17 +29,32 @@ public class Γιατρός_Νοσηλευτής {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("\u03A0\u03C1\u03BF\u03B2\u03BF\u03BB\u03AE \u0391\u03C3\u03B8\u03B5\u03BD\u03CE\u03BD \u039A\u03BB\u03B9\u03BD\u03B9\u03BA\u03AE\u03C2");
-		btnNewButton.setBounds(180, 100, 240, 24);
-		frame.getContentPane().add(btnNewButton);
+		provoliAsthenwnButton= new JButton("Προβολή Ασθενών Κλινικής");
+		provoliAsthenwnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+			frame.dispose();
+			new PatientSearch(user);
+			
+			}
+		});
+		provoliAsthenwnButton.setBounds(180, 100, 240, 24);
+		frame.getContentPane().add(provoliAsthenwnButton);
 		
-		JButton btnNewButton_1 = new JButton("\u0391\u03AF\u03C4\u03B7\u03BC\u03B1 \u03A0\u03B1\u03C1\u03B1\u03C7\u03CE\u03C1\u03B7\u03C3\u03B7\u03C2 \u0394\u03B9\u03BA\u03B1\u03B9\u03C9\u03BC\u03AC\u03C4\u03C9\u03BD");
-		btnNewButton_1.setBounds(180, 150, 240, 24);
-		frame.getContentPane().add(btnNewButton_1);
+		aitimaButton = new JButton("Αίτημα Παραχώρησης Δικαιωμάτων");
+		aitimaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				frame.dispose();
+				new αίτημα(user);
+			}
+		});
+		aitimaButton.setBounds(180, 150, 240, 24);
+		frame.getContentPane().add(aitimaButton);
 		
-		JButton btnNewButton_2 = new JButton("\u0391\u03C0\u03BF\u03C3\u03CD\u03BD\u03B4\u03B5\u03C3\u03B7");
-		btnNewButton_2.setBounds(240, 230, 120, 24);
-		frame.getContentPane().add(btnNewButton_2);
+		disconnectButton= new JButton("Αποσύνδεση");
+		disconnectButton.setBounds(240, 230, 120, 24);
+		frame.getContentPane().add(disconnectButton);
 		frame.setVisible(true);
 	}
 }

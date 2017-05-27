@@ -5,15 +5,15 @@ import javax.swing.JFrame;
 
 public class SecretaryOffice extends JFrame implements ActionListener{
 
-	JButton btnAnoigmaKartelas ;
-	JButton btnDhmiourgiasXrhsth ;
-	JButton btnDoctorSearch ;
-	JButton btnPatientSearch;
-	JButton btnDisconnect ;
-	User user;
+	private JButton btnAnoigmaKartelas ;
+	private JButton btnDhmiourgiasXrhsth ;
+	private JButton btnDoctorSearch ;
+	private JButton btnPatientSearch;
+	private JButton btnDisconnect ;
+	private Secretary user;
 	
 	
-	public SecretaryOffice(User u){
+	public SecretaryOffice(Secretary u){
 		this.user=u;
 		this.setResizable(false);
 		this.setTitle("Secretary's office");

@@ -58,7 +58,8 @@ public class InitialScreen {
 				User u = db_search(username,password);
 				
 					if(type==3){
-						new SecretaryOffice(u);
+						
+						new SecretaryOffice((Secretary)u);
 						frmLoginScreen.dispose();
 					}
 					

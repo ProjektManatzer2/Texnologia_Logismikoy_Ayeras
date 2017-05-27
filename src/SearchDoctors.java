@@ -26,12 +26,12 @@ public class SearchDoctors implements ActionListener{
 	private JTable table;
 	private JComboBox comboBox;
 	private JScrollPane scrollPane;
-	private User user;
+	private Secretary user;
 	/**
 	 * Launch the application.
 	 */
 
-	public SearchDoctors(User u) {
+	public SearchDoctors(Secretary u) {
 		this.user=u;
 		initialize();
 	}
@@ -154,7 +154,7 @@ public class SearchDoctors implements ActionListener{
 				int row = table.getSelectedRow();
 				String username =  table.getModel().getValueAt(row,3).toString();
 				frame.dispose();	
-				new ΣτοιχείαΧρήστηFrame(username);
+				new ΣτοιχείαΧρήστηFrame(username,user);
 			}
 					
 		

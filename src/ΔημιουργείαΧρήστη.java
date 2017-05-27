@@ -53,9 +53,9 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	private String username;
 	private String password;
 	private int type;
-	User user;
+	private Secretary user;
 
-	public ΔημιουργείαΧρήστη(String username, String password, int i, User user) {
+	public ΔημιουργείαΧρήστη(String username, String password, int i, Secretary user) {
 		this.user=user;
 		this.username=username;
 		this.password=password;

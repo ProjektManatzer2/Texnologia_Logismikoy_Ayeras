@@ -16,9 +16,9 @@ public class ClinicCreateFrame {
 	private JFrame frame;
 	private JTextField nameField;
 	private JTextField textField;
-	private User user;
+	private Secretary user;
 	
-	public ClinicCreateFrame(User u) {
+	public ClinicCreateFrame(Secretary u) {
 		initialize();
 		this.user=u;
 	}

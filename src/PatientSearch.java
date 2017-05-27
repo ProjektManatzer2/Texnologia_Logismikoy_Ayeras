@@ -12,6 +12,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
@@ -34,9 +35,8 @@ public class PatientSearch implements ActionListener{
 	
 
 	public PatientSearch(User u) {
-		this.user=u;
 		
-		initialize1();
+		initialize1(u);
 		//else
 		//initialize();	
 		
@@ -46,7 +46,9 @@ public class PatientSearch implements ActionListener{
 	 * Initialize the contents of the frame.
 	 * @return 
 	 */
-	private  void initialize1() {
+	private  void initialize1(User u) {
+		this.user=User.loadUser(u.getUser_name());
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 831, 411);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +75,14 @@ public class PatientSearch implements ActionListener{
 		button = new JButton("Πίσω");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-				new SecretaryOffice(user);
+				if(!user.hasClinic()){
+					frame.dispose();
+					new SecretaryOffice((Secretary)user);
+				}
+				else{
+					frame.dispose();
+					new Γιατρός_Νοσηλευτής(user);
+				}
 			}
 		});
 		button.setBounds(29, 322, 163, 32);
@@ -89,12 +97,13 @@ public class PatientSearch implements ActionListener{
 		showButton.setBounds(579, 331, 198, 32);
 		showButton.addActionListener(this);
 		frame.getContentPane().add(showButton);
+		
 		if(user.hasClinic()){
 			Connection conn=null;
 			try{
 				conn=User.getConnection();
 				
-				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where clinic=(select clinic from Users where username='"+user.getUser_name()+"')";
+				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where clinic="+user.getDto().getClinic();
 				System.out.println(textFieldSearch.getText()); 
 				PreparedStatement statement = conn.prepareStatement(query);
 				ResultSet res = statement.executeQuery();
@@ -137,7 +146,36 @@ public class PatientSearch implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==searchButton){
-				//ANAZHTHSH
+			if(!user.hasClinic()){
+					//ANAZHTHSH
+					Connection conn=null;
+					try{
+						conn=User.getConnection();
+					}catch(Exception exception){
+						System.out.println("Couldnt connect to database");
+						exception.printStackTrace();
+					}
+					
+					String selection = (String)comboBox.getSelectedItem();
+					String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where "+selection+" like '%"+textFieldSearch.getText()+"%' ";
+					
+					
+					try {
+						System.out.println(textFieldSearch.getText()); 
+						
+						PreparedStatement statement = conn.prepareStatement(query);
+						ResultSet res = statement.executeQuery();
+						
+						table.setModel(resultSetToTableModel(res));
+						table.setSelectionBackground(Color.BLUE);
+						table.setSelectionForeground(Color.CYAN);
+						
+					} catch (SQLException e2) {
+						
+						e2.printStackTrace();
+					}
+			}
+			else{
 				Connection conn=null;
 				try{
 					conn=User.getConnection();
@@ -147,7 +185,8 @@ public class PatientSearch implements ActionListener{
 				}
 				
 				String selection = (String)comboBox.getSelectedItem();
-				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where "+selection+" like '%"+textFieldSearch.getText()+"%' ";
+				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where "+selection+" like '%"+textFieldSearch.getText()+"%' and "
+						+ "clinic = (select kliniki from Users where username='"+user.getUser_name()+"')";
 				
 				
 				try {
@@ -164,19 +203,28 @@ public class PatientSearch implements ActionListener{
 					
 					e2.printStackTrace();
 				}
+				
+				
+				
+				
+			}
+			
 		}
 		
-		
 		if(e.getSource()==showButton){
-			try{
-				int row = table.getSelectedRow();
-				String amka =  table.getModel().getValueAt(row,2).toString();
-				frame.dispose();
-				new	VasikaStoixeiaAstheni(amka);
+			if(!user.hasClinic()){
+				try{
+					int row = table.getSelectedRow();
+					String amka =  table.getModel().getValueAt(row,2).toString();
+					frame.dispose();
+					new	VasikaStoixeiaAstheni(amka,(Secretary)user);
+				}
+				catch(ArrayIndexOutOfBoundsException ex){
+					JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
+				}
 			}
-			catch(Exception ex){
-				ex.printStackTrace();
-				System.out.println("nothing selected");
+			else{
+				///FRAME KARABETSOU
 			}
 			
 		}

@@ -125,6 +125,8 @@ public class User implements Serializable{
 		ObjectInputStream oss =new ObjectInputStream(fis);
 		john = (User)oss.readObject();
 		System.out.println("Ola kala");
+		os.close();
+		oss.close();
 		}
 		return john;
 		
