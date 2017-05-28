@@ -64,7 +64,7 @@ public class PatientSearch implements ActionListener{
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first", "last","personal_tel","AMKA"}));
 		comboBox.setSelectedIndex(1);
-		comboBox.setBounds(46, 29, 183, 20);
+		comboBox.setBounds(45, 30, 183, 20);
 		frame.getContentPane().add(comboBox);
 		
 		

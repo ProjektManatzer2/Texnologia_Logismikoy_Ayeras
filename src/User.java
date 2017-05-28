@@ -1,5 +1,7 @@
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class User implements Serializable{
@@ -11,8 +13,12 @@ public class User implements Serializable{
 	protected String first;
 	protected String last;
 	private UserDataTransferObject dto;
+	protected ArrayList<String> amka_bonusPatients;
 	
-	
+	public ArrayList<String> getAmka_bonusPatients() {
+		return amka_bonusPatients;
+	}
+
 	public UserDataTransferObject getDto() {
 		return dto;
 	}

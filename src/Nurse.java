@@ -1,5 +1,5 @@
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Nurse extends User implements Serializable{
 
@@ -7,12 +7,12 @@ public class Nurse extends User implements Serializable{
 
 	
 	private static final long serialVersionUID = 1387698080150491069L;
-	private HashSet<String> amka_bonusPatients;
+
 
 		public Nurse(String user_name, String password,String first,String last) {
 		
 		super( user_name,  password,  first, last);
-		amka_bonusPatients= new HashSet<String>();
+		amka_bonusPatients= new ArrayList<String>();
 		
 		}
 
@@ -20,7 +20,12 @@ public class Nurse extends User implements Serializable{
 			amka_bonusPatients.add(amka);
 			this.save_User_in_DB(true);
 		}
-
+		
+		public void showBonusPatients(){
+			
+			
+			
+		}
 	
 	
 	

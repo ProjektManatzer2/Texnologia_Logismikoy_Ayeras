@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Doctor extends User implements Serializable {
@@ -6,13 +7,13 @@ public class Doctor extends User implements Serializable {
 
 
 	private static final long serialVersionUID = -8408069154688140529L;
-	private HashSet<String> amka_bonusPatients;
+	
 	
 	
 	public Doctor(String user_name, String password,String first,String last) {
 		
 		super( user_name,  password,  first, last);
-		amka_bonusPatients= new HashSet<String>();	
+		amka_bonusPatients= new ArrayList<String>();	
 	}
 			
 	@Override

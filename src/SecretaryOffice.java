@@ -39,7 +39,7 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 		
 		btnAnoigmaKartelas = new JButton("’νοιγμα καρτέλας ασθενούς");
 		btnAnoigmaKartelas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
-		btnAnoigmaKartelas.setBounds(164, 70, 259, 58);
+		btnAnoigmaKartelas.setBounds(169, 70, 259, 58);
 		btnAnoigmaKartelas.addActionListener(this);
 		this.getContentPane().add(btnAnoigmaKartelas);
 		

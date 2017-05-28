@@ -57,6 +57,13 @@ public class Γιατρός_Νοσηλευτής {
 		frame.getContentPane().add(disconnectButton);
 		
 		JButton button = new JButton("Εμφάνιση επιπλέον ασθενών");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				new FrameOfBonusPatients(user);
+			
+			}
+		});
 		button.setBounds(180, 195, 240, 24);
 		frame.getContentPane().add(button);
 		frame.setVisible(true);
