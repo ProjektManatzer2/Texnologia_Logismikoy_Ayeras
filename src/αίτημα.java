@@ -50,7 +50,7 @@ public class αίτημα {
 		comboBox.setBounds(46, 29, 183, 20);
 		frame.getContentPane().add(comboBox);
 		
-		JButton button = new JButton("\u03A0\u03AF\u03C3\u03C9");
+		JButton button = new JButton("Πίσω");
 		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,18 +82,14 @@ public class αίτημα {
 					while(res.next()){
 						Secretary S = (Secretary)User.loadUser(res.getString("username"));
 						S.addAithma(aitima);
-											
+						S.save_User_in_DB(true);					
 					}
 					
 				}catch(Exception exception){
 					System.out.println("Couldnt connect to database");
 					exception.printStackTrace();
 				}
-				
-				
-				
-			
-			
+							
 			}
 		});
 		button_1.setBounds(584, 324, 198, 32);

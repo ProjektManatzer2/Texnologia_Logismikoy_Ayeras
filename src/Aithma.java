@@ -1,6 +1,8 @@
+import java.io.Serializable;
 
-public class Aithma {
+public class Aithma implements Serializable {
 
+	private static final long serialVersionUID = 7105237476130660880L;
 	private User giatros;
 	private String amka;
 	
@@ -15,6 +17,10 @@ public class Aithma {
 
 	public String getAmka() {
 		return amka;
+	}
+	
+	public String showAitima(){
+		return "Ο Γιατρός/Νοσηλευτής με username = "+giatros.getUser_name()+"\nXρειάζεται τα στοιχεία του ασθενή με ΑΜΚΑ = "+this.amka;
 	}
  
 }

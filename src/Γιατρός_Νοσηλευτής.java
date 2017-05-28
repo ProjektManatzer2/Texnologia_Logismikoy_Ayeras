@@ -53,8 +53,12 @@ public class Γιατρός_Νοσηλευτής {
 		frame.getContentPane().add(aitimaButton);
 		
 		disconnectButton= new JButton("Αποσύνδεση");
-		disconnectButton.setBounds(240, 230, 120, 24);
+		disconnectButton.setBounds(241, 243, 120, 24);
 		frame.getContentPane().add(disconnectButton);
+		
+		JButton button = new JButton("Εμφάνιση επιπλέον ασθενών");
+		button.setBounds(180, 195, 240, 24);
+		frame.getContentPane().add(button);
 		frame.setVisible(true);
 	}
 }

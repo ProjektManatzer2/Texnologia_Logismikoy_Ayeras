@@ -15,6 +15,12 @@ public class Nurse extends User implements Serializable{
 		amka_bonusPatients= new HashSet<String>();
 		
 		}
+
+		public void newPatient(String amka) {
+			amka_bonusPatients.add(amka);
+			this.save_User_in_DB(true);
+		}
+
 	
 	
 	
