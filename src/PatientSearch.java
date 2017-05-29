@@ -224,7 +224,15 @@ public class PatientSearch implements ActionListener{
 				}
 			}
 			else{
-				///FRAME KARABETSOU
+				try{
+				int row = table.getSelectedRow();
+				String amka =  table.getModel().getValueAt(row,2).toString();
+				frame.dispose();
+				Patient p = Patient.loadPatient(amka);
+				new PatientFrame(p);
+				}catch(ArrayIndexOutOfBoundsException ex){
+					JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
+				}
 			}
 			
 		}

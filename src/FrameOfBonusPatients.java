@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -34,6 +35,22 @@ public class FrameOfBonusPatients {
 		frame.getContentPane().setLayout(null);
 		
 		 showButton = new JButton("\u0395\u03BC\u03C6\u03AC\u03BD\u03B9\u03C3\u03B7 \u03C3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03C9\u03BD");
+		 showButton.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+		 	
+		 		try{
+					int row = table.getSelectedRow();
+					String amka =  table.getModel().getValueAt(row,2).toString();
+					frame.dispose();
+					Patient p = Patient.loadPatient(amka);
+					new PatientFrame(p);
+					}catch(ArrayIndexOutOfBoundsException ex){
+						JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
+					}
+		 	
+		 	
+		 	}
+		 });
 		showButton.setBounds(498, 364, 198, 32);
 		frame.getContentPane().add(showButton);
 		

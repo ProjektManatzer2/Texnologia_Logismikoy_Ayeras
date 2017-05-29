@@ -28,6 +28,7 @@ public class PatientDataTransferObject implements Serializable {
 	private String put_date;
 	private String comments;
 	private String amka; 
+	private String room;
 	
 	
 	public PatientDataTransferObject(String amka)
@@ -54,6 +55,7 @@ public class PatientDataTransferObject implements Serializable {
 		put_date="";
 		ama="";
 		job="";
+		room="";
 	}
 	
 	public void transferToDatabase(Connection conn)
@@ -68,7 +70,7 @@ public class PatientDataTransferObject implements Serializable {
 					+ "insurance_institution=?,status=?,"
 					+ "taytotita=?,"
 					+ " personal_tel=?,home_tel=?,job_tel=?,"
-					+ "fax=?,email=?,put_date=?,comments=?,gender=?,job=? WHERE amka='" + amka+"'";
+					+ "fax=?,email=?,put_date=?,comments=?,gender=?,job=?,room=? WHERE amka='" + amka+"'";
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, f_name);
 			statement.setString(2, date_of_birth);
@@ -90,6 +92,8 @@ public class PatientDataTransferObject implements Serializable {
 			statement.setString(18, comments);
 			statement.setString(19, gender);
 			statement.setString(20, job);
+			statement.setString(21, room);
+			
 			
 			statement.executeUpdate();
 			
@@ -223,6 +227,13 @@ public class PatientDataTransferObject implements Serializable {
 	}
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
 	}
 	public void setPutDate(String putDate) {
 		this.put_date= putDate;

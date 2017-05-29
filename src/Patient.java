@@ -11,6 +11,14 @@ public class Patient implements Serializable {
 	private String first;
 	private String last;
 	private String amka;
+	private String astheneies;
+	private String allergies;
+	private String egxeirhseis;
+	private String farmaka;
+	private String genikaSxolia;
+	private String kardiologiko;
+	private String paragontes;
+	private String paratiriseis;
 	private PatientDataTransferObject pdto;
 	
 	public PatientDataTransferObject getPdto() {
@@ -144,5 +152,96 @@ public class Patient implements Serializable {
 
 		return amka;
 	}
+
+	public void setFirst(String text) {
+		this.first=text;	
+	}
+	
+	public void setLast(String text) {
+		this.last=text;	
+	}
+
+
+	public String getAmka() {
+		return amka;
+	}
+
+	public void setAmka(String amka) {
+		this.amka = amka;
+	}
+
+	public String getAstheneies() {
+		return astheneies;
+	}	
+
+	public String getAllergies() {
+		return allergies;
+	}
+
+	
+
+	public void setEgxeirhseis(String s) {
+		this.egxeirhseis=s;
+	}
+	
+
+	public void setAllergies(String s) {
+		this.allergies=s;
+	}
+	
+
+	public void setAstheneies(String s) {
+		this.astheneies=s;
+	}
+	
+
+	public void setGenikaSxolia(String s) {
+		this.genikaSxolia=s;
+	}
+	
+
+	public void setFarmaka(String s) {
+		this.farmaka=s;
+	}
+	
+
+	public void setKardiologiko(String s) {
+		this.kardiologiko=s;
+	}
+
+	public void setParatiriseis(String s) {
+		this.paratiriseis=s;
+	}
+	public String getParatiriseis(){
+		return paratiriseis;
+	}
+	
+	public void setParagontes(String s) {
+		this.paragontes=s;
+	}
+	
+
+	public String getEgxeirhseis() {
+		return egxeirhseis;
+	}
+	
+	public String getFarmaka() {
+		return farmaka;
+	}
+
+	public String getGenikaSxolia() {
+		return genikaSxolia;
+	}
+
+	public String getKardiologiko() {
+		return kardiologiko;
+	}
+
+	public String getParagontes() {
+		return paragontes;
+	}
+	
+
+	
 
 }
