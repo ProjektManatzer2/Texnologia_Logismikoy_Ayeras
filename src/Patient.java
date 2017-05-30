@@ -1,7 +1,17 @@
-import java.io.*;
+import java.awt.Desktop;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFileChooser;
 
 public class Patient implements Serializable {
 	
@@ -19,6 +29,7 @@ public class Patient implements Serializable {
 	private String kardiologiko;
 	private String paragontes;
 	private String paratiriseis;
+	private String sxoliaEksetasewn; 
 	private PatientDataTransferObject pdto;
 	
 	public PatientDataTransferObject getPdto() {
@@ -29,7 +40,7 @@ public class Patient implements Serializable {
 		this.first=first;
 		this.last=last;
 		this.amka=amka;
-		this.pdto=new PatientDataTransferObject(amka);
+		this.pdto=new PatientDataTransferObject(amka); 
 	}
 	
 	
@@ -136,8 +147,75 @@ public class Patient implements Serializable {
 		}
 	}	
 	
+
+
+	public void loadEksetasi(String title) {
+
+
+		Connection conn=null;
+		Clinic kiliniki=null;
+		try{
+			conn=User.getConnection();
+		}catch(Exception e){
+			System.out.println("Couldnt connect to database");
+		
+		}
+		
+		try{
+		PreparedStatement statement = conn.prepareStatement("SELECT file FROM Eksetaseis where Title='"+title+"' and AMKA = '"+this.amka+"'");
+		ResultSet result = statement.executeQuery();
+		
+		int i = 0;
+		File file = new File("testing.jpg");
+		while (result.next()) {
+			InputStream in = result.getBinaryStream(1);
+			OutputStream fos = new FileOutputStream(file);
+			i++;
+			int c = 0;
+			while ((c = in.read()) > -1) {
+				fos.write(c);
+			}
+			fos.close();
+			in.close();
+		}
+	
+		//OPEN
+		String imagePath=file.getAbsolutePath();
+		Desktop desktop=Desktop.getDesktop();
+		desktop.open(new File(imagePath));
+		
+		
+		
+		} catch (Exception e ){
+			e.printStackTrace();
+				 System.out.println("Arxeio Exception");
+		
+		}
+		
+	}
 	
 
+	public void uploadExsetasi() throws Exception {
+		
+		JFileChooser fileChooser = new JFileChooser();
+		if (fileChooser.showOpenDialog(fileChooser) == JFileChooser.APPROVE_OPTION) {
+		  File file = fileChooser.getSelectedFile();
+			FileInputStream inputStream = new FileInputStream(file);
+			String sql = " INSERT INTO Eksetaseis (AMKA,file,Title) VALUES (?,?,?) ";
+			PreparedStatement sQLstatement = User.getConnection().prepareStatement(sql);
+
+			sQLstatement.setString(1, this.amka);
+			sQLstatement.setBinaryStream(2, (InputStream)inputStream,(int)file.length());
+			sQLstatement.setString(3,file.getName());
+			  
+			sQLstatement.executeUpdate();
+			
+			
+		
+		}
+		
+	}
+	
 	public String getFirst() {
 
 		return first;
@@ -240,8 +318,13 @@ public class Patient implements Serializable {
 	public String getParagontes() {
 		return paragontes;
 	}
-	
 
-	
+	public String getSxoliaEks() {
+		return sxoliaEksetasewn;
+	}
+
+	public void setSxoliaEks(String sxoliaEks) {
+		this.sxoliaEksetasewn = sxoliaEks;
+	}
 
 }

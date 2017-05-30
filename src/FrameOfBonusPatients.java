@@ -29,6 +29,7 @@ public class FrameOfBonusPatients {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(User user) {
+		this.user=user;
 		frame = new JFrame();
 		frame.setBounds(100, 100, 784, 457);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +44,7 @@ public class FrameOfBonusPatients {
 					String amka =  table.getModel().getValueAt(row,2).toString();
 					frame.dispose();
 					Patient p = Patient.loadPatient(amka);
-					new PatientFrame(p);
+					new PatientFrame(p,user);
 					}catch(ArrayIndexOutOfBoundsException ex){
 						JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
 					}

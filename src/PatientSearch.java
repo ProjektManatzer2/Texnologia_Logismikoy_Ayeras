@@ -229,7 +229,7 @@ public class PatientSearch implements ActionListener{
 				String amka =  table.getModel().getValueAt(row,2).toString();
 				frame.dispose();
 				Patient p = Patient.loadPatient(amka);
-				new PatientFrame(p);
+				new PatientFrame(p,user);
 				}catch(ArrayIndexOutOfBoundsException ex){
 					JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
 				}

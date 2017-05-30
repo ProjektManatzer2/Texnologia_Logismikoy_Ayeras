@@ -1,21 +1,31 @@
+import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextPane;
-import javax.swing.JScrollPane;
+import javax.swing.border.EtchedBorder;
 
 public class PatientFrame {
-	private 	JTextPane Paratiriseis;
+
+	private	JButton Προβολή_Εξέτασης ;
+	private JButton btnAdd;
+	private JButton Προσθήκη_Σχολίου;
+	private JTextPane Paratiriseis;
 	private JTextPane Egxeirhseis;
 	private JTextPane farmaka;
 	private JTextPane genikaSxolia;
@@ -44,15 +54,17 @@ public class PatientFrame {
 	private JTextField Fax;
 	private JTextField Age;
 	private JTextField room;
-	
-	
-	
+	private JTable table;
+	private JTextPane textPane;
+	private JButton Προσθήκη_Εξέτασης;
+	private User user;
 	
 	
 
-	public PatientFrame(Patient patient) {
+	public PatientFrame(Patient patient,User user) {
 		
 		this.patient = patient;
+		this.user=user;
 		initialize(patient);
 	}
 
@@ -370,13 +382,7 @@ public class PatientFrame {
 				Fax.setEditable(true);
 				Age.setEditable(true);
 				room.setEditable(true);
-				
-			
-			
-			
-			
-			
-			
+						
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -540,11 +546,24 @@ public class PatientFrame {
 		tabbedPane.addTab("Εξετάσεις", null, panel_Εξετάσεις, null);
 		panel_Εξετάσεις.setLayout(null);
 		
-		JList list = new JList();
-		list.setBounds(16, 72, 324, 223);
-		panel_Εξετάσεις.add(list);
-		
-		JButton Προβολή_Εξέτασης = new JButton("\u03A0\u03C1\u03BF\u03B2\u03BF\u03BB\u03AE \u0395\u03BE\u03AD\u03C4\u03B1\u03C3\u03B7\u03C2 ");
+		Προβολή_Εξέτασης = new JButton("Προβολή Εξέτασης");
+		Προβολή_Εξέτασης.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					int row = table.getSelectedRow();
+					String title  =  table.getModel().getValueAt(row,0).toString();
+					patient.loadEksetasi(title);
+					Desktop desktop;
+				}
+				catch(ArrayIndexOutOfBoundsException ex){
+					JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+				
+				
+			}
+		});
 		Προβολή_Εξέτασης.setFont(new Font("Tahoma", Font.BOLD, 11));
 		Προβολή_Εξέτασης.setBounds(104, 306, 146, 39);
 		panel_Εξετάσεις.add(Προβολή_Εξέτασης);
@@ -554,24 +573,92 @@ public class PatientFrame {
 		Διαγραφή_Εξέτασης.setBounds(104, 406, 146, 39);
 		panel_Εξετάσεις.add(Διαγραφή_Εξέτασης);
 		
-		JButton Προσθήκη_Εξέτασης = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7 \u0395\u03BE\u03AD\u03C4\u03B1\u03C3\u03B7\u03C2");
+		Προσθήκη_Εξέτασης = new JButton("Προσθήκη Εξέτασης");
+		Προσθήκη_Εξέτασης.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					patient.uploadExsetasi();
+					JOptionPane.showMessageDialog(null,"Το αρχείο εξετάσεων έχει αναρτηθεί!(Ανανεώστε τη σελίδα για να φανεί η καταχώρηση)","Adding done",JOptionPane.INFORMATION_MESSAGE);
+					
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null,"Πρόβλημα σύνδεσης","File not uploaded",JOptionPane.WARNING_MESSAGE);
+					e.printStackTrace();
+				}
+				
+			}
+		});
 		Προσθήκη_Εξέτασης.setFont(new Font("Tahoma", Font.BOLD, 11));
 		Προσθήκη_Εξέτασης.setBounds(103, 356, 147, 39);
 		panel_Εξετάσεις.add(Προσθήκη_Εξέτασης);
 		
-		JList list_1 = new JList();
-		list_1.setBounds(383, 72, 358, 223);
-		panel_Εξετάσεις.add(list_1);
-		
-		JButton Προσθήκη_Σχολίου = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7 \u03A3\u03C7\u03BF\u03BB\u03AF\u03BF\u03C5 ");
+		Προσθήκη_Σχολίου = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7 \u03A3\u03C7\u03BF\u03BB\u03AF\u03BF\u03C5 ");
+		Προσθήκη_Σχολίου.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textPane.setEditable(true);
+				btnAdd.setBounds(404, 245, 299, 39);
+				Προσθήκη_Σχολίου.setBounds(0, 0, 0, 0);
+				patient.save_Patient_in_DB(true);
+			
+			}
+		});
 		Προσθήκη_Σχολίου.setFont(new Font("Tahoma", Font.BOLD, 11));
-		Προσθήκη_Σχολίου.setBounds(407, 306, 152, 39);
+		Προσθήκη_Σχολίου.setBounds(404, 245, 299, 39);
 		panel_Εξετάσεις.add(Προσθήκη_Σχολίου);
 		
-		JButton Διαγραφή_Σχολίου = new JButton("\u0394\u03B9\u03B1\u03B3\u03C1\u03B1\u03C6\u03AE \u03A3\u03C7\u03BF\u03BB\u03AF\u03BF\u03C5 ");
-		Διαγραφή_Σχολίου.setFont(new Font("Tahoma", Font.BOLD, 11));
-		Διαγραφή_Σχολίου.setBounds(569, 306, 152, 39);
-		panel_Εξετάσεις.add(Διαγραφή_Σχολίου);
+		table = new JTable();
+		table.setBounds(72, 33, 199, 248);
+		table.setShowGrid(true);
+		table.setBorder(new EtchedBorder(EtchedBorder.RAISED));
+		table.setGridColor(Color.BLACK);
+		Connection conn=null;
+		try{
+			conn=User.getConnection();
+		}catch(Exception exception){
+			System.out.println("Couldnt connect to database");
+			exception.printStackTrace();
+		}
+		
+		String query = "select Title from Eksetaseis where AMKA='"+patient.getAmka()+"'";
+					
+		
+		try {
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			
+			table.setModel(PatientSearch.resultSetToTableModel(res));
+			table.setSelectionBackground(Color.BLUE);
+			table.setSelectionForeground(Color.RED);
+			
+		} catch (SQLException e2) {
+			
+			e2.printStackTrace();
+		}
+		panel_Εξετάσεις.add(table);
+		
+		JScrollPane scrollPane_8 = new JScrollPane();
+		scrollPane_8.setBounds(404, 11, 299, 187);
+		panel_Εξετάσεις.add(scrollPane_8);
+		
+		textPane = new JTextPane();
+		scrollPane_8.setViewportView(textPane);
+		textPane.setEditable(false);
+		textPane.setText(patient.getSxoliaEks());
+		
+		btnAdd = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Προσθήκη_Σχολίου.setBounds(404, 245, 299, 39);
+				btnAdd.setBounds(0,0,0,0);
+				textPane.setEditable(false);
+				patient.setSxoliaEks(textPane.getText());
+				patient.save_Patient_in_DB(true);
+			}
+		});
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnAdd.setBounds(404, 245, 299, 39);
+		panel_Εξετάσεις.add(btnAdd);
+	
 		
 		JPanel panel_Παρατηρήσεις = new JPanel();
 		tabbedPane.addTab("Παρατηρήσεις", null, panel_Παρατηρήσεις, null);
@@ -589,6 +676,7 @@ public class PatientFrame {
 		Paratiriseis = new JTextPane();
 		scrollPane_7.setViewportView(Paratiriseis);
 		Paratiriseis.setEditable(false);
+		Paratiriseis.setText(patient.getParatiriseis());
 		
 		JButton btnSave_1 = new JButton("Save");
 		btnSave_1.addActionListener(new ActionListener() {
@@ -605,7 +693,7 @@ public class PatientFrame {
 		JButton btnNewButton = new JButton("Επεξεργασία");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				Paratiriseis.setEditable(true);
 			}
 			
@@ -614,12 +702,21 @@ public class PatientFrame {
 		panel_Παρατηρήσεις.add(btnNewButton);
 		
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				if(user.isGiatros()){
+					new Γιατρός_Νοσηλευτής((Doctor)user);
+				}
+				else{
+					new Γιατρός_Νοσηλευτής((Nurse)user);
+				}
+			}
+		});
+		
 		btnOk.setBounds(679, 530, 89, 23);
 		frame.getContentPane().add(btnOk);
-		
-		JButton btnClose = new JButton("Close");
-		btnClose.setBounds(574, 530, 89, 23);
-		frame.getContentPane().add(btnClose);
 		frame.setVisible(true);
 	}
 }
