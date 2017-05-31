@@ -18,10 +18,11 @@ public class ClinicCreateFrame {
 	private JTextField textField;
 	private Secretary user;
 	
-	public ClinicCreateFrame(Secretary u) {
-		initialize();
+	public ClinicCreateFrame(Secretary u) { //лОМО щМАР ВЯчСТГР ТГР ЦЯАЛЛАТЕъАР ДГЛИОУЯЦЕъ ЙКИМИЙч.
+		//аПОТЕКЕъ БщБАИА СПэМИО ЖАИМЭЛЕМО СТА МОСОЙОЛЕъО Г ДГЛИОУЯЦъА МщАР ЙКМИЙчР
 		this.user=u;
-	}
+		initialize();
+		}
 
 
 	private void initialize() {
@@ -30,12 +31,12 @@ public class ClinicCreateFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("╪МОЛА йКИМИЙчР");
+		JLabel label = new JLabel("╪МОЛА йКИМИЙчР"); 
 		label.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		label.setBounds(51, 71, 172, 49);
 		frame.getContentPane().add(label);
 		
-		nameField = new JTextField();
+		nameField = new JTextField(); //омола йкимийгс лпаимеи еды
 		nameField.setBounds(244, 79, 172, 36);
 		frame.getContentPane().add(nameField);
 		nameField.setColumns(10);
@@ -46,7 +47,7 @@ public class ClinicCreateFrame {
 		frame.getContentPane().add(label_1);
 		
 		textField = new JTextField();
-		textField.setColumns(10);
+		textField.setColumns(10); 				//тевт FIELD ле то иD тгс йкимийгс
 		textField.setBounds(244, 177, 172, 36);
 		frame.getContentPane().add(textField);
 		
@@ -54,28 +55,28 @@ public class ClinicCreateFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 		
-					if(!(nameField.getText().trim().replaceAll(" ","").equals(""))){
+					if(!(nameField.getText().trim().replaceAll(" ","").equals(""))){ //екецвос ам сулпкгяыхгйе то омола
 						try{
 							Connection conn = User.getConnection();
-							int aa = Integer.parseInt(textField.getText());
-							if(!(nameExists(nameField.getText(),conn) || numberExists(aa,conn))){
-								Clinic c =new Clinic(aa,nameField.getText(),conn);
-								c.saveClinic();
+							int aa = Integer.parseInt(textField.getText()); //летатяопг аяихлоу се INT.
+							if(!(nameExists(nameField.getText(),conn) || numberExists(aa,conn))){ //екецвос упаянгс омолатос 
+								Clinic c =new Clinic(aa,nameField.getText(),conn);				//йаи аяихлоу стг басг.
+								c.saveClinic();    //ам ови г йкмийг дглиоуяцеитаи ле то дыслемо омола йаи ID йаи апохуйеуетаи
 								frame.dispose();
-								new SecretaryOffice(user);
+								new SecretaryOffice(user);	//епеита о вягстгс епистяежеи стгм аявийг TOY.
 							}
 				
 							
 						}
-						catch(NumberFormatException e){
-							JOptionPane.showMessageDialog(null,
-								    "тО ПКАъСИО а/а йКИМИЙчР ПЯщПЕИ МА ПЕЯИщВЕИ АЯИХЛЭ",
+						catch(NumberFormatException e){		//г PARSE INT AN EXEI KENO H KATI POY DEN EINAI ARITHMOS
+							JOptionPane.showMessageDialog(null,	//жеямеи то пяоцяалла сто  CATCH поу емглеяымеи том вягстг.
+								    "тО ПКАъСИО а/а йКИМИЙчР ПЯщПЕИ МА ПЕЯИщВЕИ АЯИХЛЭ", 
 								    "кахос аяихлос",
 								    JOptionPane.INFORMATION_MESSAGE);
 						}
 						catch(Exception e){
-							
-						e.printStackTrace();
+											
+						e.printStackTrace(); //се пеяиптысг поу г басг дем апойяиметаи емглеяыметаи о вягстгс.
 						JOptionPane.showMessageDialog(null,
 							    "аПОТУВъА СЩМДЕСГР СТГ БэСГ",
 							    "Failed to connect",
@@ -83,8 +84,8 @@ public class ClinicCreateFrame {
 						}
 					}
 					else{
-						JOptionPane.showMessageDialog(null,
-							    "сУЛПКГЯЧСТЕ ТО ЭМОЛА ТГР ЙКИМИЙчР",
+						JOptionPane.showMessageDialog(null, //ам дем евеи  сулпкгяыхеи омола тоте елжамифетаи 
+							    "сУЛПКГЯЧСТЕ ТО ЭМОЛА ТГР ЙКИМИЙчР", //емглеяытийо лумгла
 							    "No name",
 							    JOptionPane.INFORMATION_MESSAGE);
 					}
@@ -92,7 +93,14 @@ public class ClinicCreateFrame {
 			}
 
 			private boolean numberExists(int aa, Connection conn) throws Exception {
-		
+				/*
+				 * ам упаявеи то ID ежосым апотекеи йкеиди ха упаявеи ломо лиа жояа.
+				   аяа диатяевоуле тг басг, йаи ам бяехеи есты йаи ема ID
+				 * KOINыс ам то RESULT дем еимаи йемо тоте сглаимеи оти йати бяехгйе стг басг аяа то
+				 * ID KAI г йкимийг упаявоум.
+				 * тоте епистяежоуле тRUE аккиыс
+				 * FALSE
+				 */
 					
 					String sql = "Select id from clinics where id = ?";
 					PreparedStatement statement = conn.prepareStatement(sql);
@@ -115,6 +123,11 @@ public class ClinicCreateFrame {
 			}
 
 			private boolean nameExists(String text, Connection conn) throws SQLException {
+				/*
+				 * г коцийг укопоигсгс еимаи айяибыс г идиа ле тгм паяапамы сумаятгсг
+				 */
+				
+				
 				String sql = "Select name from clinics where name = ?";
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setString(1,text );
@@ -140,7 +153,7 @@ public class ClinicCreateFrame {
 		btnNewButton.setBounds(389, 298, 121, 31);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("╒ЙУЯО");
+		JButton btnNewButton_1 = new JButton("╒ЙУЯО"); //ам патгхеи айуяо тоте йкеимеи то FRAME
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();

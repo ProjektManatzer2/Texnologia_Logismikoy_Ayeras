@@ -16,16 +16,14 @@ public class Nurse extends User implements Serializable{
 		
 		}
 
+		
+		//Η ΙsGiatros είναι false και εδώ, αλλά τέτοιου είδους χρήστης έχει πρόσβαση στα στοιχεία του ασθενή.
 		public void newPatient(String amka) {
 			amka_bonusPatients.add(amka);
 			this.save_User_in_DB(true);
 		}
 		
-		public void showBonusPatients(){
-			
-			
-			
-		}
+		
 	
 	
 	

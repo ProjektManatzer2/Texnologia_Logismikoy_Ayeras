@@ -58,7 +58,9 @@ public class PatientFrame {
 	private JTextPane textPane;
 	private JButton Προσθήκη_Εξέτασης;
 	private User user;
-	
+	/*
+	 * ΕΔΩ ΒΡΙΣΚΟΝΤΑΙ ΟΛΑ ΤΑ ΕΥΑΙΣΘΗΤΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΑΣΘΕΝΗ ΟΠΩΣ ΕΞΕΤΑΣΕΙΣ ΙΑΤΡΙΚΟ ΙΣΤΟΡΙΚΟ ΚΛΠ.
+	 */
 	
 
 	public PatientFrame(Patient patient,User user) {
@@ -79,7 +81,7 @@ public class PatientFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 11, 758, 522);
 		frame.getContentPane().add(tabbedPane);
-		
+		//ΑΡΧΙΚΟΠΟΙΗΣΗ ΟΛΩΝ ΤΩΝ LABELS ΚΑΙ UNEDITABLE TEXTFIELDS
 		JPanel panel_Στοιχεία = new JPanel();
 		tabbedPane.addTab("Βασικά Στοιχεία", null, panel_Στοιχεία, null);
 		panel_Στοιχεία.setToolTipText("");
@@ -312,8 +314,8 @@ public class PatientFrame {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FirstName.setEditable(false);
+			public void actionPerformed(ActionEvent e) { //ΑΝ ΠΑΤΗΘΕΙ ΤΟ ΚΟΥΜΠΙ SAVE ΟΛΑ ΤΑ ΤΕΧΤFIELDS ΞΑΝΑΓΙΝΟΝΤΑΙ UNEDITABLE KAI 
+				FirstName.setEditable(false);			//KAI ΠΑΡΑΚΑΤΩ ΣΩΖΟΝΤΑΙ ΟΛΑ ΤΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΧΡΗΣΤΗ ΣΤΗ ΒΑΣΗ.
 				LastName.setEditable(false);
 				FathersName.setEditable(false);
 				AMA.setEditable(false);
@@ -364,7 +366,7 @@ public class PatientFrame {
 		JButton button = new JButton("Επεξεργασία");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FirstName.setEditable(true);
+				FirstName.setEditable(true); //ΑΝ ΠΑΤΗΘΕΙ Η ΕΠΕΞΕΡΓΙΑΣΙΑ Ο ΧΡΗΣΤΗΣ ΜΠΟΡΕΙ ΝΑ ΕΠΕΞΕΡΓΑΣΤΕΙ ΤΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΧΡΗΣΤΗ
 				LastName.setEditable(true);
 				FathersName.setEditable(true);
 				AMA.setEditable(true);
@@ -388,8 +390,18 @@ public class PatientFrame {
 		button.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		button.setBounds(431, 418, 99, 32);
 		panel_Στοιχεία.add(button);
-					
 		
+		JButton deleteButton = new JButton("\u0394\u03B9\u03B1\u03B3\u03C1\u03B1\u03C6\u03AE \u0391\u03C0\u03CC \u03C4\u03B7\u03BD \u039A\u03BB\u03B9\u03BD\u03B9\u03BA\u03AE");
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//ΑΝ ΠΑΤΗΘΕΙ ΤΟ ΚΟΥΜΠΙ ΔΙΑΓΡΑΦΗΣ ΕΜΦΑΝΙΖΕΤΑΙ ΝΕΟ ΠΑΡΑΘΥΡΟ ΓΙΑ ΝΑ ΕΠΙΒΕΒΑΙΩΣΕΙ Ο ΧΡΗΣΤΗΣ
+				new DeletePatientFromClinicFrame(patient);
+			}
+		});
+		deleteButton.setBounds(10, 460, 223, 23);
+		panel_Στοιχεία.add(deleteButton);
+					
+		//ΑΡΧΙΚΟΠΟΙΗΣΗ LABEL ΚΑΙ ΤΕΧΤFIELDS ΓΙΑ ΤΗ ΔΕΥΤΕΡΗ ΚΑΡΤΕΛΑ
 		JPanel panel_Ιατρικό_Ιστορικό = new JPanel();
 		tabbedPane.addTab("Ιατρικό Ιστορικό", null, panel_Ιατρικό_Ιστορικό, null);
 		panel_Ιατρικό_Ιστορικό.setLayout(null);
@@ -437,7 +449,7 @@ public class PatientFrame {
 		JButton button_1 = new JButton("\u0395\u03C0\u03B5\u03BE\u03B5\u03C1\u03B3\u03B1\u03C3\u03AF\u03B1");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				//ΠΑΤΩΝΤΑΣ ΕΠΕΞΕΡΓΑΣΙΑ Ο ΧΡΗΣΤΗΣ ΜΠΟΡΕΙ ΝΑ ΕΠΕΞΕΡΓΑΣΤΕΙ ΤΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΑΣΘΕΝΗ
 				allergies.setEditable(true);
 				astheneies.setEditable(true);
 				KardiologikoIstoriko.setEditable(true);
@@ -464,7 +476,7 @@ public class PatientFrame {
 				genikaSxolia.setEditable(false);
 				farmaka.setEditable(false);
 				Egxeirhseis.setEditable(false);
-				
+				// ΠΑΤΩΝΤΑΣ SAVE ΑΠΟΘΥΚΕΥΟΝΤΑΙ
 				patient.setAllergies(allergies.getText());
 				patient.setAstheneies(astheneies.getText());
 				patient.setFarmaka(farmaka.getText());
@@ -542,6 +554,8 @@ public class PatientFrame {
 		farmaka.setText(patient.getFarmaka());
 		farmaka.setEditable(false);
 		
+		
+		//ΑΡΧΙΚΟΠΟΙΗΣΗ ΜΕΤΑΒΛΗΤΩΝ ΚΑΡΤΕΛΑΣ ΕΞΕΤΑΣΕΩΝ
 		JPanel panel_Εξετάσεις = new JPanel();
 		tabbedPane.addTab("Εξετάσεις", null, panel_Εξετάσεις, null);
 		panel_Εξετάσεις.setLayout(null);
@@ -549,11 +563,11 @@ public class PatientFrame {
 		Προβολή_Εξέτασης = new JButton("Προβολή Εξέτασης");
 		Προβολή_Εξέτασης.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{
+				try{ //ΔΙΑΛΕΓΕΤΑΙ ΑΠΟ ΤΟΝ ΠΙΝΑΚΑ Η ΕΞΕΤΑΣΗ ΚΑΙ ΦΟΡΤΩΝΕΤΑΙ ΣΤΟΝ ΧΡΗΣΤΗ
 					int row = table.getSelectedRow();
-					String title  =  table.getModel().getValueAt(row,0).toString();
-					patient.loadEksetasi(title);
-					Desktop desktop;
+					int id  =  Integer.parseInt(table.getModel().getValueAt(row,0).toString());
+					patient.loadEksetasi(id);
+
 				}
 				catch(ArrayIndexOutOfBoundsException ex){
 					JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
@@ -568,8 +582,59 @@ public class PatientFrame {
 		Προβολή_Εξέτασης.setBounds(104, 306, 146, 39);
 		panel_Εξετάσεις.add(Προβολή_Εξέτασης);
 		
-		JButton Διαγραφή_Εξέτασης = new JButton("\u0394\u03B9\u03B1\u03B3\u03C1\u03B1\u03C6\u03AE \u0395\u03BE\u03AD\u03C4\u03B1\u03C3\u03B7\u03C2 ");
-		Διαγραφή_Εξέτασης.setFont(new Font("Tahoma", Font.BOLD, 11));
+		JButton Διαγραφή_Εξέτασης = new JButton("\u0394\u03B9\u03B1\u03B3\u03C1\u03B1\u03C6\u03AE E\u03BE\u03AD\u03C4\u03B1\u03C3\u03B7\u03C2 ");
+		Διαγραφή_Εξέτασης.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{//ΣΕ ΠΕΡΙΠΤΩΣΗ ΠΟΥ Ο ΧΡΗΣΤΗΣ ΕΙΝΑΙ ΓΙΑΤΡΟΣ ΠΑΕΙ ΣΤΟ LINE 618 ΟΠΟΥ ΚΑΝΕΙ ΑΠΛΑ ΔΙΑΓΡΑΦΗ ΕΞΕΤΑΣΗΣ
+					int row = table.getSelectedRow();
+					int id =  Integer.parseInt(table.getModel().getValueAt(row,0).toString());
+					if(!user.isGiatros()){	//ΣΕ ΠΕΡΙΠΤΩΣΗ ΝΟΣΗΛΕΥΤΗ ΠΑΙΡΝΟΥΜΕ ΑΠΟ ΤΗ ΒΑΣΗ ΤΗ ΣΕΙΡΑ ΤΟΥ ΑΡΧΕΙΟΥ ΚΑΙ ΑΝ ΤΟ ΑΝΕΒΑΣΕ		 
+											//ΓΙΑΤΡΟΣ ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΣΒΗΣΤΕΙ ΑΠΟ ΤΟ ΝΟΣΗΛΕΥΤΗ
+						String query = "select username from Eksetaseis where id="+id;
+						String username="";
+						PreparedStatement statement = User.getConnection().prepareStatement(query);
+						ResultSet res = statement.executeQuery();
+						while(res.next())
+							{
+							username=res.getString("username");
+							}
+						User u = User.loadUser(username);
+						if(u.isGiatros()){
+							JOptionPane.showMessageDialog(null,"Δεν μπορείτε να σβήσετε εξετάσεις αναρτημένες από γιατρό","Not allowed",JOptionPane.WARNING_MESSAGE);
+							
+						}
+						else{
+						query="DELETE FROM Eksetaseis WHERE id="+id;
+						PreparedStatement st = User.getConnection().prepareStatement(query);
+						st.executeUpdate();
+						JOptionPane.showMessageDialog(null,"Το αρχείο εξέτασης διαγράφηκε, ανανεώστε την καρτέλτα για να φανούν οι αλλαγές","Delete done",JOptionPane.INFORMATION_MESSAGE);
+						
+						
+						}
+					}
+					
+					
+					else{
+						String query="DELETE FROM Eksetaseis WHERE id="+id;
+						PreparedStatement st = User.getConnection().prepareStatement(query);
+						st.executeUpdate();
+						JOptionPane.showMessageDialog(null,"Το αρχείο εξέτασης διαγράφηκε, ανανεώστε την καρτέλτα για να φανούν οι αλλαγές","Delete done",JOptionPane.INFORMATION_MESSAGE);
+					}
+					
+					
+				}
+				catch(ArrayIndexOutOfBoundsException ex){
+					JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
+				
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+				
+			
+			}
+		});
+		Διαγραφή_Εξέτασης.setFont(new Font("Tahoma", Font.BOLD, 10));
 		Διαγραφή_Εξέτασης.setBounds(104, 406, 146, 39);
 		panel_Εξετάσεις.add(Διαγραφή_Εξέτασης);
 		
@@ -577,8 +642,8 @@ public class PatientFrame {
 		Προσθήκη_Εξέτασης.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				try {
-					patient.uploadExsetasi();
+				try { //Ο ΧΡΗΣΤΗΣ ΔΙΑΛΕΓΕΙ ΑΠΟ ΤΟΝ ΥΠΟΛΟΓΙΣΤΗ ΕΝΑ ΑΡΕΧΙΟ ΚΑΙ ΤΟ ΑΝΕΒΑΖΕΙ ΣΤΟ ΣΥΣΤΗΜΑ
+					patient.uploadExsetasi(user);
 					JOptionPane.showMessageDialog(null,"Το αρχείο εξετάσεων έχει αναρτηθεί!(Ανανεώστε τη σελίδα για να φανεί η καταχώρηση)","Adding done",JOptionPane.INFORMATION_MESSAGE);
 					
 				} catch (Exception e) {
@@ -591,15 +656,20 @@ public class PatientFrame {
 		Προσθήκη_Εξέτασης.setFont(new Font("Tahoma", Font.BOLD, 11));
 		Προσθήκη_Εξέτασης.setBounds(103, 356, 147, 39);
 		panel_Εξετάσεις.add(Προσθήκη_Εξέτασης);
-		
+	
 		Προσθήκη_Σχολίου = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7 \u03A3\u03C7\u03BF\u03BB\u03AF\u03BF\u03C5 ");
 		Προσθήκη_Σχολίου.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(user.isGiatros()){		//ΣΕ ΠΕΡΙΠΤΩΣΗ ΓΙΑΤΡΟΥ ΓΡΑΦΕΤΑΙ ΣΧΟΛΙΟ ΠΑΝΩ ΣΤΙΣ ΕΞΕΤΑΣΕΙΣ
 				textPane.setEditable(true);
 				btnAdd.setBounds(404, 245, 299, 39);
 				Προσθήκη_Σχολίου.setBounds(0, 0, 0, 0);
 				patient.save_Patient_in_DB(true);
-			
+				}
+				else	//Ο ΝΟΣΗΛΕΥΤΗΣ ΜΠΟΡΕΙ ΝΑ ΧΡΗΣΗΜΟΠΟΊΗΣΕΙ ΤΟ ΠΕΔΙΟ ΠΑΡΑΤΗΡΉΣΕΩΝ
+					JOptionPane.showMessageDialog(null,"Δεν επιτρέπεται να γράψετε σχόλιο πάνω στις εξετάσεις,μπορείτε \nνα μεταβείτε στην καρτέλα παρατηρήσεις"
+							+ "για να γράψετε τη δική σας διάγνωση","Wrong field",JOptionPane.INFORMATION_MESSAGE);
+				
 			}
 		});
 		Προσθήκη_Σχολίου.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -607,7 +677,7 @@ public class PatientFrame {
 		panel_Εξετάσεις.add(Προσθήκη_Σχολίου);
 		
 		table = new JTable();
-		table.setBounds(72, 33, 199, 248);
+		table.setBounds(23, 33, 299, 248);
 		table.setShowGrid(true);
 		table.setBorder(new EtchedBorder(EtchedBorder.RAISED));
 		table.setGridColor(Color.BLACK);
@@ -618,8 +688,8 @@ public class PatientFrame {
 			System.out.println("Couldnt connect to database");
 			exception.printStackTrace();
 		}
-		
-		String query = "select Title from Eksetaseis where AMKA='"+patient.getAmka()+"'";
+		//ΕΔΩ ΓΙΝΕΤΑΙ ΦΟΡΤΩΣΗ ΤΩΝ ΑΡΧΕΙΩΝ ΕΞΕΤΑΣΕΩΝ ΤΟΥ ΑΣΘΕΝΗ ΣΤΟ TABLE
+		String query = "select id,Title from Eksetaseis where AMKA='"+patient.getAmka()+"'";
 					
 		
 		try {
@@ -627,8 +697,8 @@ public class PatientFrame {
 			ResultSet res = statement.executeQuery();
 			
 			table.setModel(PatientSearch.resultSetToTableModel(res));
-			table.setSelectionBackground(Color.BLUE);
-			table.setSelectionForeground(Color.RED);
+			table.setSelectionBackground(Color.gray);
+			table.setSelectionForeground(Color.black);
 			
 		} catch (SQLException e2) {
 			
@@ -648,6 +718,7 @@ public class PatientFrame {
 		btnAdd = new JButton("\u03A0\u03C1\u03BF\u03C3\u03B8\u03AE\u03BA\u03B7");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//EMFANIZETAI MONO STOYS GIATROYS AFOU PROSTHESOYN SXOLIA, GIA NA PRAGMATOPOIH8EI H EPIKYRWSH TOYS.
 				Προσθήκη_Σχολίου.setBounds(404, 245, 299, 39);
 				btnAdd.setBounds(0,0,0,0);
 				textPane.setEditable(false);
@@ -681,7 +752,6 @@ public class PatientFrame {
 		JButton btnSave_1 = new JButton("Save");
 		btnSave_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				patient.setParatiriseis(Paratiriseis.getText());
 				patient.save_Patient_in_DB(true);
 				Paratiriseis.setEditable(false);
@@ -704,7 +774,7 @@ public class PatientFrame {
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) { //ΚΛΕΙΝΕΙ ΤΟ FRAME ΚΑΙ ΚΑΛΕΙ ΤΗΝ ΑΡΧΙΚΗ ΤΟΥ ΧΡΗΣΤΗ.
 				frame.dispose();
 				if(user.isGiatros()){
 					new Γιατρός_Νοσηλευτής((Doctor)user);

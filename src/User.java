@@ -15,24 +15,7 @@ public class User implements Serializable{
 	private UserDataTransferObject dto;
 	protected ArrayList<String> amka_bonusPatients;
 	
-	public ArrayList<String> getAmka_bonusPatients() {
-		return amka_bonusPatients;
-	}
 
-	public UserDataTransferObject getDto() {
-		return dto;
-	}
-	
-	public boolean hasClinic() {
-		return true;
-	}
-	
-	public boolean equals(User another){
-		if(this.user_name.equals(another.getUser_name()))
-				return true;
-		return false;
-		
-	}
 
 	public User(String user_name, String password, String first, String last) {
 		this.user_name = user_name;
@@ -42,11 +25,13 @@ public class User implements Serializable{
 		this.dto=new UserDataTransferObject(user_name);
 	}
 	
+	
+	//Ayti h methodos pragmatipoiei thn apothikeusi enos xristi sth basi
 	public void save_User_in_DB(boolean exists){
 		Connection conn=null;
 		String sql="";
 		PreparedStatement sQLstatement=null;
-		if(!exists){
+		if(!exists){ //AN O XRHSTHS DEN YPARXEI KANOYME INSERT... ALLIWS KANOYME SET TA STOIXEIA TOY
 			
 			try{
 				conn=User.getConnection();
@@ -79,7 +64,7 @@ public class User implements Serializable{
 				}
 			}
 			try{
-			File file = new File("temporaryUser.bin");
+			File file = new File("temporaryUser.bin"); //Apothikeusi xrhsth se proswrino arxeio
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
@@ -87,14 +72,14 @@ public class User implements Serializable{
 			oos.close();
 			fout.close();
 			InputStream inputStream = new FileInputStream(new File(file.getAbsolutePath()));
-			sql = "UPDATE Users set arxeio= ? where username='" + this.user_name+"'";
+			sql = "UPDATE Users set arxeio= ? where username='" + this.user_name+"'"; //Kai anartisi toy arxeioy sti basi dedomenwn
 			 
 			sQLstatement = conn.prepareStatement(sql);
 			sQLstatement.setBlob(1, inputStream);
 			sQLstatement.executeUpdate();
 			System.out.println("User was successfully written");
 			inputStream.close();
-			this.dto.transferToDatabase(conn);
+			this.dto.transferToDatabase(conn); //episis metaferontai sti basi kai ta stoixeia toy
 			}	
 		catch (Exception e){
 			e.printStackTrace();
@@ -103,10 +88,10 @@ public class User implements Serializable{
 			
 	}
 		
-
+	//AYTH H METHODOS FORTWNEI STO USER POU EPISTREFEI TON USER ME Username = username (poy dinetai ws parametros)
 	public static User loadUser(String username){
 		Connection conn=null;
-		User john=null;
+		User john=null; //Epistrefomenos xristis
 		try{
 			conn=getConnection();
 		}catch(Exception e){
@@ -117,7 +102,7 @@ public class User implements Serializable{
 		try{
 		PreparedStatement statement = conn.prepareStatement("SELECT arxeio FROM Users where username='"+username+"';");
 		ResultSet result = statement.executeQuery();
-		File file = new File("loaderUser.bin");
+		File file = new File("loaderUser.bin"); //Ginetai load to arxeio toy an brethei to username
 		FileOutputStream os = new FileOutputStream(file);
 		if(result.next()){
 
@@ -136,8 +121,8 @@ public class User implements Serializable{
 		}
 		return john;
 		
-		} catch (Exception e ){
-			e.printStackTrace();
+		} catch (Exception e ){ //Den elegxetai h periptwsi o xrhsths me username na min uparxei kathws oi programmatistes frontizoyn opote kaleitai h methodos ayti
+			e.printStackTrace();  //pio prin na exoune elegksei tin eisodo poy tha ginei en telei parametros se auti tin methodo
 				 System.out.println("Arxeio Exception");
 				 	return null;
 		}
@@ -145,13 +130,13 @@ public class User implements Serializable{
 
 	
 
-	public static Connection getConnection() throws Exception{
-		try{
-			String driver = "com.mysql.jdbc.Driver";
+	public static Connection getConnection() throws Exception{ //Statiki methodos poy pragmatopoiei ti sundesi sti basi dedomenwn mas.
+		try{													//H methodos auti einai h pio "polykalesmeni" apo oles, kathws summetexei opote xreiastei
+			String driver = "com.mysql.jdbc.Driver";			//na uparksei allhlepidrasi me ti basi dedomenwn.
 			Class.forName(driver);
 			
-			String url = "jdbc:mysql://snf-517490.vm.okeanos.grnet.gr/Ayeras";
-									//(IP address)
+			String url = "jdbc:mysql://snf-517490.vm.okeanos.grnet.gr/Ayeras";  //SPECIAL THANKS TO:  EVAGELIDIS GEORGE  <3
+									//(IP address)								//ÃÉÁ ÔÇÍ ÐÁÑÁ×ÙÑÇÓÇ ÔÏÕ ÅÎÕÐÇÑÅÔÇÔÇ ! ! ! 
 			String username = "Ayeras";
 			String password = "giwrgos";
 			
@@ -166,7 +151,14 @@ public class User implements Serializable{
 	
 	public boolean isGiatros() {
 		
+		return false; //Me auti ti methodo ksexwrizoun oi giatroi apo tous allous xrhstes.
+	}
+	
+	public boolean equals(User another){ //Äýï ÷ñÞóôåò åßíáé ßóïé áí Ý÷ïõí ßäéï username
+		if(this.user_name.equals(another.getUser_name()))
+				return true;
 		return false;
+		
 	}
 
 	public String getUser_name() {
@@ -194,7 +186,16 @@ public class User implements Serializable{
 		this.last = last;
 	}
 	
+	public ArrayList<String> getAmka_bonusPatients() {
+		return amka_bonusPatients;
+	}
 
-
+	public UserDataTransferObject getDto() {
+		return dto;
+	}
 	
+	public boolean hasClinic() {
+		return true;
+	}
+		
 }

@@ -24,7 +24,7 @@ import javax.swing.border.TitledBorder;
 public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	
 	private JSpinner monthSpinner;
-	private JSpinner yearSpinner;
+	private JSpinner yearSpinner; //Ατελείωτα πεδία για να γεμίσοουν με στοιχεία
 	private JSpinner daySpinner;
 	private JRadioButton maleField;
 	private JRadioButton femaleField;
@@ -54,7 +54,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	private String password;
 	private int type;
 	private Secretary user;
-
+								//Ονομα χρηστη δινεται απο την αλλη κλαση |ΔημιοργΙα χρήστη|, όπως και το password του χρήστη προς δημιουργία. ΤΥΡΕ ειναι ο το είδος χρήστη και user ο χρήστης που δημιουργεί
 	public ΔημιουργείαΧρήστη(String username, String password, int i, Secretary user) {
 		this.user=user;
 		this.username=username;
@@ -62,7 +62,7 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		this.type=i;
 		
 		this.getContentPane().setEnabled(false);
-		this.setTitle("\u0394\u03B7\u03BC\u03B9\u03BF\u03C5\u03C1\u03B3\u03AF\u03B1 \u03C7\u03C1\u03AE\u03C3\u03C4\u03B7");
+		this.setTitle("Δημιουργία Χρήστη"); //Ξέρουμε οτι γράφεται με Γίωτα.
 		this.setBounds(100, 100, 800, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -210,6 +210,9 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_13 = new JLabel("\u0395\u03B9\u03B4\u03B9\u03BA\u03CC\u03C4\u03B7\u03C4\u03B1 :\r\n");
 		lblNewLabel_13.setBounds(6, 18, 105, 20);
+		
+		
+		//Αν ο χρήστης προς δημιουργία δεν είναι της γραμματείας δεν μπαίνουν τα παρακάτω πεδία που ζητάνε ειδίκευση κλπ.
 		if(type!=3){
 		panel_2.add(lblNewLabel_13);
 		lblNewLabel_13.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -354,13 +357,13 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==cancelButton){
-			this.dispose();
+			this.dispose(); //An patithei to cancel pame pisw sto prwto frame dhmioyrgias
 			new ΔημιουργίαΧρήστη(user);
 		}	
 		if(e.getSource()==okButton){
-			if(elegxosStoixeiwn()){
+			if(elegxosStoixeiwn()){ //Συνάρτηση ελέγχου. Πραγματοποιούνται ΟΛΟΙ οι έλεγχοι για την ορθή εισαγωγή των στοιχείων του χρήστη
 				
-				switch (type){
+				switch (type){	//alliws analoga me to type perniounte ta stoixeia kai dhmiourgeita o xrhsths
 				case 1:
 					
 					Doctor D = new Doctor(username,password,firstNameField.getText().trim(),lastNameField.getText().trim());
@@ -501,38 +504,38 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 	}
 
 
-	private boolean elegxosStoixeiwn() {
-		if(firstNameField.getText().trim().equals("") || lastNameField.getText().trim().equals("") )
+	private boolean elegxosStoixeiwn() {			//Γυρνάει false και εμφανίζει αντίστοιχο μήνυμα ΟΤΑΝ 
+		if(firstNameField.getText().trim().equals("") || lastNameField.getText().trim().equals("") ) //1) Δεν έχει συμπληρωθεί ονοματεπώνυμο
 		{	warning("Συμπληρώστε ονοματεπώνυμο");
 			return false;
 		}
 		
-		if(dieuthinsiField.getText().trim().equals("") && poliField.getText().trim().equals(""))
+		if(dieuthinsiField.getText().trim().equals("") && poliField.getText().trim().equals(""))	//2)Όταν δεν έχει συμπληρωθεί έστω ένα στοιχείο κατοικίας
 		{
 			warning("Συμπληρώστε στοιχεία κατοικίας");
 			return false;
 		}
 		
 		if( characterFound(thlErgasiaField.getText().trim().replaceAll(" ","")) || characterFound(homeField.getText().trim().replaceAll(" ","")) || characterFound(kinitoField.getText().trim().replaceAll(" ","")))
-		{
-			warning("Aφαιρέστε τις παύλες και τους χαρακτήρες από τους αριθμούς επικοινωνίας");
+		{//3) Αν δεν έχει συμπληρωθεί με αριθμούς το στοιχείο επικοινωνίας
+			warning("Aφαιρέστε τις παύλες και τους χαρακτήρες από τους αριθμούς επικοινωνίας");	
 			return false;
 		}
 		
 		if( fakeNumber(thlErgasiaField.getText().trim().replaceAll(" ","")) || fakeNumber(homeField.getText().trim().replaceAll(" ","")) || fakeNumber(kinitoField.getText().trim().replaceAll(" ","")))
-		{
+		{	//4)Μέσω της fakeNumber γίνεται έλεγχος αν το τηλέφωνο είναι ορθό, σε ότι αφορά τη σειρά και το των αριθμών. 
 			warning("Ο αριθμός που συμπληρώσατε δεν αντιστοιχεί σε τηλέφωνο");
 			return false;
 		}
-	
+		
 		if(thlErgasiaField.getText().trim().equals("") && homeField.getText().trim().equals("") && kinitoField.getText().trim().equals(""))
 		{	warning("Πρέπει να συμπληρωθεί έστω ένα στοιχείο επικοινωνίας");
 			return false;
-		}
+		} //5) Αν δεν έχει συμπληρωθεί έστω ένα στοιχείο επικοινωνίας.
 		
 		if(thlErgasiaField.getText().trim().replaceAll(" ","").length()!=10 && thlErgasiaField.getText().trim().length()!=0)
 		{  warning("Τα ψηφία στον αριθμό εργασίας πρέπει να είναι δέκα");
-			return false;
+			return false; //6) Αν τα στοιχεία επικοινωνίας έχουν το σωστό πλήθος
 		}
 		
 		if(kinitoField.getText().trim().replaceAll(" ","").length()!=10 && kinitoField.getText().trim().length()!=0)
@@ -544,23 +547,19 @@ public class ΔημιουργείαΧρήστη extends JFrame implements ActionListener {
 		{ warning("Τα ψηφία στο τηλέφωνο σπιτιού πρέπει να είναι δέκα");
 			return false;
 		}
-		if((int)monthSpinner.getValue()>12 || (int)daySpinner.getValue()>31)
-			{
-			warning("Λάθος ημερομηνία");
-			return false;
-			}
+		
 				
 		return true;}
 		
 	private boolean fakeNumber(String ss) {
 		try{
-			if(ss.charAt(0) == '2' || (ss.charAt(0)=='6' && ss.charAt(1)=='9'))
+			if(ss.charAt(0) == '2' || (ss.charAt(0)=='6' && ss.charAt(1)=='9')) //Αν ξεκινά με 2 ή 69 είναι αριθμός
 				return false;
 			
 			return true;
 			
 		}catch(StringIndexOutOfBoundsException e){
-			return false;
+			return false;	//Αν δεν υπάρχει αριθμός επιστρέφουμε ότι δεν υπάρχει. Έτσι περνά στον εξωτερικό έλεγχο το μπαλάκι να δει αν έχει δωθεί έστω ένα στοιχείο επικοινωνίας
 		}
 		
 		

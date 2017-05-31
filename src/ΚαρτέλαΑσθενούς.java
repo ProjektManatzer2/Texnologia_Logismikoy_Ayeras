@@ -63,8 +63,9 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * Initialize the contents of the frame.
-	 * @param aUser 
+	 * Συμπλήρωση στοιχείων για δημιουργία ασθενή
+	 * Παρακάτω γεμίζουμε το φρέιμ με πεδία προς συμπλήρωση
+	 *Γραμμή=400
 	 */
 	private void initialize() {
 		this.getContentPane().setEnabled(false);
@@ -398,14 +399,14 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 	
 		
-		if(e.getSource()==cancelButton){
+		if(e.getSource()==cancelButton){ //Αν πατηθεί το κάνσελ πάμε πίσω στον ασθενή
 			this.dispose();
 			new SecretaryOffice(user);
 		}	
 		
 		
 		if(e.getSource()==nextButton){
-			
+			//Αν πατηθεί το next  δημιουργείται ο ασθενής στο πρόγραμμα αλλά δεν καταχωρείται αν δεν περάσει τον έλεγχο στη γραμμή 441
 			Patient P = new Patient(amkaField.getText().trim().replaceAll(" ","").replaceAll("-",""), firstTextField.getText(),lastTextField.getText());
 			P.getPdto().setAddress(addressField.getText());
 			P.getPdto().setCity(cityField.getText());
@@ -437,7 +438,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateOfPut = new Date();
 		System.out.println(dateFormat.format(dateOfPut));
-		if(elegxos()){
+		if(elegxos()){ //Γίνεται σέιβ στη βάση.
 		P.save_Patient_in_DB(false);
 		this.dispose();
 		new addToClinicFrame(P,null,null,user); 
@@ -458,14 +459,14 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		String arithmos_spiti=houseField.getText().trim().replaceAll("-","").replaceAll(" ","");
 		String kinito=kinitoField.getText().trim().replaceAll("-","").replaceAll(" ","");
 		String arithmos_ergasia=douleiaField.getText().trim().replaceAll("-","").replaceAll(" ","");;
-		String amka=amkaField.getText().trim().replaceAll(" ","").replaceAll("-","");
+		String amka=amkaField.getText().trim().replaceAll(" ","").replaceAll("-",""); //ΚΑΤΑ ΤΟ ΓΡΑΨΙΜΟ ΜΠΟΡΟΥΝ ΝΑ ΒΑΖΟΥΝ ΠΑΥΛΕΣ ΚΑΙ ΚΕΝΑ ΟΙ ΧΡΗΣΤΕΣ
 		int Want_arithmos=0;
 		if(firstTextField.getText().replaceAll(" ","").equals("") || lastTextField.getText().replaceAll(" ","").equals("") ){
 			JOptionPane.showMessageDialog(null,"Πρέπει να συμπληρωθεί όνομα και επώνυμο","Error Found",JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		try{
-			if(amka.length()!=11 || amkaExists(amka)){
+			if(amka.length()!=11 || amkaExists(amka) || characterFound(amka)){ //ΤΟ ΑΜΚΑ ΕΧΕΙ 11 ΨΗΦΙΑ ΚΑΙ ΕΙΝΑΙ ΜΟΝΑΔΙΚΟ.
 				
 				JOptionPane.showMessageDialog(null,"Λάθος ΑΜΚΑ","Error Found",JOptionPane.ERROR_MESSAGE);
 				return false;}
@@ -479,7 +480,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		
 		
 		
-		if(fakeNumber(arithmos_spiti)||fakeNumber(arithmos_ergasia)||fakeNumber(kinito)){
+		if(fakeNumber(arithmos_spiti)||fakeNumber(arithmos_ergasia)||fakeNumber(kinito)){ //Oi parakatw elegxoi einai idioi me ti dhmioyrgia xrhsth
 			JOptionPane.showMessageDialog(null,"Ο αριθμός δεν αντιστοιχεί σε τηλέφωνο","Error Found",JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
@@ -539,7 +540,23 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 				return true;
 			return false;
 	
-	}	
+	}
+	
+	private boolean characterFound(String trim) {
+		try{
+		for(int i=0; i<trim.length();i++){
+			if(trim.charAt(i) > '9' || trim.charAt(i)<'0')
+				return true;
+			}
+		
+			return false;
+			
+		}catch(StringIndexOutOfBoundsException e){
+			return false;
+		}
+		
+		
+	}
 
 		
 	

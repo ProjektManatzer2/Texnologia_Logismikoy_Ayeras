@@ -19,7 +19,7 @@ public class Γιατρός_Νοσηλευτής {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * ARXIKH SELIDA TOY NOSHLEUTH KAI TOY GIATROY
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -32,7 +32,7 @@ public class Γιατρός_Νοσηλευτής {
 		provoliAsthenwnButton= new JButton("Προβολή Ασθενών Κλινικής");
 		provoliAsthenwnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
+			//AN PATH8EI TO KOYMPI KALEITAI H ANAZHTHSH ASTHENWN, EFOSWN OMWS THA PAREI WS ORISMA XRHSTH GIATRO H NOSHLEYTH THA EMFANISEI MONO AYTOYS TOYS XRHSTES TH KLINIKIS TOYS
 			frame.dispose();
 			new PatientSearch(user);
 			
@@ -44,7 +44,7 @@ public class Γιατρός_Νοσηλευτής {
 		aitimaButton = new JButton("Αίτημα Παραχώρησης Δικαιωμάτων");
 		aitimaButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				//SE AYTO TO PLHKTRO EMFANIZONTAI OI ASTHENEIS STOYS OPOIOYS MPOREI NA KANEI AITHSH NA PAREI TA STOIXEIA TOYS
 				frame.dispose();
 				new αίτημα(user);
 			}
@@ -60,7 +60,7 @@ public class Γιατρός_Νοσηλευτής {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new FrameOfBonusPatients(user);
+				new FrameOfBonusPatients(user);//KAI EDW OI ASTHENEIS EKTOS KLINIKHS POY MPOREI NA PROBALEI TA STOIXEIA TOYS.
 			
 			}
 		});

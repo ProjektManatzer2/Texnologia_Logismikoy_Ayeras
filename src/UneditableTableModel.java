@@ -4,6 +4,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class UneditableTableModel extends DefaultTableModel{
 	 
+	//Κλάση που βοηθά στη δημιουργία πίνακα του οποίου τα στοιχεία ΔΕΝ είναι επεξεργάσιμα.
 	
 	public UneditableTableModel(Vector rows, Vector columnNames) {
 		super(rows,columnNames);

@@ -27,6 +27,10 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	private JRadioButton nurseButton;
 	private Secretary user;
 	
+	/*
+	 * Το πρώτο φρέιμ δημιουργίας. Εδώ συμπληρώνεται το είδους χρήστη επιθυμούμε να φτιάξουμε
+	 * καθώς επίσης και το password Και το όνομα χρήστη του.
+	 */
 	
 	
 	public ΔημιουργίαΧρήστη(Secretary user) {
@@ -104,11 +108,11 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	  if(event.getSource() == okButton){
 			  
 			  		 
-			if(elegxos()){
+			if(elegxos()){//Συνάρτηση ελέγχου στοιχείων.
 				if(doctorButton.isSelected()){ //New frame proorismeno gia dhmiourgia giatroy.
 					this.dispose();
-					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),1,user);
-				}
+					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),1,user); //Μόλις πατηθεί το ΟΚ, καλείται ο constructor ανάλογα με το 
+				}																								//Ποιό έχει επιλεχθεί από τα  checkButtonς
 				else if(nurseButton.isSelected()){ //New frame proorismeno gia dhmiourgia Noshleuti.
 					this.dispose();
 					 new ΔημιουργείαΧρήστη(usernameField.getText().trim(),passwordField.getText().trim(),2,user);
@@ -134,7 +138,7 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 	
 	
 	private boolean elegxos() {
-		if(usernameField.getText().trim().equals("") || passwordField.getText().trim().equals(""))
+		if(usernameField.getText().trim().equals("") || passwordField.getText().trim().equals("")) //Πρέπει να συμπληρωθεί όνομα και κωδικός
 			{JOptionPane.showMessageDialog(null,
 			    "Συμπληρώστε όλα τα στοιχεία",
 			    "Ελλιπείς στοιχεία",
@@ -142,8 +146,8 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 			return false;
 			}
 		
-		try {
-			if(usernameExists(usernameField.getText().trim())){
+		try {	
+			if(usernameExists(usernameField.getText().trim())){ //Πρέπει το όνομα χρήστη να μην υπάρχει. Η username exists το ελέγχει αυτό.
 				JOptionPane.showMessageDialog(null,
 					    "Username Exists",
 					    "Invalid Username",
@@ -157,7 +161,7 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 				    JOptionPane.ERROR_MESSAGE);
 		}
 		
-		if (doctorButton.isSelected() || nurseButton.isSelected() || secretaryButton.isSelected())
+		if (doctorButton.isSelected() || nurseButton.isSelected() || secretaryButton.isSelected()) //Αν έχει επιλεγεί κάποιο, μόνον τότε ο έλεγχος περνάει
 		return true;
 		
 		else
@@ -174,11 +178,11 @@ public class ΔημιουργίαΧρήστη extends JFrame implements ActionListener{
 		
 			Connection conn = User.getConnection();
 		
-			String sql = "Select username from Users where username = '"+trim+"'";
+			String sql = "Select username from Users where username = '"+trim+"'"; //Ελέγχει αν υπάρχει το username
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet result =statement.executeQuery();
 			int i=0;
-			while(result.next())
+			while(result.next()) //Αν δεν είναι άδειο το result τότε υπάρχει.
 				i++;
 			if (i>0)
 				return true;

@@ -20,14 +20,17 @@ public class FrameOfBonusPatients {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private User user;
+	/*
+	 * Σε αυτό το frame εμφανίζονται οι επιπλέον ασθενείς εκτός της κλινικής του γιατρού 
+	 * στους οποίους έχει την πρόσβαση στα στοιχεία τους. Το frame αυτό παίνρει τη δομή
+	 * δεδομένων amkaBonusPatients του γιατρού/νοσηλευτή και εμφανίζει τα στοιχεία ασθενών
+	 * με τα αντίστοιχα ΑΜΚΑ στην βάση δεδομένων. 
+	 */
 	
 	public FrameOfBonusPatients(User user) {
 		initialize(user);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(User user) {
 		this.user=user;
 		frame = new JFrame();
@@ -35,7 +38,7 @@ public class FrameOfBonusPatients {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		 showButton = new JButton("\u0395\u03BC\u03C6\u03AC\u03BD\u03B9\u03C3\u03B7 \u03C3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03C9\u03BD");
+		 showButton = new JButton("Εμφάνιση στοιχείων");
 		 showButton.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 	
@@ -43,8 +46,8 @@ public class FrameOfBonusPatients {
 					int row = table.getSelectedRow();
 					String amka =  table.getModel().getValueAt(row,2).toString();
 					frame.dispose();
-					Patient p = Patient.loadPatient(amka);
-					new PatientFrame(p,user);
+					Patient p = Patient.loadPatient(amka); //ΣΤΟ FRAME ΕΧΟΥΝ ΗΔΗ ΕΜΦΑΝΙΣΤΕΙ ΟΙ ΑΣΘΕΝΕΙΣ. ΑΝΑΛΟΓΑ ΜΕ ΤΟ ΠΟΙΟΣ ΕΠΙΛΕΓΕΤΑΙ ΓΙΝΕΤΑΙ
+					new PatientFrame(p,user);	//Η ΕΜΦΑΝΙΣΗ ΤΩΝ ΣΤΟΙΧΕΙΩΝ ΤΟΥ ΠΟΥ ΥΠΑΡΧΟΥΝ ΣΤΟ PATIENTFRAME.
 					}catch(ArrayIndexOutOfBoundsException ex){
 						JOptionPane.showMessageDialog(null,"Δεν έχει επιλεγεί τίποτα","No row selected",JOptionPane.WARNING_MESSAGE);
 					}
@@ -55,7 +58,7 @@ public class FrameOfBonusPatients {
 		showButton.setBounds(498, 364, 198, 32);
 		frame.getContentPane().add(showButton);
 		
-		JButton backButton = new JButton("\u03A0\u03AF\u03C3\u03C9");
+		JButton backButton = new JButton("ΠΙΣΩ");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Γιατρός_Νοσηλευτής(user);
@@ -77,15 +80,15 @@ public class FrameOfBonusPatients {
 		try{
 			conn=User.getConnection();
 			
-			ArrayList<String> taAmka=user.getAmka_bonusPatients();
-			String query2 = "AMKA = ";
+			ArrayList<String> taAmka=user.getAmka_bonusPatients();//ΠΑΙΡΝΟΥΜΕ ΤΗ ΛΙΣΤΑ ΤΩΝ ΑΜΚΑ ΑΠΟ ΤΟΝ ΧΡΗΣΤΗ
+			String query2 = "AMKA = ";	//ΔΗΜΙΟΥΡΓΟΥΜΕ ΑΥΤΟ ΤΟ STRING
 			
-			for(String s : taAmka){
+			for(String s : taAmka){ //ΕΠΕΙΤΑ ΠΡΟΣΘΕΤΟΥΜΕ ΟΛΑ ΤΑ ΑΜΚΑ ΠΟΥ ΥΠΑΡΧΟΝΕ ΚΑΙ ΑΦΟΥ ΕΙΝΑΙ SQL ENTOΛΗ ΒΑΖΟΥΜΕ "OR AMKA=s1 OR AMKA=s2 KLP..."
 				query2+=s+" or AMKA = ";
 				
 			}
-			String finalQuery="";
-			for(int i = 0 ; i < query2.length()-11; i++){
+			String finalQuery="";	
+			for(int i = 0 ; i < query2.length()-11; i++){ //ΣΤΟ ΤΕΛΙΚΟ QUERY ΑΠΛΑ ΑΦΑΙΡΟΥΜΕ ΤΟ ΤΕΛΕΥΤΑΙΟ "or amka = " ΚΑΙ ΣΤΗ ΣΥΝΕΧΕΙΑ ΕΚΤΕΛΟΥΜΕ ΤΗΝ ΕΝΤΟΛΗ.
 				finalQuery+=query2.charAt(i);
 			}
 			
@@ -97,7 +100,7 @@ public class FrameOfBonusPatients {
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet res = statement.executeQuery();
 			
-			table.setModel(PatientSearch.resultSetToTableModel(res));
+			table.setModel(PatientSearch.resultSetToTableModel(res)); //ΕΜΦΑΝΙΖΟΝΤΑΙ ΣΤΟ TABLE ΤΑ ΣΤΟΙΧΕΙΑ ΤΩΝ ΑΣΘΕΝΩΝ ΠΟΥ ΕΧΟΥΝ ΑΜΚΑ ΜΕΣΑ ΣΤΗ ΛΙΣΤΑ ΤΟΥ ΧΡΗΣΤΗ.
 			table.setSelectionBackground(Color.BLUE);
 			table.setSelectionForeground(Color.CYAN);
 			

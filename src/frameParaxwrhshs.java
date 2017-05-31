@@ -17,8 +17,11 @@ public class frameParaxwrhshs {
 	private JTextField amkaField;
 	private JTextField usernameField;
 	private JFrame frame;
-	private Secretary user;
+	private Secretary xrhsths;
 
+	/*
+	 * се ауто то FRAME о упаккгкос цяаллатеиас димеи стоивеиа емос асхемг се ема циатяо/мосгкеутг.
+	 */
 	
 	
 	public frameParaxwrhshs(Secretary user) {
@@ -26,8 +29,8 @@ public class frameParaxwrhshs {
 	}
 
 		
-	private void initialize(Secretary user) {
-		this.user=user;
+	private void initialize(Secretary user) { 
+		xrhsths=user;
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 168);
 		frame.getContentPane().setLayout(null);
@@ -35,13 +38,13 @@ public class frameParaxwrhshs {
 		JButton btnNewButton = new JButton("пАЯэДОСГ СТОИВЕъЫМ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				user.paraxwrhsh(usernameField.getText(),amkaField.getText());
-				user.diagrafiAitimatos(usernameField.getText(),amkaField.getText());
+				user.paraxwrhsh(usernameField.getText(),amkaField.getText()); //о вягстгс димеи ле дийиа тоу леходо стом циатяо/мосгкеутг та стоивеиа
+				user.diagrafiAitimatos(usernameField.getText(),amkaField.getText()); //епеита диацяажеи то аитгла апо том еауто тоу
 				try{
 					Connection conn=User.getConnection();
 					
-					String query = "select username from Users where type = 3";
-					PreparedStatement statement = conn.prepareStatement(query);
+					String query = "select username from Users where type = 3";		//йаи стг сумевеиа апо окоус тоус упокоипоус вягстес тгс цяаллатеиас стоус опоиоус
+					PreparedStatement statement = conn.prepareStatement(query);		//паяадохгйе.
 					ResultSet res = statement.executeQuery();
 					while(res.next()){
 						Secretary S = (Secretary)User.loadUser(res.getString("username"));
@@ -64,6 +67,13 @@ public class frameParaxwrhshs {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("\u03A0\u03AF\u03C3\u03C9");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			frame.dispose();
+			new SecretaryOffice(xrhsths);
+			
+			}
+		});
 		btnNewButton_1.setBounds(307, 103, 117, 19);
 		frame.getContentPane().add(btnNewButton_1);
 		

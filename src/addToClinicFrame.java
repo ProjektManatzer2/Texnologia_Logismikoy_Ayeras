@@ -12,10 +12,11 @@ public class addToClinicFrame {
 
 	private JFrame frame;
 	private JComboBox comboBox;
-	private Secretary xrhsths;
+	private Secretary xrhsths; // User using the programm
+	//This frame adds a doctor,a nurse or a patient into a clinic
 	
 	public addToClinicFrame(Patient aPatient,Doctor aDoctor,Nurse aNurse, Secretary user) {
-	
+		//Except user, only one parameter has value, the other two must be null, when you call it.
 		this.xrhsths=user;
 		
 		frame = new JFrame();
@@ -26,27 +27,25 @@ public class addToClinicFrame {
 		JButton btnNewButton = new JButton("Προσθήκη");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			String clinic =	(String)comboBox.getSelectedItem();
+			String clinic =	(String)comboBox.getSelectedItem(); //ComboBox with the names of the clinics.
 				try {
 					
 					int numberClinic=0;
 					Connection conn=User.getConnection();
 					
-					String sql="Select id from clinics where name = '"+clinic+"'";
+					String sql="Select id from clinics where name = '"+clinic+"'"; 
 					PreparedStatement statement = conn.prepareStatement(sql);
-					ResultSet result = statement.executeQuery();
+					ResultSet result = statement.executeQuery();	//GETS THE NUMBER (ID) OF THE SELECTED CLINIC
 					while (result.next()){
 						numberClinic = result.getInt("id");
 					}
-					if(aNurse!=null){
-						sql="Update Users set kliniki = ? where username= '"+aNurse.getUser_name()+"'";
+					if(aNurse!=null){  //AND ACCORDING TO WHAT KIND OF PARAMETERS ARE PUT IN, SETS THE User's(patient's)  clinic id 
+						sql="Update Users set kliniki = ? where username= '"+aNurse.getUser_name()+"'"; //equal to the id.
 						System.out.println(sql);
 						statement = conn.prepareStatement(sql);
 						statement.setInt(1, numberClinic);
 						statement.executeUpdate();
-						Clinic c = Clinic.loadClinic(numberClinic);
 						
-						c.addNurseToClinic(aNurse);
 						frame.dispose();
 						new SecretaryOffice(user);
 					}
@@ -56,10 +55,8 @@ public class addToClinicFrame {
 						statement = conn.prepareStatement(sql);
 						statement.setInt(1, numberClinic);
 						statement.executeUpdate();
-						Clinic c = Clinic.loadClinic(numberClinic);
 						
-						c.addDoctorToClinic(aDoctor);
-
+						
 						new SecretaryOffice(user);
 						frame.dispose();
 					}
@@ -69,9 +66,7 @@ public class addToClinicFrame {
 						statement = conn.prepareStatement(sql);
 						statement.setInt(1, numberClinic);
 						statement.executeUpdate();
-						Clinic c = Clinic.loadClinic(numberClinic);
 						
-						c.addPatientToClinic(aPatient);
 						frame.dispose();
 						new SecretaryOffice(xrhsths);
 					}
@@ -88,11 +83,11 @@ public class addToClinicFrame {
 		btnNewButton.setBounds(43, 38, 149, 38);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Πίσω");
+		JButton btnNewButton_1 = new JButton("Πίσω"); //Closes the frame
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				new SecretaryOffice(user);
+				new SecretaryOffice(user);	//Back to secretary Interface
 			}
 		});
 		btnNewButton_1.setBounds(112, 141, 315, 32);
@@ -118,7 +113,7 @@ public class addToClinicFrame {
 		frame.setVisible(true);
 	}
 
-
+	//This private method, fills the comboBox with the clinic names
 	private void fillComboBox(JComboBox comboBox,Connection conn) {
 		
 		try {

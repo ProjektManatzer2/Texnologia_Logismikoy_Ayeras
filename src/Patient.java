@@ -18,11 +18,11 @@ public class Patient implements Serializable {
 	
 	 
 	private static final long serialVersionUID = 737501913632927252L;
-	private String first;
+	private String first;		//ои пяытес тяеис апотекоу та йуяиотеяа стоивеиа тоу асхемг сто сустгла, дем лпояеи ма упаянеи асхемгс выяис аута.
 	private String last;
-	private String amka;
-	private String astheneies;
-	private String allergies;
+	private String amka;//йкеиди стг басг.
+	private String astheneies;		
+	private String allergies;		//та упокоипа пеяиевоум стоивеиа та опоиа сулпкгяымоум ои вягстес йаи апеийомеифомтаи се FRAMES.	
 	private String egxeirhseis;
 	private String farmaka;
 	private String genikaSxolia;
@@ -30,7 +30,7 @@ public class Patient implements Serializable {
 	private String paragontes;
 	private String paratiriseis;
 	private String sxoliaEksetasewn; 
-	private PatientDataTransferObject pdto;
+	private PatientDataTransferObject pdto; //еды упаявоум та пкеом басийа стоивеиа тоу вягстг поу летажеяомтаи стг басг
 	
 	public PatientDataTransferObject getPdto() {
 		return pdto;
@@ -46,7 +46,7 @@ public class Patient implements Serializable {
 	
 	
 	
-	public void save_Patient_in_DB(boolean exists){
+	public void save_Patient_in_DB(boolean exists){ //апохуйеуеи том асхемг стг басг дедолемым
 		Connection conn=null;
 		String sql="";
 		PreparedStatement sQLstatement=null;
@@ -83,8 +83,8 @@ public class Patient implements Serializable {
 				}
 			}
 			try{
-			File file = new File("temporaryPatient.bin");
-			FileOutputStream fout = new FileOutputStream(file);
+			File file = new File("temporaryPatient.bin");				//апохуйеуеи то аявеио тоу асхемг стг басг
+			FileOutputStream fout = new FileOutputStream(file);			//дглиоуяцомтас ема TEMPORARY.
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
 
@@ -107,6 +107,8 @@ public class Patient implements Serializable {
 			
 	}
 	
+	
+	//Жоятымеи то аявеио тоу асхемг апо тг басг дедолемым
 	public static Patient loadPatient(String amka){ 
 		Connection conn=null;
 		Patient mary=null;
@@ -120,7 +122,7 @@ public class Patient implements Serializable {
 		try{
 		PreparedStatement statement = conn.prepareStatement("SELECT patientFile FROM Astheneis where AMKA='"+amka+"';");
 		ResultSet result = statement.executeQuery();
-		File file = new File("loaderPatient.bin");
+		File file = new File("loaderPatient.bin"); 
 		FileOutputStream os = new FileOutputStream(file);
 		if(result.next()){
 
@@ -134,7 +136,7 @@ public class Patient implements Serializable {
 		ObjectInputStream oss =new ObjectInputStream(fis);
 		mary = (Patient)oss.readObject();
 		System.out.println("Ola kala");
-		//Care
+
 		os.close();
 		oss.close();
 		}
@@ -148,12 +150,11 @@ public class Patient implements Serializable {
 	}	
 	
 
-
-	public void loadEksetasi(String title) {
+	//елжамифеи ема аявеио енетасеым(PICTURE FILE) поу епикецетаи апо то вягтсг
+	public void loadEksetasi(int id) {
 
 
 		Connection conn=null;
-		Clinic kiliniki=null;
 		try{
 			conn=User.getConnection();
 		}catch(Exception e){
@@ -162,25 +163,26 @@ public class Patient implements Serializable {
 		}
 		
 		try{
-		PreparedStatement statement = conn.prepareStatement("SELECT file FROM Eksetaseis where Title='"+title+"' and AMKA = '"+this.amka+"'");
+		PreparedStatement statement = conn.prepareStatement("SELECT file FROM Eksetaseis where id="+id+" and AMKA = '"+this.amka+"'");
 		ResultSet result = statement.executeQuery();
 		
-		int i = 0;
-		File file = new File("testing.jpg");
-		while (result.next()) {
-			InputStream in = result.getBinaryStream(1);
+			File file = new File("testing.jpg"); //ваягм апкотгтас то йахе аявеио поу йатебафетаи амтийахгста то TESTING.
+		while (result.next()) {						//пио пяайтийо ха гтам ма дглиоуяце╨таи ема пкгяес амтицяажо ле том титко тоу аявеио се йапоио жайеко
+													//йати поу лпояеи ма цимеи ле лийяес аккацес стом йыдийа тгс леходоу аутгс. то паяатгягсале сто текос йаи 
+													//ежосым дем епгяеафетаи г кеитоуяцийотгта йаи бяисйоласте стгм пяытг ейдосг апожасисале ма то ажгсоуле етси.
+			
+			InputStream in = result.getBinaryStream(1); 
 			OutputStream fos = new FileOutputStream(file);
-			i++;
 			int c = 0;
 			while ((c = in.read()) > -1) {
-				fos.write(c);
+				fos.write(c);		//лесы STREAM цяажетаи ема амтицяажо тоу аявеиоу йаи стг сумевеиа
 			}
 			fos.close();
 			in.close();
 		}
 	
-		//OPEN
-		String imagePath=file.getAbsolutePath();
+									
+		String imagePath=file.getAbsolutePath();//амоицетаи.
 		Desktop desktop=Desktop.getDesktop();
 		desktop.open(new File(imagePath));
 		
@@ -189,24 +191,26 @@ public class Patient implements Serializable {
 		} catch (Exception e ){
 			e.printStackTrace();
 				 System.out.println("Arxeio Exception");
-		
+				 e.printStackTrace();
 		}
 		
 	}
 	
 
-	public void uploadExsetasi() throws Exception {
+	//O вягстгс епикцеи ема аявеио апо том упокоцистг тоу йаи то амебафеи стг басг.
+	public void uploadExsetasi(User user) throws Exception {
 		
 		JFileChooser fileChooser = new JFileChooser();
 		if (fileChooser.showOpenDialog(fileChooser) == JFileChooser.APPROVE_OPTION) {
 		  File file = fileChooser.getSelectedFile();
 			FileInputStream inputStream = new FileInputStream(file);
-			String sql = " INSERT INTO Eksetaseis (AMKA,file,Title) VALUES (?,?,?) ";
+			String sql = " INSERT INTO Eksetaseis (AMKA,file,Title,username) VALUES (?,?,?,?) ";
 			PreparedStatement sQLstatement = User.getConnection().prepareStatement(sql);
 
 			sQLstatement.setString(1, this.amka);
 			sQLstatement.setBinaryStream(2, (InputStream)inputStream,(int)file.length());
-			sQLstatement.setString(3,file.getName());
+			sQLstatement.setString(3,file.getName());	
+			sQLstatement.setString(4,user.getUser_name());
 			  
 			sQLstatement.executeUpdate();
 			

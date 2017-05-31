@@ -29,7 +29,10 @@ public class АъТГЛА {
 
 	private JTable table;
 	
-
+/*
+ * лесы аутгс тгс йкасгс о циатяос г о мосгкеутгс фгтаеи та стоивеиа емос асхемг том опоио том
+ * бягсйеи лсеы тоу COMBOBOX йаи тоу SEARCHFIELD
+ */
 
 
 	
@@ -54,7 +57,7 @@ public class АъТГЛА {
 		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				frame.dispose();			//PATONTAS PISW PAEI STHN ARXIKH TOY
 				new цИАТЯЭР_мОСГКЕУТчР(user);
 			
 			}});
@@ -63,29 +66,37 @@ public class АъТГЛА {
 		button.setBounds(34, 315, 163, 32);
 		frame.getContentPane().add(button);
 		
-		JButton button_1 = new JButton("аПОСТОКч АИТчЛАТОР");
+		JButton button_1 = new JButton("аПОСТОКч АИТчЛАТОР"); //AN патгсеи апостокг
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null,
-					    "то аитгла естакг",
-					    "MESSAGE SEND",
-					    JOptionPane.INFORMATION_MESSAGE);
 				int row = table.getSelectedRow();
-				String amka =  table.getModel().getValueAt(row,2).toString();
+				String amka =  table.getModel().getValueAt(row,2).toString(); //калбаметаи г епикоцг тоу
 				
 				try{
 					Connection conn=User.getConnection();
-					String query = "select username from Users where type = 3";
+					String query = "select username from Users where type = 3";	//ажоу евоуле то алйа тоу асхемг
 					PreparedStatement statement = conn.prepareStatement(query);
 					ResultSet res = statement.executeQuery();
-					Aithma aitima = new Aithma(user,amka);
-					while(res.next()){
+					Aithma aitima = new Aithma(user,amka);	//стекметаи се окоус тоус вягстес тгс цяаллатеиас емглеяысг оти о 
+					while(res.next()){						//циатяос аутос фгтаеи та стоивеиа тоу асхемг ле алйа = amka
 						Secretary S = (Secretary)User.loadUser(res.getString("username"));
-						S.addAithma(aitima);
+						S.addAithma(aitima); //окои калбамоум то идио аитгла
 						S.save_User_in_DB(true);					
 					}
+					JOptionPane.showMessageDialog(null,		
+						    "то аитгла естакг",
+						    "MESSAGE SEND",
+						    JOptionPane.INFORMATION_MESSAGE);//отам стакхеи то лумгла елжамифетаи г емглеяысг
+				
 					
-				}catch(Exception exception){
+				}catch(ArrayIndexOutOfBoundsException ep){		//аккиыс дем евеи епикецеи йати
+					JOptionPane.showMessageDialog(null,		
+						    "дЕМ щВЕИ ЕПИКЕЦЕъ АСХЕМчР",
+						    "NOTHING SELECTED",
+						    JOptionPane.WARNING_MESSAGE);
+				
+				}catch(Exception exception){	//г пяоейуье йапоио хела ле тг басг
+					
 					System.out.println("Couldnt connect to database");
 					exception.printStackTrace();
 				}
@@ -105,8 +116,8 @@ public class АъТГЛА {
 					System.out.println("Couldnt connect to database");
 					exception.printStackTrace();
 				}
-				
-				String selection = (String)comboBox.getSelectedItem();
+							//ам патгсеи амафгтгсг тоте амакоца ле то ти епекене сто COMBOBOX 
+				String selection = (String)comboBox.getSelectedItem(); //циметаи г амафгтгсг стг басг
 				String query = "select first as onoma, last as eponymo, AMKA from Astheneis where "+selection+" like '%"+searchField.getText()+"%' and clinic!="+user.getDto().getClinic();
 				
 				
@@ -115,7 +126,7 @@ public class АъТГЛА {
 					
 					PreparedStatement statement = conn.prepareStatement(query);
 					ResultSet res = statement.executeQuery();
-					
+					//йаи та стоивеиа та паиямеи о TABLE
 					table.setModel(resultSetToTableModel(res));
 					table.setSelectionBackground(Color.BLUE);
 					table.setSelectionForeground(Color.CYAN);
@@ -143,9 +154,9 @@ public class АъТГЛА {
 		scrollPane.setViewportView(table);
 
 		Connection conn=null;
-		try{
+		try{		
 			conn=User.getConnection();
-			
+			//AN DEN GINEI TIPOTA, ARXIKA STO XRHSTH EMFANIZONTAI OLOI OI ASTHENEIS EKTOS THS KLINIKIS TOY MIAS KAI GIA AYTOYS EXEI NOHMA NA ZHTHSEI TA STOIXEIA.
 			String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where clinic!="+this.user.getDto().getClinic(); 
 			System.out.println(searchField.getText()); 
 			PreparedStatement statement = conn.prepareStatement(query);
@@ -170,12 +181,11 @@ public class АъТГЛА {
             int numberOfColumns = metaData.getColumnCount();
             Vector columnNames = new Vector();
 
-            // Get the column names
             for (int column = 0; column < numberOfColumns; column++) {
                 columnNames.addElement(metaData.getColumnLabel(column + 1));
             }
 
-            // Get all rows.
+            //DHMIOYRGIA PINAKA MESW TWN APOTELESMATWN TOY RESULT SET
             Vector rows = new Vector();
 
             while (rs.next()) {

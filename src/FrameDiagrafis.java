@@ -14,10 +14,14 @@ import java.awt.event.ActionEvent;
 public class FrameDiagrafis {
 
 	private JFrame frame;
-	private JTextField usernameField;
-	private JTextField amkaField;
+	private JTextField usernameField; //Συμπληρώνει το όνομα χρήστη του αιτήματος
+	private JTextField amkaField;	// Συμπληρώνει το ΑΜΚΑ του ασθενή του αιτήματος
 	private Secretary user;
-	
+	/*
+	 * Αυτό το φρέιμ διαγράφει ένα αίτημα που στάλθηκε στο χρήστη,
+	 * από κάποιο γιατρό ή νοσηλευτή.
+	 * 
+	 */
 	
 	public FrameDiagrafis(Secretary user) {
 		initialize(user);
@@ -30,11 +34,11 @@ public class FrameDiagrafis {
 		frame.setBounds(100, 100, 450, 168);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Διαγραφή");
+		JButton btnNewButton = new JButton("Διαγραφή"); 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(user.diagrafiAitimatos(usernameField.getText(),amkaField.getText())){
-					
+				if(user.diagrafiAitimatos(usernameField.getText(),amkaField.getText())){ //Στην μέθοδο του ο χρήστης αν βρει τα δωσμένα ΑΜΚΑ και όνομα χρήστη
+																							//Στη λίστα αιτημάτων του θα τα σβήσει, αλλίως θα εμφανίσει αντίστοιχο μήνυμα.
 					JOptionPane.showMessageDialog(null,"Το αίτημα διαγράφηκε(Ανανεώστε την αρχική σελίδα σας για να δείτε τον συνολικό αριθμό αιτημάτων)","ΔΙΑΓΡΑΦΗ ΕΠΙΤΥΧΗΣ",JOptionPane.INFORMATION_MESSAGE);
 					frame.dispose();
 				}else{

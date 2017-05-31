@@ -35,7 +35,12 @@ public class сТОИВЕъАвЯчСТГFrame {
 	private JTextField taytotitaField;
 	private JTextField genderField;
 	private JTextField textField;
-	private Secretary user;
+	private Secretary user; //вягстгс поу бкепеи то жяеил.(ови аутос стом опоио амгйеи)
+	
+	/*
+	 * се ауто то жяеил елжамифомтаи та стоивеиа емос
+	 * вягстг тоу сустглатос.(циатяоу г мосгкеутг).
+	 */
 
 	public сТОИВЕъАвЯчСТГFrame(String username,Secretary user) {
 		this.username=username;
@@ -45,9 +50,7 @@ public class сТОИВЕъАвЯчСТГFrame {
 		
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	//левяи тг цяаллг 268 циметаи г топохетисг педиым сто жяеил.
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 698, 581);
@@ -255,15 +258,15 @@ public class сТОИВЕъАвЯчСТГFrame {
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				frame.dispose();  		//ле ой цуямале писы сто стгм амафгтгсг циатяым
 				new SearchDoctors(user);
 			}
 		});
 		btnNewButton.setBounds(517, 476, 143, 45);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("пЯОСХчЙГ/аККАЦч ЙКИМИЙчР");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_1 = new JButton("пЯОСХчЙГ/аККАЦч ЙКИМИЙчР"); //ам патгхеи ауто то йоулпи 
+		btnNewButton_1.addActionListener(new ActionListener() {				//циметаи аккацг стгм йкимийг тоу суцйейяилемоу вягстг
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				
@@ -285,7 +288,7 @@ public class сТОИВЕъАвЯчСТГFrame {
 		textField = new JTextField();
 		textField.setEditable(false);
 		
-		if(	User.loadUser(username).isGiatros())
+		if(	User.loadUser(username).isGiatros()) //елжамифетаи се ауто то педио о тупос тоу вягстг 
 			textField.setText("цИАТЯЭР");
 		else
 			textField.setText("мОСГКЕУТчР");
@@ -294,12 +297,12 @@ public class сТОИВЕъАвЯчСТГFrame {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		try{
+		try{	//сулпкгяысг педиым жяеил.
 			PreparedStatement statement = User.getConnection().prepareStatement("SELECT username, first_name, last_name, date_birth, partonymo, address, region, city, tk, eidikotita, tameio, family_statement, kliniki, amka, arithmos_taytotitas, kinito, thlefwno_spitiou,thlefwno_ergasias, fax, email, hmeromhnia_eisagwghs, paratiriseis,  gender  FROM Users where username ='"+username+"'");
 			ResultSet result = statement.executeQuery();
 			
 			
-			while(result.next()){
+			while(result.next()){ 
 				usernameField.setText(result.getString("username"));
 				e_mailField.setText(result.getString("email"));
 				firstField.setText(result.getString("first_name"));

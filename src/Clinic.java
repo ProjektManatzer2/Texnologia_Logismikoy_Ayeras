@@ -12,26 +12,36 @@ import java.util.ArrayList;
 
 public class Clinic implements Serializable{
 
-
+	/*
+	 * Όταν ένας ασθενής ή γιατρός καταχωρείται σε μία κλινική
+	 * Η στήλη της βάσης δεδομένων clinic παίρνει την τιμή id της κλινικήs.
+	 * Οι κλινικές με τα ονόματά τους είναι επίσης αποθυκευμένες σε ένα πίνακα
+	 * Στη βάση με όνομα clinics. Εκεί αποθυκεύονται το όνομα της, το id και το αρχείο.
+	 * Πρακτικα το αρχείο δεν χρησιμεύει σε κάτι, παρ'όλα αυτά αποθυκεύεται για ένα και μόνο λόγο.
+	 * Σε περίπτωση αναβάθμισης του συστήματος, οι κλινικές θα μπορούν πολύ εύκολα να εκτελούν λειτουργίες
+	 * και να εξασφαλίζουν την παροχή πολλών στατιστικών. Κάποιων δομών όπως doctors,nurses,patients 
+	 * εφόσων έχει ήδη φτιαχτεί η μέθοδος loadClinic και η SaveClinicFile η κλινική θα μπορεί ενεργά να παρέχει
+	 * πολλές διευκολίνσεις στο σύστημα. Επειδή όμως είναι η πρώτη έκδοση του συστήματος αυτές οι λειτουργίες από την 
+	 * ομάδα τελικά δεν θεωρήθηκαν τόσο ζωτικές όσο βοηθητικές, οπότε φτιαχτήκανε κάποιες μέθοδοι για να διευκολύνουν τυχόν
+	 * αναβαθμίσεις.
+	 */
+	
+	
+	
+	
 	private static final long serialVersionUID = 4411944799402341685L;
-	private ArrayList<Patient> astheneis;
-	private ArrayList<Doctor> giatroi;
-	private ArrayList<Nurse> nosokomoi;
 	private int id;
 	private String name;
 	
 	public Clinic(int id, String name,Connection conn){
-		
-		
+		//Στο φρέιμ όπου δημιουργείτα η κλινική καλείται διαδοχικά και ο Constructor και η saveClinic
+		//ώστε να αποθυκευτούν όλα τα στοιχεία των τριών στηλών.
 		try{
 			this.id=id;
 			this.name=name;
-			this.astheneis= new ArrayList<Patient>();
-			this.giatroi=new ArrayList<Doctor>();
-			this.nosokomoi=new ArrayList<Nurse>();;
 			
-			String statement = "INSERT INTO clinics ( id , name ) VALUES (?,?)";
-			PreparedStatement posted = conn.prepareStatement(statement);
+			String statement = "INSERT INTO clinics ( id , name ) VALUES (?,?)"; //Και τα δύο τα δίνει ο χρήστης 
+			PreparedStatement posted = conn.prepareStatement(statement); //Που θα δημιουργήσει την κλινική.
 			
 			posted.setInt(1,id);
 			posted.setString(2,name);
@@ -111,34 +121,6 @@ public class Clinic implements Serializable{
 				 	return null;
 		}
 
-	}
-
-	public void addNurseToClinic(Nurse aNurse) {
-		nosokomoi.add(aNurse);
-		this.saveClinic();
-	}
-	
-	public void addDoctorToClinic(Doctor aDoctor) {
-		giatroi.add(aDoctor);
-		this.saveClinic();
-	}
-	
-	public void addPatientToClinic(Patient aPatient) {	
-		astheneis.add(aPatient);
-		this.saveClinic();
-	}
-
-
-	public ArrayList<Patient> getAstheneis() {
-		return astheneis;
-	}
-
-	public ArrayList<Doctor> getGiatroi() {
-		return giatroi;
-	}
-
-	public ArrayList<Nurse> getNosokomoi() {
-		return nosokomoi;
 	}
 
 	public int getId() {

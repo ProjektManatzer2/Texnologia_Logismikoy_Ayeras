@@ -1,4 +1,3 @@
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -18,13 +17,14 @@ public class InitialScreen {
 	private JFrame frmLoginScreen;
 	private JTextField txtUsername;
 	private JTextField pwdPassword;
-	private int type;
-	boolean flag;
+	private int type;	//Είδος χρήστη
 	
+	/*
+	 * Αυτό είναι το Frame σύνδεσης στο σύστημα
+	 */
 	
 	public InitialScreen() {
 		
-		flag = false;
 		type=0;
 		frmLoginScreen = new JFrame();
 		frmLoginScreen.setResizable(false);
@@ -55,9 +55,9 @@ public class InitialScreen {
 				String			username=txtUsername.getText();
 			
 				String 			password=pwdPassword.getText();
-				User u = db_search(username,password);
+				User u = db_search(username,password); //Η db_search αν ο χρήστης βρεθεί στη βάση, επιστρέφει το είδος του στην type και τον ίδιο τον χρήστη στον u.
 				
-					if(type==3){
+					if(type==3){	//Ανάλογα με το type Καλείται η αντίστοιχη αρχική
 						
 						new SecretaryOffice((Secretary)u);
 						frmLoginScreen.dispose();
@@ -102,21 +102,23 @@ public class InitialScreen {
 			
 			PreparedStatement statement =conn.prepareStatement(sql);
 			ResultSet result = statement.executeQuery();
-				if (result.next()){
-					sql="select password,type from Users where username='"+username+"'";
+				if (result.next()){//Aν βρεθεί το Username τσέκαρε αν στην ίδια σειρά βρεθεί το δωσμένο password του χρήστη.
+					sql="select password from Users where username='"+username+"'";
 					 statement =conn.prepareStatement(sql);
 					 result = statement.executeQuery();
 					
-					 String normalPass="";
+					 String normalPass="";  
 					 while (result.next ())
-					   {
-					        normalPass = result.getString ("password");
-					        type = result.getInt ("type");
-					    }
-					if (normalPass.equals(password)){
+					   normalPass = result.getString ("password");
+					   
+					if (normalPass.equals(password)){ //ΑΝ ΤΟ ΔΩΣΜΕΝΟ PASSWORD ΕΙΝΑΙ ΙΔΙΟ ΜΕ ΑΥΤΟ ΣΤΗ ΒΑΣΗ ΤΟΤΕ 
 						
-					
-					 
+						sql="select type from Users where username='"+username+"'";	//ΔΩΣΕ ΜΟΥ ΚΑΙ ΤΟΝ ΤΥΠΟ ΤΟΥ ΧΡΗΣΤΗ ΓΙΑ ΝΑ ΚΑΛΕΣΩ ΤΟΝ ΑΝΑΛΟΓΟ 
+						statement =conn.prepareStatement(sql);					//CONSTRUCTOR
+						result = statement.executeQuery();
+						while (result.next())
+							type=result.getInt("type");
+										 
 					 switch(type){
 					 case 1:
 						 Doctor d =(Doctor) User.loadUser(username);
@@ -134,7 +136,7 @@ public class InitialScreen {
 							 return null;
 						 
 					 }
-					}
+					}  //AN ΔΕΝ ΒΡΕΘΕΙ ΤΙΠΟΤΑ ΤΟ ΤΥΡΕ ΜΕΝΕΙ ΜΗΔΕΝ ΚΑΙ Ο ΧΡΗΣΤΗΣ ΝULL, ΑΡΑ ΔΕΝ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΥΝΔΕΣΗ, ΘΑ ΕΜΦΑΝΙΣΤΕΙ ΤΟ ΜΥΝΗΜΑ
 					
 				
 			}	

@@ -43,8 +43,10 @@ public class PatientSearch implements ActionListener{
 	}
 
 	/**
-	 * Initialize the contents of the frame.
-	 * @return 
+	 * TRICKY йкасг. се пеяиптысг поу о вягстгс еимаи циатяос г мосгкеутгс елжамифомтаи акка омолата апо аута ам еимаи упаккгкос.
+	 * еписгс се пеяиптысг епикоцгс аутым елжамифомтаи акка пяацлата се свесг ле том упаккгко цяаллатеиас.
+	 * ауто епитуцваметаи опыс ха доуле ле тгм леходо гаS_CLINIC() г опоиа пяодидеи ам о вягстгс лас евеи йкимийг.
+	 * 
 	 */
 	private  void initialize1(User u) {
 		this.user=User.loadUser(u.getUser_name());
@@ -72,12 +74,13 @@ public class PatientSearch implements ActionListener{
 		textFieldSearch.setBounds(281, 29, 295, 20);
 		frame.getContentPane().add(textFieldSearch);
 		
-		button = new JButton("пъСЫ");
+		button = new JButton("пъСЫ");//|г HAS_CLINIC пио сыста ха епяепе ма кецетаи IsNotYpallilos().|
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(!user.hasClinic()){
+			public void actionPerformed(ActionEvent arg0) { //еды циметаи о пяытос диавыяислос
+				if(!user.hasClinic()){	//ам патгсеи писы йаи евеи йкимийг лпаимеи  сто INTERFACE тоу циатяоу/мосгкеутг
 					frame.dispose();
-					new SecretaryOffice((Secretary)user);
+					
+					new SecretaryOffice((Secretary)user); //Alliws stin arxikh toy ypallilou
 				}
 				else{
 					frame.dispose();
@@ -98,11 +101,12 @@ public class PatientSearch implements ActionListener{
 		showButton.addActionListener(this);
 		frame.getContentPane().add(showButton);
 		
+		//2o невыяисла!!!  ам евеи йкимийг бкепеи та енгс омолата
 		if(user.hasClinic()){
 			Connection conn=null;
 			try{
-				conn=User.getConnection();
-				
+				conn=User.getConnection();	
+																													//осоус амгйоуме стгм йкимийг тоу !!!!!
 				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where clinic="+user.getDto().getClinic();
 				System.out.println(textFieldSearch.getText()); 
 				PreparedStatement statement = conn.prepareStatement(query);
@@ -121,7 +125,7 @@ public class PatientSearch implements ActionListener{
 			Connection conn=null;
 			try{
 				conn=User.getConnection();
-				
+								//аккиыс тоу бкепеи окоус!!! (пио йаты олыс ха доуле оти бкепеи поку кицотеяа стоивеиа циа аутоус)
 				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis "; 
 				System.out.println(textFieldSearch.getText()); 
 				PreparedStatement statement = conn.prepareStatement(query);
@@ -146,8 +150,8 @@ public class PatientSearch implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==searchButton){
-			if(!user.hasClinic()){
-					//ANAZHTHSH
+			if(!user.hasClinic()){ //се пеяиптысг амафгтгсгс циметаи амафгтгсг ле басг оти епикевхгйе
+					
 					Connection conn=null;
 					try{
 						conn=User.getConnection();
@@ -165,7 +169,7 @@ public class PatientSearch implements ActionListener{
 						
 						PreparedStatement statement = conn.prepareStatement(query);
 						ResultSet res = statement.executeQuery();
-						
+						//та апотекеслата патма стом TABLE
 						table.setModel(resultSetToTableModel(res));
 						table.setSelectionBackground(Color.BLUE);
 						table.setSelectionForeground(Color.CYAN);
@@ -182,11 +186,11 @@ public class PatientSearch implements ActionListener{
 				}catch(Exception exception){
 					System.out.println("Couldnt connect to database");
 					exception.printStackTrace();
-				}
+				}					
 				
-				String selection = (String)comboBox.getSelectedItem();
+				String selection = (String)comboBox.getSelectedItem();			//ам евеи йкимийг цимтаи амафгтгсг акка памта ломо стгм йкимийг тоу
 				String query = "select first as onoma, last as eponymo, AMKA, personal_tel from Astheneis where "+selection+" like '%"+textFieldSearch.getText()+"%' and "
-						+ "clinic = (select kliniki from Users where username='"+user.getUser_name()+"')";
+						+ "clinic = (select kliniki from Users where username='"+user.getUser_name()+"')";	//лесы SQL емтокгс паиямы тгм йкимийг тоу вягстг
 				
 				
 				try {
@@ -212,12 +216,12 @@ public class PatientSearch implements ActionListener{
 		}
 		
 		if(e.getSource()==showButton){
-			if(!user.hasClinic()){
+			if(!user.hasClinic()){ //3О басийотеяо невыяисла
 				try{
-					int row = table.getSelectedRow();
+					int row = table.getSelectedRow();	
 					String amka =  table.getModel().getValueAt(row,2).toString();
 					frame.dispose();
-					new	VasikaStoixeiaAstheni(amka,(Secretary)user);
+					new	VasikaStoixeiaAstheni(amka,(Secretary)user); //ам епикецеи йати апо том упаккгко бкепеи тгм VasikaStoixeiaAstheni. поу пеяиевеи апкес пкгяожояиес
 				}
 				catch(ArrayIndexOutOfBoundsException ex){
 					JOptionPane.showMessageDialog(null,"дЕМ щВЕИ ЕПИКЕЦЕъ ТъПОТА","No row selected",JOptionPane.WARNING_MESSAGE);
@@ -228,8 +232,8 @@ public class PatientSearch implements ActionListener{
 				int row = table.getSelectedRow();
 				String amka =  table.getModel().getValueAt(row,2).toString();
 				frame.dispose();
-				Patient p = Patient.loadPatient(amka);
-				new PatientFrame(p,user);
+				Patient p = Patient.loadPatient(amka);	
+				new PatientFrame(p,user);	//о циатяос/мосгкеутгс олыс бкепеи йамомийа, том пкгяг жайеко тоу асхемг.
 				}catch(ArrayIndexOutOfBoundsException ex){
 					JOptionPane.showMessageDialog(null,"дЕМ щВЕИ ЕПИКЕЦЕъ ТъПОТА","No row selected",JOptionPane.WARNING_MESSAGE);
 				}
@@ -239,19 +243,19 @@ public class PatientSearch implements ActionListener{
 				
 		
 		}
-
+		//летатяепеи то RESULT поу епистяежетаи се табLE 
 		public static TableModel resultSetToTableModel(ResultSet rs) {
 	        try {
 	            ResultSetMetaData metaData = rs.getMetaData();
 	            int numberOfColumns = metaData.getColumnCount();
 	            Vector columnNames = new Vector();
 
-	            // Get the column names
+	           
 	            for (int column = 0; column < numberOfColumns; column++) {
 	                columnNames.addElement(metaData.getColumnLabel(column + 1));
 	            }
 
-	            // Get all rows.
+	            
 	            Vector rows = new Vector();
 
 	            while (rs.next()) {

@@ -23,9 +23,13 @@ public class VasikaStoixeiaAstheni {
 	private JTextField amkaField;
 	private JTextField contactField;
 	private Secretary user;
+	private JTextField outField;
 	
-	
-	VasikaStoixeiaAstheni(String amka,Secretary user) {
+	/*
+	 * Αυτό το φρέιμ αποτελεί το ΤΙ ΒΛΕΠΕΙ ένας χρήστης γραμματείας από τον Patient
+	 * Όλα τα στοιχεία του γράφονται στα αντίστοιχα παραπάνω πλαίσια.
+	 */
+	VasikaStoixeiaAstheni(String amka,Secretary user) { //ΑΜΚΑ ασθενή, user = χρήστης που βλέπει τα στοιχεία του φρέιμ.
 		this.user=user;
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -39,7 +43,7 @@ public class VasikaStoixeiaAstheni {
 		
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) { //Επιστροφή στην αρχική
 				frame.dispose();
 				new PatientSearch(user);
 				
@@ -77,7 +81,7 @@ public class VasikaStoixeiaAstheni {
 		frame.getContentPane().add(amkaLabel);
 		
 		
-		
+		//ΓΕΜΙΣΜΑ FRAME  ΜΕ ΤΑ ΠΕΔΙΑ
 		
 		firstField = new JTextField();
 		firstField.setEditable(false);
@@ -143,17 +147,28 @@ public class VasikaStoixeiaAstheni {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-			new addToClinicFrame(Patient.loadPatient(amka), null, null, (Secretary)user);
-			}
+			new addToClinicFrame(Patient.loadPatient(amka), null, null, (Secretary)user); //ΕΔΩ ΠΡΟΣΘΕΤΟΥΝ ΤΟΝ ΑΣΘΕΝΗ ΣΕ ΚΛΙΝΙΚΙ
+			}																				//ΚΑΛΟΝΤΑΣ ΜΕ ΤΟΝ ΣΩΣΤΟ ΤΡΟΠΟ ΤΗΝ ΚΛΑΣΗ addToClinicFrame
 		});
 		btnNewButton_1.setBounds(19, 316, 321, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
+		JLabel label_1 = new JLabel("Ημερομηνία εξαγωγής");
+		label_1.setBounds(291, 255, 169, 22);
+		frame.getContentPane().add(label_1);
+		
+		outField = new JTextField();
+		outField.setEditable(false);
+		outField.setColumns(10);
+		outField.setBounds(441, 260, 152, 20);
+		frame.getContentPane().add(outField);
+		
 		try{
-		PreparedStatement statement = User.getConnection().prepareStatement("SELECT first,last,room,AMKA,personal_tel,home_tel,date_of_birth,put_date,clinic  FROM Astheneis where AMKA='"+amka+"'");
+		PreparedStatement statement = User.getConnection().prepareStatement("SELECT first,last,room,AMKA,personal_tel,home_tel,date_of_birth,put_date,clinic,dateOut  FROM Astheneis where AMKA='"+amka+"'");
 		ResultSet result = statement.executeQuery();
 		
-		while(result.next()){
+		while(result.next()){ //  ΓΕΜΙΣΜΑ ΠΕΔΙΩΝ ΜΕ ΤΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΧΡΗΣΤΗ
+			outField.setText(result.getString("dateOut"));
 			firstField.setText(result.getString("first"));
 			lastField.setText(result.getString("last"));
 			roomField.setText(result.getString("room"));

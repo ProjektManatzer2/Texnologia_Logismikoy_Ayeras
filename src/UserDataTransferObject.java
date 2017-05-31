@@ -27,8 +27,9 @@ public class UserDataTransferObject implements Serializable{
 	private String kliniki;
 	private String put_date;
 	private String paratiriseis;
-	private int type;
-		
+	private int type; //Eidos xrhsth
+			//H filosofia einai akrivws idia me tin patientDataTransferObject
+	
 	public UserDataTransferObject(String username){
 		this.username=username;
 		patronymo="";
@@ -228,6 +229,7 @@ public class UserDataTransferObject implements Serializable{
 		this.put_date= putDate;
 	}
 
+	//Epistrofi klinikis apo ti basi apeutheias.
 	public int getClinic() {
 		Connection conn;
 		try {

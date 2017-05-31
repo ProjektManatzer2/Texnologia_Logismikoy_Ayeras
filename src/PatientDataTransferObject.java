@@ -4,7 +4,9 @@ import java.sql.PreparedStatement;
 
 public class PatientDataTransferObject implements Serializable {
 
-	 
+	 /*
+	  * г йкасг аутг пеяиевеи ояислема басийа стовиеиа тоу асхемг.
+	  */
 	private static final long serialVersionUID = -8472687185815951244L;
 	private String f_name;
 	private String ama;
@@ -29,7 +31,10 @@ public class PatientDataTransferObject implements Serializable {
 	private String comments;
 	private String amka; 
 	private String room;
+	private String dateOut;
 	
+	
+	//Mе басг то алйа йахе PatientDataTranfserObject циметаи ATTACHED се йахе асхем╧.
 	
 	public PatientDataTransferObject(String amka)
 	{
@@ -56,6 +61,7 @@ public class PatientDataTransferObject implements Serializable {
 		ama="";
 		job="";
 		room="";
+		dateOut="";
 	}
 	
 	public void transferToDatabase(Connection conn)
@@ -70,7 +76,7 @@ public class PatientDataTransferObject implements Serializable {
 					+ "insurance_institution=?,status=?,"
 					+ "taytotita=?,"
 					+ " personal_tel=?,home_tel=?,job_tel=?,"
-					+ "fax=?,email=?,put_date=?,comments=?,gender=?,job=?,room=? WHERE amka='" + amka+"'";
+					+ "fax=?,email=?,put_date=?,comments=?,gender=?,job=?,room=?,dateOut=? WHERE amka='" + amka+"'";
 			PreparedStatement statement=conn.prepareStatement(sql);
 			statement.setString(1, f_name);
 			statement.setString(2, date_of_birth);
@@ -93,6 +99,7 @@ public class PatientDataTransferObject implements Serializable {
 			statement.setString(19, gender);
 			statement.setString(20, job);
 			statement.setString(21, room);
+			statement.setString(22, dateOut);
 			
 			
 			statement.executeUpdate();
@@ -261,6 +268,14 @@ public class PatientDataTransferObject implements Serializable {
 
 	public void setPut_date(String put_date) {
 		this.put_date = put_date;
-	}	
+	}
+	
+	public void setDateOut(String date) {
+		this.dateOut = date;
+	}
+	
+	public String  getPut_Out() {
+		return this.dateOut;
+	}
 
 }

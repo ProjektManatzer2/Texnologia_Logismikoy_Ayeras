@@ -13,9 +13,9 @@ import javax.swing.JTextPane;
 public class Secretary extends User implements Serializable{
 	
 	private JFrame frameAithmatwn;
-	private ArrayList<Aithma> aitimata;
-	private boolean newAithma;
-	private JTextPane textField;
+	private ArrayList<Aithma> aitimata; //Εδώ αποθηκεύονται τα αιτήματα που αναφέρονται στο χρήστη
+	private boolean newAithma; //Ενημεώνει τον χρήστη αν υπάρχει κάποιο νέο αίτημα
+	private JTextPane textField; 
 
 	
 	public Secretary(String user_name, String password,String first,String last) {
@@ -26,8 +26,8 @@ public class Secretary extends User implements Serializable{
 		
 	}
 	
-	public void showFrameAithmatwn(){
-		frameAithmatwn = new JFrame();
+	public void showFrameAithmatwn(){ //Σε αυτό το φρέιμ εμφανίζεται το περιεχόμενο της
+		frameAithmatwn = new JFrame();	//δομή των αιτημάτων.
 		frameAithmatwn.setBounds(100, 100, 450, 300); 
 		frameAithmatwn.getContentPane().setLayout(null);
 		
@@ -42,8 +42,8 @@ public class Secretary extends User implements Serializable{
 		String olaTaAitimata = "";
 
 		for(Aithma aitima:aitimata)
-				olaTaAitimata+=aitima.showAitima()+"\n";
-		
+				olaTaAitimata+=aitima.showAitima()+"\n"; //Η showAitima της κλάσης Aithma επιστρέφει string που 
+															//Αναφέρει ποιός χρήστη ζητάει τα στοιχεία ποιού ασθενή
 		
 		textField.setText(olaTaAitimata);
 		
@@ -57,12 +57,12 @@ public class Secretary extends User implements Serializable{
 	}
 	
 
-
+	//Η μέθοδος αυτή προσθέτει τον ΑΜΚΑ ενός ασθενή στον γιατρό ή νοσηλευτή ανάλογα με το username.
 	public void paraxwrhsh(String username, String amka) {
 		Patient pat = Patient.loadPatient(amka);
 		User user = User.loadUser(username);
 		
-		if(user.isGiatros()){
+		if(user.isGiatros()){ 
 			Doctor doc = (Doctor)user;
 			doc.newPatient(amka);
 			
@@ -76,7 +76,7 @@ public class Secretary extends User implements Serializable{
 		
 	}
 
-	
+	//Αυτή η μέθοδος διαγράφει ένα αίτημα από τη δομή με τα αιτήματα
 	public boolean diagrafiAitimatos(String username, String amka) {
 		Iterator<Aithma> iter = aitimata.iterator();
 		boolean flag=false;
@@ -90,8 +90,8 @@ public class Secretary extends User implements Serializable{
 		    	}
 		    
 		}
-		this.newAithma=false;
-		return flag;
+		this.newAithma=false; //Εφόσων ο χρήστη σβήνει αίτημα δεν έχει νόημα να ενημερωθεί για κάποιο 
+		return flag;		//Επειδή τα βλέπει.
 		
 		
 		
@@ -99,7 +99,7 @@ public class Secretary extends User implements Serializable{
 
 	@Override
 	public boolean hasClinic(){
-		return false;
+		return false; //Βοηθά στο να ξεχωρίζουν οι υπάλληλοι της γραμματείας από τους άλλους χρήστες
 	}
 
 	public void addAithma(Aithma aithma) {

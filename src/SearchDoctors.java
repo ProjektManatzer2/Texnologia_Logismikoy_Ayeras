@@ -36,9 +36,8 @@ public class SearchDoctors implements ActionListener{
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @return 
+	/*
+	 * еды елжамифомтаи окои ои циатяои тоу сустглатос
 	 */
 	private  void initialize() {
 		frame = new JFrame();
@@ -51,7 +50,7 @@ public class SearchDoctors implements ActionListener{
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
+		//сто COMBOBOX епикецетаи то стоивеио ле басг то опоио ха пяацлатопоигхеи г амафгтгсг
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"first_name", "last_name","eidikotita","username"}));
 		comboBox.setSelectedIndex(1);
@@ -83,7 +82,7 @@ public class SearchDoctors implements ActionListener{
 		Connection conn=null;
 		try{
 			conn=User.getConnection();
-		
+		//аявийа циметаи г елжамифг окым тым циатяым/мосгкеутым, дгкадг окым тым вягстым поу евоум туяе<3
 			String query = "select first_name as onoma, last_name as eponymo, eidikotita,username,kinito from Users where type<3";
 			
 			
@@ -129,9 +128,9 @@ public class SearchDoctors implements ActionListener{
 						exception.printStackTrace();
 					}
 					
-					String selection = (String)comboBox.getSelectedItem();
+					String selection = (String)comboBox.getSelectedItem(); //оти евеи епикевхеи апо то COMBOBOX еисацетаи 
 					String query = "select first_name as onoma, last_name as eponymo, eidikotita,username,kinito from Users where "+selection+" like '%"+textFieldSearch.getText()+"%' and type < 3";
-					
+					//сто QUERY ле то опоио циметаи г амафгтгсг.
 					
 					try {
 						System.out.println(textFieldSearch.getText()); 
@@ -155,6 +154,7 @@ public class SearchDoctors implements ActionListener{
 				String username =  table.getModel().getValueAt(row,3).toString();
 				frame.dispose();	
 				new сТОИВЕъАвЯчСТГFrame(username,user);
+				//ажоу евеи епикевхеи то USERNAME апо том пимайа елжамифоуле то FRAME ле та стовиеиа вягстг.
 			}
 					
 		

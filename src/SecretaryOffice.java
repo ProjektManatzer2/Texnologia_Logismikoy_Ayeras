@@ -21,7 +21,11 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 	private JButton showButton;
 	private JButton diagrafiButton;
 	private JButton paraxwrhshButton;
-	
+	/*
+	 * Εδώ βρίσκεται η αρχική σελίδα του υπαλλήλου γραμματείας
+	 	Όλο το "ζουμί", είναι H ActionListener, ουσιαστικά γεμίζεται το φρέιμ με πλήκτρα και 
+	 	το καθένα ανοίγει κάποιο νέο frame.
+	 */
 	
 	public SecretaryOffice(Secretary u){
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
@@ -106,13 +110,15 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 		paraxwrhshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new frameParaxwrhshs(user);
-				
-				
-				
-				
+						
 			}
 		});
 		paraxwrhshButton.setBounds(164, 7, 170, 23);
+		
+		
+		
+		
+		//ΑΝ Ο ΧΡΗΣΤΗΣ ΕΧΕΙ ΚΑΠΟΙΟ ΝΕΟ ΑΙΤΗΜΑ ΕΜΦΑΝΙΖΕΤΑΙ ΕΝΗΜΕΡΩΣΗ
 		getContentPane().add(paraxwrhshButton);
 		
 		if(user.newAithma()){
