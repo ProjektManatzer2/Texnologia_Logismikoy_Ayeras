@@ -80,5 +80,4 @@ public class FrameDiagrafis {
 		frame.getContentPane().add(amkaField);
 		frame.setVisible(true);
 	}
-
 }

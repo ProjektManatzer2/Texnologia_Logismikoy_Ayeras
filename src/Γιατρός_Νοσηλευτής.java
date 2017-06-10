@@ -53,6 +53,12 @@ public class Γιατρός_Νοσηλευτής {
 		frame.getContentPane().add(aitimaButton);
 		
 		disconnectButton= new JButton("Αποσύνδεση");
+		disconnectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				new InitialScreen();
+			}
+		});
 		disconnectButton.setBounds(241, 243, 120, 24);
 		frame.getContentPane().add(disconnectButton);
 		

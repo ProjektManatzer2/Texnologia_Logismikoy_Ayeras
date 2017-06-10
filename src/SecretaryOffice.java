@@ -63,6 +63,7 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 		this.getContentPane().add(btnPatientSearch);
 		
 		btnDisconnect = new JButton("Αποσύνδεση");
+		btnDisconnect.addActionListener(this);
 		btnDisconnect.setBounds(244, 314, 120, 23);
 		this.getContentPane().add(btnDisconnect);
 		
@@ -178,6 +179,9 @@ public class SecretaryOffice extends JFrame implements ActionListener{
 		if(e.getSource()==clinicButton){
 			new ClinicCreateFrame(user);
 			this.dispose();
+		}if(e.getSource()==btnDisconnect){
+			this.dispose();
+			new InitialScreen();
 		}
 	}
 }
