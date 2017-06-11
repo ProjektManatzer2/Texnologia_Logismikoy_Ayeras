@@ -242,10 +242,7 @@ public class PatientDataTransferObject implements Serializable {
 	public void setRoom(String room) {
 		this.room = room;
 	}
-	public void setPutDate(String putDate) {
-		this.put_date= putDate;
-	}
-
+	
 	public String getAma() {
 		return ama;
 	}

@@ -56,7 +56,7 @@ public class ΣτοιχείαΧρήστηFrame {
 		frame.setBounds(100, 100, 698, 581);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Όνομα χρήστη");
+		JLabel lblNewLabel = new JLabel("Username");
 		lblNewLabel.setBounds(51, 23, 80, 22);
 		frame.getContentPane().add(lblNewLabel);
 		

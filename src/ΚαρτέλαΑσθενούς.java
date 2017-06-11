@@ -424,6 +424,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 			P.getPdto().setHeight(ypsosField.getText());
 			P.getPdto().setWeight(varosField.getText());
 			P.getPdto().setStatus(katastasiField.getText());		
+			P.getPdto().setJob(workField.getText());		
 			if(femaleRadio.isSelected())
 				P.getPdto().setGender("F");
 			else if(maleRadio.isSelected())
@@ -437,7 +438,7 @@ public class ΚαρτέλαΑσθενούς extends JFrame implements ActionListener{
 		P.getPdto().setDate_of_birth(date);
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateOfPut = new Date();
-		System.out.println(dateFormat.format(dateOfPut));
+		P.getPdto().setPut_date(dateFormat.format(dateOfPut));
 		if(elegxos()){ //Γίνεται σέιβ στη βάση.
 		P.save_Patient_in_DB(false);
 		this.dispose();

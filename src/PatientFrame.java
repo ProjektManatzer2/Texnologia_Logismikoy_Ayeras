@@ -21,7 +21,8 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 
 public class PatientFrame {
-
+	
+	private JTextPane commentsField;
 	private	JButton Προβολή_Εξέτασης ;
 	private JButton btnAdd;
 	private JButton Προσθήκη_Σχολίου;
@@ -93,7 +94,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label);
 		
 		FirstName = new JTextField();
-		FirstName.setBounds(124, 39, 86, 20);
+		FirstName.setBounds(124, 39, 162, 20);
 		panel_Στοιχεία.add(FirstName);
 		FirstName.setColumns(10);
 		FirstName.setText(patient.getFirst());
@@ -104,7 +105,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_1);
 		
 		LastName = new JTextField();
-		LastName.setBounds(124, 70, 86, 20);
+		LastName.setBounds(124, 70, 162, 20);
 		panel_Στοιχεία.add(LastName);
 		LastName.setColumns(10);
 		LastName.setText(patient.getLast());
@@ -116,7 +117,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_2);
 		
 		FathersName = new JTextField();
-		FathersName.setBounds(124, 101, 86, 20);
+		FathersName.setBounds(124, 101, 162, 20);
 		FathersName.setEditable(false);
 		
 		panel_Στοιχεία.add(FathersName);
@@ -128,7 +129,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_3);
 		
 		AMKA = new JTextField();
-		AMKA.setBounds(124, 132, 86, 20);
+		AMKA.setBounds(124, 132, 162, 20);
 		panel_Στοιχεία.add(AMKA);
 		AMKA.setColumns(10);
 		AMKA.setText(patient.getAMKA());
@@ -140,7 +141,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_4);
 		
 		AMA = new JTextField();
-		AMA.setBounds(124, 163, 86, 20);
+		AMA.setBounds(124, 163, 162, 20);
 		panel_Στοιχεία.add(AMA);
 		AMA.setColumns(10);
 		AMA.setText(patient.getPdto().getAma());
@@ -152,7 +153,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_5);
 		
 		Tameio = new JTextField();
-		Tameio.setBounds(124, 194, 86, 20);
+		Tameio.setBounds(124, 194, 162, 20);
 		panel_Στοιχεία.add(Tameio);
 		Tameio.setColumns(10);
 		Tameio.setText(patient.getPdto().getInsurance_institution());
@@ -165,7 +166,7 @@ public class PatientFrame {
 		
 		Age = new JTextField();
 		Age.setEditable(false);
-		Age.setBounds(124, 225, 86, 20);
+		Age.setBounds(124, 225, 162, 20);
 		panel_Στοιχεία.add(Age);
 		Age.setColumns(10);
 		Age.setText(patient.getPdto().getDate_of_birth());
@@ -177,7 +178,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_8);
 		
 		Weight = new JTextField();
-		Weight.setBounds(124, 256, 86, 20);
+		Weight.setBounds(124, 256, 162, 20);
 		panel_Στοιχεία.add(Weight);
 		Weight.setColumns(10);
 		Weight.setText(patient.getPdto().getWeight());
@@ -189,7 +190,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_9);
 		
 		Height = new JTextField();
-		Height.setBounds(124, 287, 86, 20);
+		Height.setBounds(124, 287, 162, 20);
 		panel_Στοιχεία.add(Height);
 		Height.setColumns(10);
 		Height.setText(patient.getPdto().getHeight());
@@ -201,7 +202,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_10);
 		
 		Job = new JTextField();
-		Job.setBounds(124, 321, 86, 20);
+		Job.setBounds(124, 321, 162, 20);
 		panel_Στοιχεία.add(Job);
 		Job.setColumns(10);
 		Job.setText(patient.getPdto().getJob());
@@ -213,7 +214,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_12);
 		
 		Address = new JTextField();
-		Address.setBounds(500, 39, 86, 20);
+		Address.setBounds(500, 39, 184, 20);
 		panel_Στοιχεία.add(Address);
 		Address.setColumns(10);
 		Address.setText(patient.getPdto().getAddress());
@@ -225,7 +226,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_13);
 		
 		State = new JTextField();
-		State.setBounds(500, 70, 86, 20);
+		State.setBounds(500, 70, 184, 20);
 		panel_Στοιχεία.add(State);
 		State.setColumns(10);
 		State.setText(patient.getPdto().getRegion());
@@ -237,7 +238,7 @@ public class PatientFrame {
 		panel_Στοιχεία.add(label_14);
 		
 		City = new JTextField();
-		City.setBounds(500, 101, 86, 20);
+		City.setBounds(500, 101, 184, 20);
 		panel_Στοιχεία.add(City);
 		City.setColumns(10);
 		City.setText(patient.getPdto().getCity());
@@ -250,7 +251,7 @@ public class PatientFrame {
 		
 		MobileNum = new JTextField();
 		MobileNum.setEditable(false);
-		MobileNum.setBounds(500, 132, 86, 20);
+		MobileNum.setBounds(500, 132, 184, 20);
 		panel_Στοιχεία.add(MobileNum);
 		MobileNum.setColumns(10);
 		MobileNum.setText(patient.getPdto().getPersonal_tel());
@@ -261,7 +262,7 @@ public class PatientFrame {
 		
 		HomeNum = new JTextField();
 		HomeNum.setEditable(false);
-		HomeNum.setBounds(500, 163, 86, 20);
+		HomeNum.setBounds(500, 163, 184, 20);
 		panel_Στοιχεία.add(HomeNum);
 		HomeNum.setColumns(10);
 		HomeNum.setText(patient.getPdto().getHome_tel());
@@ -273,7 +274,7 @@ public class PatientFrame {
 		
 		JobNum = new JTextField();
 		JobNum.setEditable(false);
-		JobNum.setBounds(500, 194, 86, 20);
+		JobNum.setBounds(500, 194, 184, 20);
 		panel_Στοιχεία.add(JobNum);
 		JobNum.setColumns(10);
 		JobNum.setText(patient.getPdto().getJob_tel());
@@ -285,7 +286,7 @@ public class PatientFrame {
 		
 		Email = new JTextField();
 		Email.setEditable(false);
-		Email.setBounds(500, 225, 86, 20);
+		Email.setBounds(500, 225, 184, 20);
 		panel_Στοιχεία.add(Email);
 		Email.setColumns(10);
 		Email.setText(patient.getPdto().getEmail());
@@ -296,13 +297,13 @@ public class PatientFrame {
 		
 		Fax = new JTextField();
 		Fax.setEditable(false);
-		Fax.setBounds(500, 253, 86, 20);
+		Fax.setBounds(500, 252, 184, 20);
 		panel_Στοιχεία.add(Fax);
 		Fax.setColumns(10);
 		Fax.setText(patient.getPdto().getFax());
 		JLabel lblRoom = new JLabel("\u0394\u03C9\u03BC\u03AC\u03C4\u03B9\u03BF");
 		lblRoom.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRoom.setBounds(305, 342, 172, 20);
+		lblRoom.setBounds(363, 342, 126, 20);
 		panel_Στοιχεία.add(lblRoom);
 		
 		room = new JTextField();
@@ -354,6 +355,7 @@ public class PatientFrame {
 				patient.getPdto().setAddress(Address.getText());
 				patient.getPdto().setWeight(Weight.getText());
 				patient.getPdto().setHeight(Height.getText());
+				patient.getPdto().setComments(commentsField.getText());
 				patient.setFirst(FirstName.getText());
 				patient.setLast(LastName.getText());
 				patient.save_Patient_in_DB(true);
@@ -384,7 +386,7 @@ public class PatientFrame {
 				Fax.setEditable(true);
 				Age.setEditable(true);
 				room.setEditable(true);
-						
+				commentsField.setEditable(true);		
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -400,6 +402,15 @@ public class PatientFrame {
 		});
 		deleteButton.setBounds(10, 460, 223, 23);
 		panel_Στοιχεία.add(deleteButton);
+		
+		JScrollPane scrollPane_9 = new JScrollPane();
+		scrollPane_9.setBounds(28, 351, 310, 95);
+		panel_Στοιχεία.add(scrollPane_9);
+		
+		commentsField = new JTextPane();
+		commentsField.setEditable(false);
+		commentsField.setText(patient.getPdto().getComments());
+		scrollPane_9.setViewportView(commentsField);
 					
 		//ΑΡΧΙΚΟΠΟΙΗΣΗ LABEL ΚΑΙ ΤΕΧΤFIELDS ΓΙΑ ΤΗ ΔΕΥΤΕΡΗ ΚΑΡΤΕΛΑ
 		JPanel panel_Ιατρικό_Ιστορικό = new JPanel();
@@ -457,6 +468,7 @@ public class PatientFrame {
 				genikaSxolia.setEditable(true);
 				farmaka.setEditable(true);
 				Egxeirhseis.setEditable(true);
+				commentsField.setEditable(true);
 				
 			
 			}

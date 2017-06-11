@@ -9,14 +9,17 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
+import java.awt.Color;
+import javax.swing.JScrollPane;
 
 public class VasikaStoixeiaAstheni {
 
+	private JTextPane paratiriseisField ;
 	private JFrame frame;
 	private JTextField firstField;
 	private JTextField lastField;
 	private JTextField klinikiField;
-	private JTextField endDateField;
 	private JTextField roomField;
 	private JTextField bornDateField;
 	private JTextField dateOfPut;
@@ -24,6 +27,7 @@ public class VasikaStoixeiaAstheni {
 	private JTextField contactField;
 	private Secretary user;
 	private JTextField outField;
+	private JScrollPane scrollPane;
 	
 	/*
 	 * Αυτό το φρέιμ αποτελεί το ΤΙ ΒΛΕΠΕΙ ένας χρήστης γραμματείας από τον Patient
@@ -72,10 +76,6 @@ public class VasikaStoixeiaAstheni {
 		lblNewLabel_5.setBounds(291, 141, 169, 22);
 		frame.getContentPane().add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("Τέλος Νοσηλείας");
-		lblNewLabel_6.setBounds(10, 198, 98, 30);
-		frame.getContentPane().add(lblNewLabel_6);
-		
 		JLabel amkaLabel = new JLabel("ΑΜΚΑ");
 		amkaLabel.setBounds(291, 198, 169, 30);
 		frame.getContentPane().add(amkaLabel);
@@ -103,11 +103,7 @@ public class VasikaStoixeiaAstheni {
 		klinikiField.setBounds(118, 146, 138, 20);
 		frame.getContentPane().add(klinikiField);
 		
-		endDateField = new JTextField();
-		endDateField.setEditable(false);
-		endDateField.setColumns(10);
-		endDateField.setBounds(118, 203, 138, 20);
-		frame.getContentPane().add(endDateField);
+		
 		
 		roomField = new JTextField();
 		roomField.setEditable(false);
@@ -134,13 +130,13 @@ public class VasikaStoixeiaAstheni {
 		frame.getContentPane().add(amkaField);
 		
 		JLabel label = new JLabel("Επικοινωνία");
-		label.setBounds(10, 277, 98, 22);
+		label.setBounds(8, 198, 98, 22);
 		frame.getContentPane().add(label);
 		
 		contactField = new JTextField();
 		contactField.setEditable(false);
 		contactField.setColumns(10);
-		contactField.setBounds(118, 278, 138, 20);
+		contactField.setBounds(116, 199, 138, 20);
 		frame.getContentPane().add(contactField);
 		
 		JButton btnNewButton_1 = new JButton("Προσθήκη/Αλλαγή Κλινικής");
@@ -163,8 +159,17 @@ public class VasikaStoixeiaAstheni {
 		outField.setBounds(441, 260, 152, 20);
 		frame.getContentPane().add(outField);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 231, 247, 70);
+		frame.getContentPane().add(scrollPane);
+		
+		paratiriseisField = new JTextPane();
+		scrollPane.setViewportView(paratiriseisField);
+		paratiriseisField.setBackground(Color.WHITE);
+		paratiriseisField.setEditable(false);
+		
 		try{
-		PreparedStatement statement = User.getConnection().prepareStatement("SELECT first,last,room,AMKA,personal_tel,home_tel,date_of_birth,put_date,clinic,dateOut  FROM Astheneis where AMKA='"+amka+"'");
+		PreparedStatement statement = User.getConnection().prepareStatement("SELECT first,last,room,AMKA,personal_tel,home_tel,date_of_birth,put_date,clinic,dateOut,job_tel,comments FROM Astheneis where AMKA='"+amka+"'");
 		ResultSet result = statement.executeQuery();
 		
 		while(result.next()){ //  ΓΕΜΙΣΜΑ ΠΕΔΙΩΝ ΜΕ ΤΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΧΡΗΣΤΗ
@@ -173,13 +178,17 @@ public class VasikaStoixeiaAstheni {
 			lastField.setText(result.getString("last"));
 			roomField.setText(result.getString("room"));
 			amkaField.setText(result.getString("AMKA"));
+			dateOfPut.setText(result.getString("put_date"));
+			bornDateField.setText(result.getString("date_of_birth"));
+			paratiriseisField.setText(result.getString("comments"));
 			String proswpiko = result.getString("personal_tel");
 			String spiti = result.getString("home_tel");
-			if(proswpiko.equals(""))
+			if(proswpiko.equals("") && !spiti.equals(""))
 				contactField.setText(spiti);
-			else
+			else if(!proswpiko.equals(""))
 				contactField.setText(proswpiko);
-		
+			else
+				contactField.setText(result.getString("job_tel"));
 		
 		try{
 			int kliniki = result.getInt("clinic");
